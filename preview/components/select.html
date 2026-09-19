@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Select — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Select</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Select</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">あらかじめ決まった選択肢から1つを選ぶ、ネイティブ &lt;select&gt; のスタイルです。見た目は Input と揃えています。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">size</p></div>
+        <table class="catalog-matrix">
+          <tbody>
+            <tr><td>sm</td><td><select class="select select-sm" style="width:200px"><option>sm</option></select></td><td class="catalog-state-note">h32</td></tr>
+            <tr><td>md（既定）</td><td><select class="select select-md" style="width:200px"><option>md</option></select></td><td class="catalog-state-note">h40</td></tr>
+            <tr><td>lg</td><td><select class="select select-lg" style="width:200px"><option>lg</option></select></td><td class="catalog-state-note">h48</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">state</p><p class="catalog-card-note">md</p></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">enable</span><select class="select select-md" style="width:200px"><option disabled selected>選択してください</option><option>管理者</option></select><span class="catalog-state-note">border: neutral-400</span></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">error</span><select class="select select-md select-error" style="width:200px"><option disabled selected>選択してください</option></select><span class="catalog-state-note">select-error</span></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">disabled</span><select class="select select-md" disabled style="width:200px"><option>disabled</option></select><span class="catalog-state-note">:disabled</span></div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>見た目は input と揃える（サイズ・角丸・枠線を統一）</li>
+            <li>選択肢が少ない（2〜4件・常に見せたい）場合は radio-group を検討する</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>独自の見た目のドロップダウンをJSで自作しない → まずネイティブ select を使う</li>
+            <li>最初の option を「選択してください」のダミーのまま必須項目にしない</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>&lt;label&gt; で関連付ける</li>
+            <li>ネイティブ要素なのでキーボード操作・スクリーンリーダー対応は標準で確立している</li>
+            <li>:focus-visible で info/600 のフォーカスリング（DS担保）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

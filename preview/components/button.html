@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Button — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+
+  <header class="catalog-header">
+    <div>
+      <p class="catalog-header-title">Design System</p>
+      <p class="catalog-header-sub">Tailwind v4</p>
+    </div>
+  </header>
+
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Button</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Button</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">「保存」「キャンセル」など、操作のきっかけになる最も基本的なパーツです。重要度や場面に応じて色・形・大きさを選べます。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <!-- ===== 概要 ===== -->
+    <div data-tabpanel="overview">
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <p class="catalog-card-title">Variant × Theme</p>
+          <p class="catalog-card-note">size = md / state = enable</p>
+        </div>
+        <table class="catalog-matrix">
+          <thead><tr><th></th><th>solid</th><th>outline</th><th>ghost</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>primary</td>
+              <td><button class="btn btn-md btn-primary btn-solid">ボタン</button></td>
+              <td><button class="btn btn-md btn-primary btn-outline">ボタン</button></td>
+              <td><button class="btn btn-md btn-primary btn-ghost">ボタン</button></td>
+            </tr>
+            <tr>
+              <td>neutral</td>
+              <td><button class="btn btn-md btn-neutral btn-solid">ボタン</button></td>
+              <td><button class="btn btn-md btn-neutral btn-outline">ボタン</button></td>
+              <td><button class="btn btn-md btn-neutral btn-ghost">ボタン</button></td>
+            </tr>
+            <tr>
+              <td>negative</td>
+              <td><button class="btn btn-md btn-negative btn-solid">ボタン</button></td>
+              <td><button class="btn btn-md btn-negative btn-outline">ボタン</button></td>
+              <td><button class="btn btn-md btn-negative btn-ghost">ボタン</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <p class="catalog-card-title">size</p>
+          <p class="catalog-card-note">primary / solid</p>
+        </div>
+        <table class="catalog-matrix">
+          <tbody>
+            <tr><td>sm</td><td><button class="btn btn-sm btn-primary btn-solid">ボタン</button></td><td class="catalog-state-note">h32 · p12</td></tr>
+            <tr><td>md（既定）</td><td><button class="btn btn-md btn-primary btn-solid">ボタン</button></td><td class="catalog-state-note">h40 · p24</td></tr>
+            <tr><td>lg</td><td><button class="btn btn-lg btn-primary btn-solid">ボタン</button></td><td class="catalog-state-note">h48 · p24</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <p class="catalog-card-title">state</p>
+          <p class="catalog-card-note">primary / solid / md</p>
+        </div>
+        <div class="catalog-state-row"><span class="catalog-state-label">enable</span><button class="btn btn-md btn-primary btn-solid">ボタン</button><span class="catalog-state-note">bg: primary-600</span></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">loading</span><button class="btn btn-md btn-primary btn-solid" data-loading>ボタン</button><span class="catalog-state-note">data-loading</span></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">disabled</span><button class="btn btn-md btn-primary btn-solid" disabled>ボタン</button><span class="catalog-state-note">:disabled</span></div>
+      </div>
+
+    </div>
+
+    <!-- ===== ガイドライン ===== -->
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <p class="catalog-card-title">使用法</p>
+        </div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px; color:var(--color-fg-high);">
+            <li>主要アクションは1画面に btn-primary 1つ。副次は btn-neutral / btn-ghost</li>
+            <li>破壊的操作（削除など）は btn-negative</li>
+            <li>非同期処理中は data-loading を付け二重送信を防ぐ</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px; color:var(--color-fg-high);">
+            <li>通常の遷移を btn でスタイルしない → link を使う</li>
+            <li>1画面に btn-primary を複数置かない</li>
+            <li>色を #hex 直書きしない</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== アクセシビリティ ===== -->
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header">
+          <p class="catalog-card-title">必須対応</p>
+        </div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px; color:var(--color-fg-high);">
+            <li>遷移に &lt;button&gt; を使わない（遷移は a 要素）</li>
+            <li>主操作は1画面1つ、破壊的操作は negative</li>
+            <li>:focus-visible で info/600 のフォーカスリング（DS担保）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

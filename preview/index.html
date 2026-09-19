@@ -2,362 +2,127 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>Design System Catalog</title>
+<title>Design System</title>
 <link rel="stylesheet" href="../dist/ds.css">
+<link rel="stylesheet" href="catalog.css">
 <style>
-* { box-sizing: border-box; }
-body {
-  font-family: var(--font-sans);
-  background: var(--color-surface);
-  color: var(--color-fg-high);
-  margin: 0;
-  display: flex;
-}
-
-/* ===== Nav ===== */
-.catalog-nav {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  flex-shrink: 0;
-  width: 200px;
-  padding: 24px 16px;
-  background: #fff;
-  border-right: 1px solid var(--color-stroke-middle);
-}
-.catalog-nav-title { font-size: 14px; font-weight: 700; margin: 0 0 4px; }
-.catalog-nav-desc { font-size: 12px; color: var(--color-fg-low); margin: 0 0 20px; }
-.catalog-nav a {
-  display: block;
-  padding: 6px 8px;
-  border-radius: var(--radius-xs);
-  font-size: 13px;
-  color: var(--color-fg-middle);
-  text-decoration: none;
-}
-.catalog-nav a:hover { background: var(--color-neutral-100); color: var(--color-fg-high); }
-.catalog-nav-group { font-size: 11px; font-weight: 700; color: var(--color-fg-low); text-transform: uppercase; margin: 16px 0 4px; padding: 0 8px; }
-.catalog-nav-group:first-of-type { margin-top: 0; }
-
-/* ===== Main ===== */
-.catalog-main { flex: 1; min-width: 0; padding: 32px 40px 80px; max-width: 900px; }
-.section { margin-bottom: 56px; scroll-margin-top: 24px; }
-.section-title { margin: 0 0 4px; }
-.section-desc { color: var(--color-fg-low); margin: 0 0 16px; }
-.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-
+.hero { background: var(--color-primary-50); padding: 48px 24px; text-align: center; }
+.hero-title { margin: 0 0 8px; }
+.hero-desc { color: var(--color-fg-middle); margin: 0; }
 .swatch { width: 64px; height: 40px; border-radius: var(--radius-xs); border: 1px solid var(--color-stroke-middle); }
 .swatch-label { font-size: 11px; color: var(--color-fg-low); text-align: center; margin-top: 4px; }
 .swatch-col { display: flex; flex-direction: column; align-items: center; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 </style>
 </head>
 <body>
 
-  <nav class="catalog-nav">
-    <p class="catalog-nav-title">Design System</p>
-    <p class="catalog-nav-desc">Linear/Notion系・情報密度優先</p>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
 
-    <p class="catalog-nav-group">Foundation</p>
-    <a href="#colors">Colors</a>
-    <a href="#typography">Typography</a>
-
-    <p class="catalog-nav-group">Components</p>
-    <a href="#button">Button</a>
-    <a href="#input">Input</a>
-    <a href="#select">Select</a>
-    <a href="#checkbox-radio">Checkbox / Radio</a>
-    <a href="#badge">Badge</a>
-    <a href="#card">Card</a>
-    <a href="#data-table">Data Table</a>
-    <a href="#alert">Alert</a>
-    <a href="#modal">Modal</a>
-    <a href="#tab">Tab</a>
-  </nav>
+  <div class="hero">
+    <h1 class="hero-title typo-3xlarge">Design System へようこそ</h1>
+    <p class="hero-desc typo-medium">各カードのプレビューで実物を確認できます。カードをクリックして各ページへ移動してください。</p>
+  </div>
 
   <main class="catalog-main">
 
-  <div class="section" id="colors">
-    <h2 class="section-title typo-2xlarge">Colors</h2>
-    <p class="section-desc typo-small">Primary（50〜900）</p>
-    <div class="row" style="margin-bottom:16px;">
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-50)"></div><div class="swatch-label">50</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-100)"></div><div class="swatch-label">100</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-200)"></div><div class="swatch-label">200</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-300)"></div><div class="swatch-label">300</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-400)"></div><div class="swatch-label">400</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-500)"></div><div class="swatch-label">500</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-600)"></div><div class="swatch-label">600</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-700)"></div><div class="swatch-label">700</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-800)"></div><div class="swatch-label">800</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-900)"></div><div class="swatch-label">900</div></div>
-    </div>
-    <p class="section-desc typo-small">Neutral</p>
-    <div class="row">
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-50)"></div><div class="swatch-label">50</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-100)"></div><div class="swatch-label">100</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-300)"></div><div class="swatch-label">300</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-500)"></div><div class="swatch-label">500</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-700)"></div><div class="swatch-label">700</div></div>
-      <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-900)"></div><div class="swatch-label">900</div></div>
-    </div>
-  </div>
+    <h2 class="catalog-section-title typo-2xlarge">Foundation</h2>
 
-  <div class="section" id="typography">
-    <h2 class="section-title typo-2xlarge">Typography</h2>
-    <p class="typo-xsmall">typo-xsmall（11px）補足の補足</p>
-    <p class="typo-small">typo-small（13px）補足テキスト</p>
-    <p class="typo-medium">typo-medium（14px）本文はこのサイズが基準です。Linear/Notionのような情報密度の高いUIを想定しています。</p>
-    <p class="typo-large">typo-large（16px, bold）セクション内の強調見出し</p>
-    <p class="typo-2xlarge">typo-2xlarge（20px, bold）ページ見出し</p>
-  </div>
-
-  <div class="section" id="button">
-    <h2 class="section-title typo-2xlarge">Button</h2>
-    <p class="section-desc typo-small">sm / md / lg × primary / neutral / negative × solid / outline / ghost</p>
-
-    <div class="row" style="margin-bottom:12px;">
-      <button class="btn btn-md btn-primary btn-solid">保存</button>
-      <button class="btn btn-md btn-primary btn-outline">保存</button>
-      <button class="btn btn-md btn-primary btn-ghost">保存</button>
-    </div>
-    <div class="row" style="margin-bottom:12px;">
-      <button class="btn btn-md btn-neutral btn-solid">キャンセル</button>
-      <button class="btn btn-md btn-neutral btn-outline">キャンセル</button>
-      <button class="btn btn-md btn-neutral btn-ghost">キャンセル</button>
-    </div>
-    <div class="row" style="margin-bottom:12px;">
-      <button class="btn btn-md btn-negative btn-solid">削除</button>
-      <button class="btn btn-md btn-negative btn-outline">削除</button>
-      <button class="btn btn-md btn-negative btn-ghost">削除</button>
-    </div>
-    <div class="row" style="margin-bottom:12px;">
-      <button class="btn btn-sm btn-primary btn-solid">sm</button>
-      <button class="btn btn-md btn-primary btn-solid">md（既定）</button>
-      <button class="btn btn-lg btn-primary btn-solid">lg</button>
-    </div>
-    <div class="row">
-      <button class="btn btn-md btn-primary btn-solid" disabled>disabled</button>
-      <button class="btn btn-md btn-primary btn-solid" data-loading>送信中</button>
-    </div>
-  </div>
-
-  <div class="section" id="input">
-    <h2 class="section-title typo-2xlarge">Input</h2>
-    <div class="row" style="align-items:flex-start; margin-bottom:12px;">
-      <input class="input input-sm" placeholder="sm" style="width:160px">
-      <input class="input input-md" placeholder="md（既定）" style="width:160px">
-      <input class="input input-lg" placeholder="lg" style="width:160px">
-    </div>
-    <div class="row" style="align-items:flex-start;">
-      <input class="input input-md" placeholder="通常" style="width:200px">
-      <div>
-        <input class="input input-md input-error" style="width:200px" value="broken@" aria-invalid="true" aria-describedby="email-error">
-        <p id="email-error" class="typo-small" style="color:var(--color-negative-600); margin-top:4px;">メールアドレスの形式が正しくありません</p>
-      </div>
-      <input class="input input-md" placeholder="disabled" disabled style="width:200px">
-    </div>
-  </div>
-
-  <div class="section" id="select">
-    <h2 class="section-title typo-2xlarge">Select</h2>
-    <div class="row" style="align-items:flex-start; margin-bottom:12px;">
-      <select class="select select-sm" style="width:160px">
-        <option disabled selected>sm</option>
-        <option>管理者</option>
-        <option>編集者</option>
-      </select>
-      <select class="select select-md" style="width:160px">
-        <option disabled selected>md（既定）</option>
-        <option>管理者</option>
-        <option>編集者</option>
-      </select>
-      <select class="select select-lg" style="width:160px">
-        <option disabled selected>lg</option>
-        <option>管理者</option>
-        <option>編集者</option>
-      </select>
-    </div>
-    <div class="row" style="align-items:flex-start;">
-      <select class="select select-md select-error" style="width:200px">
-        <option disabled selected>役割を選択してください</option>
-        <option>管理者</option>
-      </select>
-      <select class="select select-md" disabled style="width:200px">
-        <option>disabled</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="section" id="checkbox-radio">
-    <h2 class="section-title typo-2xlarge">Checkbox / Radio</h2>
-    <div class="row" style="margin-bottom:12px;">
-      <label class="checkbox-label"><input type="checkbox" class="checkbox">利用規約に同意する</label>
-      <label class="checkbox-label"><input type="checkbox" class="checkbox" checked>チェック済み</label>
-      <label class="checkbox-label"><input type="checkbox" class="checkbox" disabled>disabled</label>
-    </div>
-    <fieldset class="radio-group" style="border:none; padding:0;">
-      <legend class="typo-small">役割</legend>
-      <label class="radio-label"><input type="radio" name="role" class="radio" checked>管理者</label>
-      <label class="radio-label"><input type="radio" name="role" class="radio">編集者</label>
-      <label class="radio-label"><input type="radio" name="role" class="radio" disabled>閲覧者（disabled）</label>
-    </fieldset>
-  </div>
-
-  <div class="section" id="badge">
-    <h2 class="section-title typo-2xlarge">Badge</h2>
-    <p class="section-desc typo-small">soft（既定）</p>
-    <div class="row" style="margin-bottom:12px;">
-      <span class="badge badge-soft-success">有効</span>
-      <span class="badge badge-soft-warning">審査中</span>
-      <span class="badge badge-soft-negative">期限切れ</span>
-      <span class="badge badge-soft-neutral">下書き</span>
-      <span class="badge badge-soft-primary">分類タグ</span>
-    </div>
-    <p class="section-desc typo-small">solid（強い注意を引きたい時のみ）</p>
-    <div class="row">
-      <span class="badge badge-solid-success">有効</span>
-      <span class="badge badge-solid-warning">審査中</span>
-      <span class="badge badge-solid-negative">期限切れ</span>
-      <span class="badge badge-solid-neutral">下書き</span>
-    </div>
-  </div>
-
-  <div class="section" id="card">
-    <h2 class="section-title typo-2xlarge">Card</h2>
-    <div class="row" style="align-items:flex-start;">
-      <div class="card" style="width:280px;">
-        <div class="card-header">
-          <p class="card-title">プランA</p>
-          <p class="card-subtitle">月額プラン</p>
+    <div class="catalog-card">
+      <div class="catalog-card-header"><p class="catalog-card-title">Colors</p></div>
+      <div style="padding: 0 24px 24px;">
+        <p class="typo-small" style="color:var(--color-fg-low); margin-bottom:8px;">Primary</p>
+        <div class="row" style="margin-bottom:16px;">
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-100)"></div><div class="swatch-label">100</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-300)"></div><div class="swatch-label">300</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-500)"></div><div class="swatch-label">500</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-600)"></div><div class="swatch-label">600</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-700)"></div><div class="swatch-label">700</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-900)"></div><div class="swatch-label">900</div></div>
         </div>
-        <div class="card-body">
-          <p class="typo-medium">border + 背景色だけで区切っています（シャドウなし）。</p>
-        </div>
-        <div class="card-footer">
-          <button class="btn btn-sm btn-primary btn-solid">選択</button>
-        </div>
-      </div>
-      <div class="card" style="width:280px;">
-        <div class="card-body">
-          <p class="card-title">header/footer無し版</p>
-          <p class="typo-medium" style="margin-top:4px;">card-bodyだけでも使える。</p>
+        <p class="typo-small" style="color:var(--color-fg-low); margin-bottom:8px;">Neutral</p>
+        <div class="row">
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-100)"></div><div class="swatch-label">100</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-300)"></div><div class="swatch-label">300</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-500)"></div><div class="swatch-label">500</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-700)"></div><div class="swatch-label">700</div></div>
+          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-900)"></div><div class="swatch-label">900</div></div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="section" id="data-table">
-    <h2 class="section-title typo-2xlarge">Data Table</h2>
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th scope="col">契約名</th>
-          <th scope="col">取引先</th>
-          <th scope="col" class="data-table-num">金額</th>
-          <th scope="col">状態</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>契約A</td>
-          <td>株式会社サンプル</td>
-          <td class="data-table-num">¥1,200,000</td>
-          <td><span class="badge badge-soft-success">有効</span></td>
-        </tr>
-        <tr>
-          <td>契約B</td>
-          <td>合同会社テスト</td>
-          <td class="data-table-num">¥85,000</td>
-          <td><span class="badge badge-soft-negative">期限切れ</span></td>
-        </tr>
-        <tr>
-          <td>契約C</td>
-          <td>株式会社デモ</td>
-          <td class="data-table-num">¥3,400,000</td>
-          <td><span class="badge badge-soft-warning">審査中</span></td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="data-table" style="margin-top:16px;">
-      <thead><tr><th scope="col">空状態の例</th></tr></thead>
-      <tbody>
-        <tr class="data-table-empty"><td colspan="1">データがありません</td></tr>
-      </tbody>
-    </table>
-  </div>
+    <div class="catalog-card">
+      <div class="catalog-card-header"><p class="catalog-card-title">Typography</p></div>
+      <div style="padding: 0 24px 24px;">
+        <p class="typo-small">typo-small（13px）補足テキスト</p>
+        <p class="typo-medium">typo-medium（14px）本文はこのサイズが基準です。</p>
+        <p class="typo-large">typo-large（16px, bold）強調見出し</p>
+        <p class="typo-2xlarge">typo-2xlarge（20px, bold）ページ見出し</p>
+      </div>
+    </div>
 
-  <div class="section" id="alert">
-    <h2 class="section-title typo-2xlarge">Alert</h2>
-    <div style="display:flex; flex-direction:column; gap:12px;">
-      <div class="alert alert-info" role="status">
-        <span class="alert-icon" aria-hidden="true">i</span>
-        <div class="alert-body">
-          <p class="alert-title">お知らせ</p>
-          <p>新しいバージョンが利用可能です。</p>
+    <h2 class="catalog-section-title typo-2xlarge">Components</h2>
+    <div class="catalog-grid">
+
+      <a class="catalog-grid-card" href="components/button.html">
+        <div class="catalog-grid-card-preview"><button class="btn btn-sm btn-primary btn-solid">ボタン</button></div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Button</p><p class="catalog-grid-card-desc">操作のきっかけになる最も基本的なパーツ</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/input.html">
+        <div class="catalog-grid-card-preview"><input class="input input-sm" placeholder="入力" style="width:120px" disabled></div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Input</p><p class="catalog-grid-card-desc">1行のテキスト入力</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/select.html">
+        <div class="catalog-grid-card-preview"><select class="select select-sm" style="width:120px" disabled><option>選択</option></select></div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Select</p><p class="catalog-grid-card-desc">決まった選択肢から1つを選ぶ</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/checkbox-radio.html">
+        <div class="catalog-grid-card-preview"><label class="checkbox-label"><input type="checkbox" class="checkbox" checked disabled></label>&nbsp;&nbsp;<label class="radio-label"><input type="radio" class="radio" checked disabled></label></div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Checkbox / Radio</p><p class="catalog-grid-card-desc">複数選択・単一選択の入力</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/badge.html">
+        <div class="catalog-grid-card-preview"><span class="badge badge-soft-success">有効</span></div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Badge</p><p class="catalog-grid-card-desc">状態・分類を伝える小さなラベル</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/card.html">
+        <div class="catalog-grid-card-preview"><div style="width:80px;height:48px;background:#fff;border:1px solid var(--color-stroke-middle);border-radius:var(--radius-sm);"></div></div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Card</p><p class="catalog-grid-card-desc">情報をひとまとまりにするコンテナ</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/data-table.html">
+        <div class="catalog-grid-card-preview">
+          <table class="data-table" style="width:120px; font-size:11px;"><thead><tr><th scope="col">A</th><th scope="col">B</th></tr></thead><tbody><tr><td>1</td><td>2</td></tr></tbody></table>
         </div>
-        <button class="alert-close" aria-label="閉じる">✕</button>
-      </div>
-      <div class="alert alert-success" role="status">
-        <span class="alert-icon" aria-hidden="true">✓</span>
-        <div class="alert-body"><p class="alert-title">保存しました</p></div>
-      </div>
-      <div class="alert alert-warning" role="status">
-        <span class="alert-icon" aria-hidden="true">!</span>
-        <div class="alert-body"><p class="alert-title">確認が必要です</p><p>審査中の項目があります。</p></div>
-      </div>
-      <div class="alert alert-negative" role="alert">
-        <span class="alert-icon" aria-hidden="true">✕</span>
-        <div class="alert-body"><p class="alert-title">保存できませんでした</p><p>ネットワーク接続を確認してください。</p></div>
-      </div>
-      <div class="alert alert-neutral" role="status">
-        <span class="alert-icon" aria-hidden="true">・</span>
-        <div class="alert-body"><p>これはneutralの例です。</p></div>
-      </div>
-    </div>
-  </div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Data Table</p><p class="catalog-grid-card-desc">複数レコードを行×列で一覧表示</p></div>
+      </a>
 
-  <div class="section" id="modal">
-    <h2 class="section-title typo-2xlarge">Modal</h2>
-    <button class="btn btn-md btn-negative btn-solid" onclick="document.getElementById('demo-modal').showModal()">アカウントを削除</button>
+      <a class="catalog-grid-card" href="components/alert.html">
+        <div class="catalog-grid-card-preview" style="padding:8px;">
+          <div class="alert alert-info" style="padding:8px 12px; font-size:12px;"><span class="alert-icon" aria-hidden="true" style="width:16px;height:16px;font-size:10px;">i</span><div class="alert-body">お知らせ</div></div>
+        </div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Alert</p><p class="catalog-grid-card-desc">画面内に留まって状況を伝える</p></div>
+      </a>
 
-    <dialog class="modal" id="demo-modal" aria-labelledby="modal-title-1">
-      <div class="modal-header">
-        <h3 class="modal-title" id="modal-title-1">アカウントを削除しますか？</h3>
-        <button class="modal-close" aria-label="閉じる" onclick="document.getElementById('demo-modal').close()">✕</button>
-      </div>
-      <div class="modal-body">
-        <p class="typo-medium">この操作は取り消せません。関連するデータもすべて削除されます。</p>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-md btn-neutral btn-ghost" onclick="document.getElementById('demo-modal').close()">キャンセル</button>
-        <button class="btn btn-md btn-negative btn-solid" onclick="document.getElementById('demo-modal').close()">削除する</button>
-      </div>
-    </dialog>
-  </div>
+      <a class="catalog-grid-card" href="components/modal.html">
+        <div class="catalog-grid-card-preview"><div style="width:100px;height:56px;background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);"></div></div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Modal</p><p class="catalog-grid-card-desc">最前面に重ねる確認・入力ダイアログ</p></div>
+      </a>
 
-  <div class="section" id="tab">
-    <h2 class="section-title typo-2xlarge">Tab</h2>
-    <div class="tabs" role="tablist" id="demo-tabs">
-      <button class="tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
-      <button class="tab" role="tab" aria-selected="false" data-panel="history">履歴 <span class="tab-count">3</span></button>
-      <button class="tab" role="tab" aria-selected="false" data-panel="settings">設定</button>
+      <a class="catalog-grid-card" href="components/tab.html">
+        <div class="catalog-grid-card-preview">
+          <div class="tabs" style="pointer-events:none;"><span class="tab" aria-selected="true">概要</span><span class="tab" aria-selected="false">履歴</span></div>
+        </div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Tab</p><p class="catalog-grid-card-desc">同一画面内でビューを切り替える</p></div>
+      </a>
+
     </div>
-    <div style="padding:16px 4px;">
-      <p class="typo-medium" data-tabpanel="overview">概要パネルの内容です。</p>
-      <p class="typo-medium" data-tabpanel="history" hidden>履歴パネルの内容です。</p>
-      <p class="typo-medium" data-tabpanel="settings" hidden>設定パネルの内容です。</p>
-    </div>
-    <script>
-      document.getElementById('demo-tabs').addEventListener('click', (e) => {
-        const btn = e.target.closest('.tab');
-        if (!btn) return;
-        document.querySelectorAll('#demo-tabs .tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
-        const target = btn.dataset.panel;
-        document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
-      });
-    </script>
-  </div>
 
   </main>
 </body>

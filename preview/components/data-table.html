@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Data Table — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Data Table</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Data Table</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">複数レコードを行×列で一覧表示します。Tailwindの table ユーティリティと衝突するため data- 接頭辞にしています。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">基本形</p></div>
+        <div style="padding: 0 24px 24px;">
+          <table class="data-table">
+            <thead>
+              <tr><th scope="col">契約名</th><th scope="col">取引先</th><th scope="col" class="data-table-num">金額</th><th scope="col">状態</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>契約A</td><td>株式会社サンプル</td><td class="data-table-num">¥1,200,000</td><td><span class="badge badge-soft-success">有効</span></td></tr>
+              <tr><td>契約B</td><td>合同会社テスト</td><td class="data-table-num">¥85,000</td><td><span class="badge badge-soft-negative">期限切れ</span></td></tr>
+              <tr><td>契約C</td><td>株式会社デモ</td><td class="data-table-num">¥3,400,000</td><td><span class="badge badge-soft-warning">審査中</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">空状態</p></div>
+        <div style="padding: 0 24px 24px;">
+          <table class="data-table">
+            <thead><tr><th scope="col">項目</th></tr></thead>
+            <tbody><tr class="data-table-empty"><td colspan="1">データがありません</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>状態列には badge を使う</li>
+            <li>操作列（編集/削除）は行の右端に置く</li>
+            <li>データが0件の時は colspan で結合した空状態メッセージを表示する</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>table要素を手書きスタイリングしない</li>
+            <li>金額・数値列を左寄せにしない → data-table-num で右寄せに</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>&lt;th scope="col"&gt; を見出しセルに付ける</li>
+            <li>ソート可能な列は aria-sort を th に付ける</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

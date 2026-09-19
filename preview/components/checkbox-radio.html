@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Checkbox / Radio — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Checkbox / Radio</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Checkbox / Radio</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">Checkboxは複数選択可能なオン/オフの入力、Radioは複数の選択肢から1つだけを選ぶ入力です。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">Checkbox</p></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">未選択</span><label class="checkbox-label"><input type="checkbox" class="checkbox">利用規約に同意する</label></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">選択済み</span><label class="checkbox-label"><input type="checkbox" class="checkbox" checked>利用規約に同意する</label></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">sm</span><label class="checkbox-label"><input type="checkbox" class="checkbox checkbox-sm" checked>小さいサイズ</label><span class="catalog-state-note">checkbox-sm</span></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">disabled</span><label class="checkbox-label"><input type="checkbox" class="checkbox" disabled>選択不可</label></div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">Radio</p></div>
+        <div style="padding: 4px 24px 24px;">
+          <fieldset class="radio-group" style="border:none; padding:0;">
+            <legend class="typo-small" style="color:var(--color-fg-middle);">役割</legend>
+            <label class="radio-label"><input type="radio" name="role-demo" class="radio" checked>管理者</label>
+            <label class="radio-label"><input type="radio" name="role-demo" class="radio">編集者</label>
+            <label class="radio-label"><input type="radio" name="role-demo" class="radio" disabled>閲覧者（disabled）</label>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>checkbox-label / radio-label でラップし、テキストをクリック領域に含める</li>
+            <li>radioは同じ name でグループ化し、radio-group でまとめる</li>
+            <li>radioの選択肢は常に2件以上（1件だけならcheckbox）</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>チェックの意味をテキスト無しで色だけに頼らない</li>
+            <li>選択肢を隠して1つだけ見せる用途にradioを使わない（それはcheckboxの役割）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>&lt;label&gt; でテキストと関連付ける</li>
+            <li>radioグループには fieldset+legend か role="radiogroup" を付ける</li>
+            <li>ネイティブ要素なのでキーボード操作・スクリーンリーダー対応は標準</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

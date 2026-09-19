@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Tab — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Tab</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Tab</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">同じ階層にある複数のビューを切り替えるナビゲーションです。ページ遷移を伴いません。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">動作例</p></div>
+        <div style="padding: 8px 24px 24px;">
+          <div class="tabs" role="tablist" id="demo-tabs">
+            <button class="tab" role="tab" aria-selected="true" data-panel="a">概要</button>
+            <button class="tab" role="tab" aria-selected="false" data-panel="b">履歴 <span class="tab-count">3</span></button>
+            <button class="tab" role="tab" aria-selected="false" data-panel="c">設定</button>
+          </div>
+          <div style="padding:16px 4px;">
+            <p class="typo-medium" data-demo-panel="a">概要パネルの内容です。</p>
+            <p class="typo-medium" data-demo-panel="b" hidden>履歴パネルの内容です。</p>
+            <p class="typo-medium" data-demo-panel="c" hidden>設定パネルの内容です。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>tabs で囲み、各項目に role="tab" + aria-selected を付ける</li>
+            <li>件数を添えたい時は tab-count を項目内に置く</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>5個を超えるタブを並べない → select や別のナビゲーションを検討する</li>
+            <li>現在地の表現を色だけにしない → aria-selected を必ず付ける</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>コンテナに role="tablist"、各項目に role="tab" + aria-selected</li>
+            <li>対応するパネルには role="tabpanel" + aria-labelledby</li>
+            <li>左右矢印キーでの移動はJS側で実装する</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+    document.getElementById('demo-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.tab');
+      if (!btn) return;
+      document.querySelectorAll('#demo-tabs .tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-demo-panel]').forEach(p => p.hidden = p.dataset.demoPanel !== target);
+    });
+  </script>
+</body>
+</html>

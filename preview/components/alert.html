@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Alert — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Alert</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Alert</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">画面内に留まって状況を伝えるメッセージです。単発の入力エラーは input-error、画面全体に関わる状態は alert を使います。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">Variant</p></div>
+        <div style="padding: 8px 24px 24px; display:flex; flex-direction:column; gap:12px;">
+          <div class="alert alert-info" role="status">
+            <span class="alert-icon" aria-hidden="true">i</span>
+            <div class="alert-body"><p class="alert-title">お知らせ</p><p>新しいバージョンが利用可能です。</p></div>
+            <button class="alert-close" aria-label="閉じる">✕</button>
+          </div>
+          <div class="alert alert-success" role="status">
+            <span class="alert-icon" aria-hidden="true">✓</span>
+            <div class="alert-body"><p class="alert-title">保存しました</p></div>
+          </div>
+          <div class="alert alert-warning" role="status">
+            <span class="alert-icon" aria-hidden="true">!</span>
+            <div class="alert-body"><p class="alert-title">確認が必要です</p><p>審査中の項目があります。</p></div>
+          </div>
+          <div class="alert alert-negative" role="alert">
+            <span class="alert-icon" aria-hidden="true">✕</span>
+            <div class="alert-body"><p class="alert-title">保存できませんでした</p><p>ネットワーク接続を確認してください。</p></div>
+          </div>
+          <div class="alert alert-neutral" role="status">
+            <span class="alert-icon" aria-hidden="true">・</span>
+            <div class="alert-body"><p>これはneutralの例です。</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>種別に応じて alert-{neutral,success,negative,warning,info} を使い分ける</li>
+            <li>閉じられる場合は alert-close を右上に置き、aria-labelを付ける</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>1画面に同種のalertを何個も積まない → 最も重要な1件に集約する</li>
+            <li>恒常的な状態表示にalertを使わない（badgeやページ内の文言の役割）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>エラー系（negative）は role="alert"（即時読み上げ）、それ以外は role="status"</li>
+            <li>閉じるボタンには aria-label="閉じる" を付ける</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

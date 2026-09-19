@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Modal — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Modal</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Modal</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">画面の操作をブロックして、確認・入力など1つのタスクに集中させる一時レイヤーです。ネイティブ &lt;dialog&gt; ベース。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">確認モーダル</p></div>
+        <div style="padding: 8px 24px 24px;">
+          <button class="btn btn-md btn-negative btn-solid" onclick="document.getElementById('demo-modal').showModal()">アカウントを削除</button>
+        </div>
+      </div>
+
+      <dialog class="modal" id="demo-modal" aria-labelledby="modal-title-1">
+        <div class="modal-header">
+          <h3 class="modal-title" id="modal-title-1">アカウントを削除しますか？</h3>
+          <button class="modal-close" aria-label="閉じる" onclick="document.getElementById('demo-modal').close()">✕</button>
+        </div>
+        <div class="modal-body">
+          <p class="typo-medium">この操作は取り消せません。関連するデータもすべて削除されます。</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-md btn-neutral btn-ghost" onclick="document.getElementById('demo-modal').close()">キャンセル</button>
+          <button class="btn btn-md btn-negative btn-solid" onclick="document.getElementById('demo-modal').close()">削除する</button>
+        </div>
+      </dialog>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>破壊的操作の確認（削除など）に使う。実行ボタンは btn-negative</li>
+            <li>modal-title を見出し要素に付け、aria-labelledby で紐付ける</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>独自の position:fixed オーバーレイを自作しない → ネイティブ dialog を使う</li>
+            <li>modal内にmodalを重ねない → 1画面1modal</li>
+            <li>恒常的な情報表示に使わない → cardやpage-shellの役割</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>&lt;dialog&gt; はネイティブでフォーカストラップ・Escキーでの閉じる操作が確立している</li>
+            <li>aria-labelledby でタイトルと紐付ける</li>
+            <li>閉じるボタンには aria-label="閉じる" を付ける</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

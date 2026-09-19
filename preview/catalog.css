@@ -1,0 +1,104 @@
+/* Catalog site chrome（relay-development.github.io/relay-design-system を参考に構成） */
+
+* { box-sizing: border-box; }
+body {
+  font-family: var(--font-sans);
+  background: var(--color-surface);
+  color: var(--color-fg-high);
+  margin: 0;
+}
+
+/* ===== Header ===== */
+.catalog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6);
+  background: #fff;
+  border-bottom: 1px solid var(--color-stroke-middle);
+}
+.catalog-header-title { font-size: 16px; font-weight: 700; margin: 0; }
+.catalog-header-sub { font-size: 12px; color: var(--color-fg-low); margin: 0; }
+
+/* ===== Breadcrumb ===== */
+.catalog-breadcrumb {
+  padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6) 0;
+  font-size: 13px;
+  color: var(--color-fg-low);
+}
+.catalog-breadcrumb a { color: var(--color-primary-700); text-decoration: underline; }
+
+/* ===== Page container ===== */
+.catalog-main { max-width: 900px; margin: 0 auto; padding: calc(var(--spacing) * 6) calc(var(--spacing) * 6) calc(var(--spacing) * 16); }
+
+/* ===== Page title block ===== */
+.catalog-page-title-row { display: flex; align-items: center; gap: calc(var(--spacing) * 3); margin: calc(var(--spacing) * 4) 0 calc(var(--spacing) * 2); }
+.catalog-page-desc { color: var(--color-fg-middle); margin: 0 0 calc(var(--spacing) * 6); max-width: 640px; }
+
+/* ===== Section tabs（概要 / ガイドライン / アクセシビリティ） ===== */
+.catalog-tabs { display: flex; gap: calc(var(--spacing) * 4); border-bottom: 1px solid var(--color-stroke-middle); margin-bottom: calc(var(--spacing) * 6); }
+.catalog-tab {
+  padding: calc(var(--spacing) * 2) calc(var(--spacing) * 1);
+  margin-bottom: -1px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  background: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-fg-low);
+  cursor: pointer;
+}
+.catalog-tab[aria-selected="true"] {
+  color: var(--color-primary-700);
+  border-bottom-width: 4px;
+  border-bottom-color: var(--color-primary-600);
+  padding-bottom: calc(var(--spacing) * 2 - 3px);
+}
+.catalog-tabpanel[hidden] { display: none; }
+
+/* ===== Demo card（バリアント表などを囲む箱） ===== */
+.catalog-card {
+  background: #fff;
+  border: 1px solid var(--color-stroke-middle);
+  border-radius: var(--radius-md);
+  margin-bottom: calc(var(--spacing) * 6);
+  overflow: hidden;
+}
+.catalog-card-header { padding: calc(var(--spacing) * 6) calc(var(--spacing) * 6) calc(var(--spacing) * 4); }
+.catalog-card-title { font-size: 16px; font-weight: 700; margin: 0 0 4px; }
+.catalog-card-note { font-size: 13px; color: var(--color-fg-low); margin: 0; }
+
+/* ===== Variant × Theme matrix ===== */
+.catalog-matrix { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.catalog-matrix th { text-align: left; font-size: 13px; color: var(--color-fg-low); font-weight: 600; padding: calc(var(--spacing) * 2) calc(var(--spacing) * 3); border-top: 1px solid var(--color-stroke-middle); }
+.catalog-matrix td { padding: calc(var(--spacing) * 4) calc(var(--spacing) * 3); border-top: 1px solid var(--color-stroke-middle); vertical-align: middle; overflow: hidden; }
+.catalog-matrix td:first-child, .catalog-matrix th:first-child { width: 96px; padding-left: calc(var(--spacing) * 6); }
+.catalog-matrix td:first-child { font-size: 13px; font-weight: 600; color: var(--color-fg-middle); white-space: nowrap; }
+
+/* ===== State list（enable/hover/focus/disabled 等の縦並び行） ===== */
+.catalog-state-row { display: flex; align-items: center; gap: calc(var(--spacing) * 6); padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6); border-top: 1px solid var(--color-stroke-middle); }
+.catalog-state-label { width: 88px; flex-shrink: 0; font-size: 13px; font-weight: 600; color: var(--color-fg-middle); }
+.catalog-state-note { font-size: 13px; color: var(--color-fg-low); font-family: ui-monospace, monospace; }
+
+/* ===== Landing page: card grid ===== */
+.catalog-section-title { margin: calc(var(--spacing) * 8) 0 calc(var(--spacing) * 4); }
+.catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: calc(var(--spacing) * 4); }
+.catalog-grid-card {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--color-stroke-middle);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+}
+.catalog-grid-card-preview {
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-50);
+}
+.catalog-grid-card-body { padding: calc(var(--spacing) * 4); }
+.catalog-grid-card-title { font-size: 14px; font-weight: 700; margin: 0 0 2px; }
+.catalog-grid-card-desc { font-size: 12px; color: var(--color-fg-low); margin: 0; }
