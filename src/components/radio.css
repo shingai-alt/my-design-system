@@ -30,6 +30,7 @@
     accent-color: var(--color-primary-600);
     cursor: pointer;
   }
+  .radio-sm { width: 14px; height: 14px; }
   .radio:disabled { cursor: not-allowed; opacity: 0.5; }
   .radio:focus-visible {
     outline: none;

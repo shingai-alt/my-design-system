@@ -35,27 +35,30 @@
     font-family: inherit;
     color: var(--color-fg-high);
     background-color: #fff;
-    border: 1px solid var(--color-stroke-high);
+    border: 1px solid var(--color-neutral-400);
     border-radius: var(--radius-sm);
     appearance: none;
     /* ハードコード例外: background-image の SVG data URI は var()/currentColor を
-       解決できないため、色を直書きしている（neutral-500 #64748b 相当）。 */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+       解決できないため、色を直書きしている（neutral-600 #475569 相当） */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right calc(var(--spacing) * 3) center;
     padding-right: calc(var(--spacing) * 8);
     transition: border-color 150ms, box-shadow 150ms;
   }
-  .select:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-neutral-400); }
+  .select:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-neutral-500); }
+  /* フォーカスは outline + offset で枠との間に隙間を空ける（input と同じ方式） */
   .select:focus-visible {
-    outline: none;
-    border-color: var(--color-info-600);
-    box-shadow: var(--shadow-focus-ring);
+    outline: 2px solid var(--color-info-600);
+    outline-offset: 2px;
   }
   .select:disabled {
     background-color: var(--color-neutral-50);
+    border-color: var(--color-neutral-200);
     color: var(--color-fg-low);
     cursor: not-allowed;
+    /* ハードコード例外: disabled時は矢印もneutral-400 #94a3b8相当に薄くする */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   }
 
   /* ===== Size（input と揃える） ===== */
@@ -64,9 +67,14 @@
   .select-lg { height: 48px; padding-left: calc(var(--spacing) * 4); font-size: 16px; }
 
   /* ===== Error ===== */
-  .select-error { border-color: var(--color-negative-500); }
-  .select-error:focus-visible {
+  /* フォーカスリングはerror時もinfo青固定（DESIGN.md原則8）。枠だけnegativeを濃くする。 */
+  .select-error {
+    background-color: var(--color-negative-50);
+    border-width: 2px;
     border-color: var(--color-negative-500);
-    box-shadow: var(--shadow-destructive);
+  }
+  .select-error:hover:not(:disabled),
+  .select-error:focus-visible {
+    border-color: var(--color-negative-600);
   }
 }

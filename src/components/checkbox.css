@@ -29,6 +29,9 @@
     accent-color: var(--color-primary-600);
     cursor: pointer;
   }
+  /* サイズ展開（relayはsm16/md24だが、本DSは14pxベースの密度に合わせ
+     既定18px・sm14pxとやや小さめに調整） */
+  .checkbox-sm { width: 14px; height: 14px; }
   .checkbox:disabled { cursor: not-allowed; opacity: 0.5; }
   .checkbox:focus-visible {
     outline: none;

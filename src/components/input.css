@@ -35,16 +35,16 @@
     font-family: inherit;
     color: var(--color-fg-high);
     background-color: #fff;
-    border: 1px solid var(--color-stroke-high);
+    border: 1px solid var(--color-neutral-400);
     border-radius: var(--radius-sm);
     transition: border-color 150ms, box-shadow 150ms;
   }
   .input::placeholder { color: var(--color-fg-low); }
-  .input:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-neutral-400); }
+  .input:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-neutral-500); }
+  /* フォーカスは outline + offset で枠との間に隙間を空ける（box-shadowで枠に密着させない） */
   .input:focus-visible {
-    outline: none;
-    border-color: var(--color-info-600);
-    box-shadow: var(--shadow-focus-ring);
+    outline: 2px solid var(--color-info-600);
+    outline-offset: 2px;
   }
   .input:disabled {
     background-color: var(--color-neutral-50);
@@ -58,11 +58,18 @@
   .input-lg { height: 48px; padding: 0 calc(var(--spacing) * 4); font-size: 16px; }
 
   /* ===== Error ===== */
+  /* フォーカスリングはerror時もinfo青固定（DESIGN.md原則8）。枠だけnegativeを濃くする。 */
   .input-error {
+    background-color: var(--color-negative-50);
+    border-width: 2px;
     border-color: var(--color-negative-500);
   }
+  .input-error:hover:not(:disabled),
   .input-error:focus-visible {
-    border-color: var(--color-negative-500);
-    box-shadow: var(--shadow-destructive);
+    border-color: var(--color-negative-600);
+  }
+  .input-error:disabled {
+    background-color: var(--color-neutral-50);
+    border-color: var(--color-negative-200);
   }
 }

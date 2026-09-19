@@ -42,23 +42,24 @@
 @layer components {
   dialog.modal {
     border: none;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     padding: 0;
-    width: 90vw;
-    max-width: 420px;
+    width: calc(100% - var(--spacing) * 8);
+    max-width: calc(var(--spacing) * 120); /* 480px */
     color: var(--color-fg-high);
   }
   dialog.modal::backdrop {
-    background-color: rgb(15 23 42 / 0.4);
+    background-color: rgb(15 23 42 / 0.6);
   }
 
+  /* header/body/footer の寸法・配色は card と揃える */
   .modal-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
     gap: calc(var(--spacing) * 3);
-    padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6) calc(var(--spacing) * 3);
+    padding: calc(var(--spacing) * 6);
     border-bottom: 1px solid var(--color-stroke-middle);
   }
   .modal-title {
@@ -84,7 +85,8 @@
     display: flex;
     justify-content: flex-end;
     gap: calc(var(--spacing) * 2);
-    padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6);
+    padding: calc(var(--spacing) * 6);
+    background-color: var(--color-neutral-50);
     border-top: 1px solid var(--color-stroke-middle);
   }
 }

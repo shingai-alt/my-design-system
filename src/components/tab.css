@@ -39,16 +39,24 @@
     margin-bottom: -1px;
     background: none;
     border: none;
-    border-bottom: 2px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-radius: var(--radius-xs) var(--radius-xs) 0 0;
     font-size: 14px;
     font-weight: 600;
     color: var(--color-fg-low);
     cursor: pointer;
   }
-  .tab:hover:not([aria-selected="true"]) { color: var(--color-fg-high); }
+  .tab:hover:not([aria-selected="true"]) {
+    color: var(--color-fg-high);
+    background-color: var(--color-neutral-50);
+  }
+  /* 選択状態は4px下線（太さの差で「選択中」がより明確に伝わる）。
+     太さが増える分 padding-bottom を詰め、行の高さを他タブと揃える。 */
   .tab[aria-selected="true"] {
     color: var(--color-primary-700);
+    border-bottom-width: 4px;
     border-bottom-color: var(--color-primary-600);
+    padding-bottom: calc(var(--spacing) * 2 - 3px);
   }
   .tab:focus-visible {
     outline: none;

@@ -30,7 +30,7 @@
     padding: 0 calc(var(--spacing) * 2);
     border-radius: var(--radius-full);
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1;
     white-space: nowrap;
   }
