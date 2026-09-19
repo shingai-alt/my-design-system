@@ -1,13 +1,14 @@
 /*
  * Design System — Radius
- * Linear/Notion系の角ばった印象に寄せ、relayより控えめな丸みにする。
+ * relay寄りの柔らかい丸みに変更（2026-09改訂。当初のLinear/Notion系の角ばった
+ * 印象からPhase0原則を一部修正。詳細はPHASE0-DIRECTION.md参照）。
  */
 
 @theme {
   --radius-none: 0px;
   --radius-xs:   4px;
-  --radius-sm:   6px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
   --radius-full: 9999px;
 }

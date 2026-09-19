@@ -3,6 +3,11 @@
 > ここで決めたことが、Phase 1（トークン）・Phase 2（コンポーネント）の判断基準になる。
 > 後工程で迷ったら、まずこのファイルに立ち返る。
 
+> **2026-09改訂**: 角丸・余白感をrelay寄りに変更。当初の「情報密度優先」原則を撤回し、
+> 「ゆったりとした余白」に切り替えた。本文14pxベース・primaryの緑・色数の絞り込みは変更なし。
+> 影響: `tokens/radius.css`（xs4/sm8/md16/lg24）、button/input/selectの高さ(32/40/48px)、
+> card/alertの内部padding。詳細は[DESIGN.md](DESIGN.md)。
+
 ## 参考プロダクト
 
 - Linear
