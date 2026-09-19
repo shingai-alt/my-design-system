@@ -44,10 +44,10 @@
   .badge-soft-info     { background-color: var(--color-info-100); color: var(--color-info-700); }
 
   /* ===== Solid（強い注意を引きたい時のみ。多用しない） ===== */
-  .badge-solid-neutral  { background-color: var(--color-neutral-700); color: #fff; }
-  .badge-solid-primary  { background-color: var(--color-primary-600); color: #fff; }
-  .badge-solid-success  { background-color: var(--color-success-600); color: #fff; }
-  .badge-solid-warning  { background-color: var(--color-warning-600); color: #fff; }
-  .badge-solid-negative { background-color: var(--color-negative-600); color: #fff; }
-  .badge-solid-info     { background-color: var(--color-info-600); color: #fff; }
+  .badge-solid-neutral  { background-color: var(--color-neutral-700); color: var(--color-white); }
+  .badge-solid-primary  { background-color: var(--color-primary-600); color: var(--color-white); }
+  .badge-solid-success  { background-color: var(--color-success-600); color: var(--color-white); }
+  .badge-solid-warning  { background-color: var(--color-warning-600); color: var(--color-white); }
+  .badge-solid-negative { background-color: var(--color-negative-600); color: var(--color-white); }
+  .badge-solid-info     { background-color: var(--color-info-600); color: var(--color-white); }
 }

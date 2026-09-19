@@ -34,7 +34,7 @@
 @layer components {
   .data-table {
     width: 100%;
-    background-color: #fff;
+    background-color: var(--color-white);
     border: 1px solid var(--color-stroke-middle);
     border-radius: var(--radius-md);
     border-collapse: separate; /* border-radius + overflow を効かせるため */
