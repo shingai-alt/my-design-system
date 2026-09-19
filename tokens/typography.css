@@ -1,0 +1,22 @@
+/*
+ * Design System — Typography
+ *
+ * Phase 0 原則「迷ったら情報密度を上げる」に沿い、本文ベースは 14px
+ * （relay 系の 16px ベースより一段階詰める。Linear / Notion と同系統）。
+ *
+ * .typo-* セマンティック層を必ず経由する。text-sm / text-base 等の直書きは禁止。
+ */
+
+@theme {
+  --font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+@layer components {
+  .typo-xsmall  { font-size: 11px; line-height: 16px; }
+  .typo-small   { font-size: 13px; line-height: 20px; }
+  .typo-medium  { font-size: 14px; line-height: 20px; }  /* ← 本文 default */
+  .typo-large   { font-size: 16px; line-height: 24px; font-weight: 600; }
+  .typo-xlarge  { font-size: 18px; line-height: 28px; font-weight: 600; }
+  .typo-2xlarge { font-size: 20px; line-height: 28px; font-weight: 700; }
+  .typo-3xlarge { font-size: 24px; line-height: 32px; font-weight: 700; }
+}

@@ -1,0 +1,36 @@
+@import "tailwindcss" source(none);
+
+@import "../tokens/colors.css";
+@import "../tokens/typography.css";
+@import "../tokens/spacing.css";
+@import "../tokens/container.css";
+@import "../tokens/radius.css";
+@import "../tokens/shadow.css";
+
+@import "./components/button.css";
+@import "./components/input.css";
+@import "./components/badge.css";
+@import "./components/select.css";
+@import "./components/checkbox.css";
+@import "./components/radio.css";
+@import "./components/data-table.css";
+@import "./components/alert.css";
+@import "./components/modal.css";
+@import "./components/tab.css";
+@import "./components/card.css";
+
+/* ── safelist ──────────────────────────────────────────────
+ * source(none) のため、utility として使われていないトークンは
+ * Tailwind v4 のビルドで刈り取られる（未使用変数として消える）。
+ * コンポーネントCSSが var(--color-*) 等を直接参照するようになったら
+ * このsafelistは段階的に不要になっていく（それまでの土台）。
+ * ------------------------------------------------------------ */
+@source inline("{bg,text,border}-primary-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("{bg,text,border}-neutral-{50,100,200,300,400,500,600,700,800,900}");
+@source inline("{bg,text,border}-{success,warning,negative,info}-{50,100,500,600,700}");
+@source inline("{bg,text,border}-fg-{high,middle,low}");
+@source inline("border-stroke-{high,middle}");
+@source inline("bg-page bg-surface");
+@source inline("max-w-page max-w-content max-w-article");
+@source inline("rounded-{none,xs,sm,md,lg,full}");
+@source inline("shadow-{sm,md,lg} shadow-focus-ring shadow-destructive");

@@ -1,0 +1,121 @@
+/*
+ * Button
+ *
+ * 機能:
+ *   ユーザーのアクション（送信・保存・削除など）を引き起こす主操作要素。
+ *   ページ遷移そのものが目的なら button ではなく link を使う。
+ *
+ * 使用法:
+ *   OK: 主要アクションは1画面に btn-primary 1つ。副次は btn-neutral / btn-ghost。
+ *   OK: 破壊的操作（削除など）は btn-negative。
+ *   OK: 非同期処理中は data-loading を付け二重送信を防ぐ。
+ *   NG: 通常の遷移（本文中・一覧内・フッター等）を btn でスタイルしない → link。
+ *   NG: 1画面に btn-primary を複数置かない → 主従が伝わらない。
+ *   NG: 色を #hex 直書きしない → btn-primary 等のクラスで色は決まる。
+ *   NG: アイコンだけのボタンに btn を使わない → icon-btn を使う（未実装）。
+ *   NG: サイズの異なるボタンを隣り合わせに置かない → 既定は md。
+ *
+ * アクセシビリティ:
+ *   遷移に <button> を使わない（遷移は a 要素）
+ *   主操作は1画面1つ、破壊的操作は negative
+ *   :focus-visible で info/600 のフォーカスリング（DS担保）
+ *
+ * Usage:
+ *   <button class="btn btn-md btn-primary btn-solid">保存</button>
+ *   <button class="btn btn-lg btn-negative btn-outline">削除</button>
+ *   <button class="btn btn-sm btn-neutral btn-ghost" disabled>OFF</button>
+ *   <button class="btn btn-md btn-primary btn-solid" data-loading>送信中</button>
+ */
+
+@layer components {
+  /* ===== Base ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: calc(var(--spacing) * 2);
+    font-weight: 600;
+    white-space: nowrap;
+    user-select: none;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    transition: background-color 150ms, border-color 150ms, color 150ms;
+  }
+  .btn:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus-ring);
+  }
+
+  /* ===== Size ===== */
+  .btn-sm { height: 32px; padding: 0 calc(var(--spacing) * 3); font-size: 13px; }
+  .btn-md { height: 36px; padding: 0 calc(var(--spacing) * 4); font-size: 14px; }
+  .btn-lg { height: 40px; padding: 0 calc(var(--spacing) * 6); font-size: 16px; }
+
+  /* ===== PRIMARY ===== */
+  .btn-primary.btn-solid { background-color: var(--color-primary-600); color: #fff; }
+  .btn-primary.btn-solid:hover:not(:disabled) { background-color: var(--color-primary-700); }
+  .btn-primary.btn-solid:disabled { background-color: var(--color-primary-200); }
+
+  .btn-primary.btn-outline { background-color: #fff; color: var(--color-primary-700); border-color: var(--color-primary-600); }
+  .btn-primary.btn-outline:hover:not(:disabled) { background-color: var(--color-primary-50); }
+  .btn-primary.btn-outline:disabled { color: var(--color-primary-200); border-color: var(--color-primary-200); }
+
+  .btn-primary.btn-ghost { background-color: transparent; color: var(--color-primary-700); }
+  .btn-primary.btn-ghost:hover:not(:disabled) { background-color: var(--color-primary-50); }
+  .btn-primary.btn-ghost:disabled { color: var(--color-primary-200); }
+
+  /* ===== NEUTRAL ===== */
+  .btn-neutral.btn-solid { background-color: var(--color-neutral-900); color: #fff; }
+  .btn-neutral.btn-solid:hover:not(:disabled) { background-color: var(--color-neutral-800); }
+  .btn-neutral.btn-solid:disabled { background-color: var(--color-neutral-200); }
+
+  .btn-neutral.btn-outline { background-color: #fff; color: var(--color-neutral-700); border-color: var(--color-stroke-high); }
+  .btn-neutral.btn-outline:hover:not(:disabled) { background-color: var(--color-neutral-50); }
+  .btn-neutral.btn-outline:disabled { color: var(--color-neutral-300); border-color: var(--color-stroke-middle); }
+
+  .btn-neutral.btn-ghost { background-color: transparent; color: var(--color-neutral-700); }
+  .btn-neutral.btn-ghost:hover:not(:disabled) { background-color: var(--color-neutral-100); }
+  .btn-neutral.btn-ghost:disabled { color: var(--color-neutral-300); }
+
+  /* ===== NEGATIVE ===== */
+  .btn-negative.btn-solid { background-color: var(--color-negative-600); color: #fff; }
+  .btn-negative.btn-solid:hover:not(:disabled) { background-color: var(--color-negative-700); }
+  .btn-negative.btn-solid:disabled { background-color: var(--color-negative-100); }
+
+  .btn-negative.btn-outline { background-color: var(--color-negative-50); color: var(--color-negative-600); border-color: var(--color-negative-600); }
+  .btn-negative.btn-outline:hover:not(:disabled) { background-color: var(--color-negative-100); }
+  .btn-negative.btn-outline:disabled { color: var(--color-negative-200); border-color: var(--color-negative-200); }
+
+  .btn-negative.btn-ghost { background-color: transparent; color: var(--color-negative-600); }
+  .btn-negative.btn-ghost:hover:not(:disabled) { background-color: var(--color-negative-50); }
+  .btn-negative.btn-ghost:disabled { color: var(--color-negative-200); }
+
+  /* ===== Loading — spinner replaces label ===== */
+  .btn[data-loading] {
+    color: transparent !important;
+    pointer-events: none;
+    position: relative;
+  }
+  .btn[data-loading]::after {
+    content: "";
+    position: absolute;
+    width: 1em; height: 1em;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: var(--radius-full);
+    animation: btn-spin 0.6s linear infinite;
+  }
+  .btn-primary.btn-solid[data-loading]::after,
+  .btn-neutral.btn-solid[data-loading]::after,
+  .btn-negative.btn-solid[data-loading]::after { color: #fff; }
+  .btn-primary:not(.btn-solid)[data-loading]::after { color: var(--color-primary-700); }
+  .btn-neutral:not(.btn-solid)[data-loading]::after { color: var(--color-neutral-700); }
+  .btn-negative:not(.btn-solid)[data-loading]::after { color: var(--color-negative-600); }
+
+  @keyframes btn-spin { to { transform: rotate(360deg); } }
+}

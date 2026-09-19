@@ -1,0 +1,63 @@
+/*
+ * Radio
+ *
+ * 機能:
+ *   複数の選択肢から1つだけを選ぶ入力。選択肢が多い（5件超）場合は select を検討する。
+ *
+ * 使用法:
+ *   OK: 同じ name でグループ化し、radio-group でまとめて role="radiogroup" を付ける。
+ *   OK: 選択肢は常に2件以上（1件だけの radio は checkbox を使う）。
+ *   NG: 選択肢を隠して1つだけ見せる用途に使わない → それは checkbox の役割。
+ *
+ * アクセシビリティ:
+ *   グループ全体に <fieldset><legend> または role="radiogroup" + aria-labelledby を付ける
+ *   ネイティブ要素なのでキーボード操作（矢印キー）・スクリーンリーダー対応は標準
+ *   :focus-visible で info/600 のフォーカスリング（DS担保）
+ *
+ * Usage:
+ *   <fieldset class="radio-group">
+ *     <legend class="typo-small">役割</legend>
+ *     <label class="radio-label"><input type="radio" name="role" class="radio">管理者</label>
+ *     <label class="radio-label"><input type="radio" name="role" class="radio">編集者</label>
+ *   </fieldset>
+ */
+
+@layer components {
+  .radio {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    accent-color: var(--color-primary-600);
+    cursor: pointer;
+  }
+  .radio:disabled { cursor: not-allowed; opacity: 0.5; }
+  .radio:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus-ring);
+    border-radius: var(--radius-full);
+  }
+
+  .radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    font-size: 14px;
+    color: var(--color-fg-high);
+    cursor: pointer;
+  }
+  .radio-label:has(.radio:disabled) { color: var(--color-fg-low); cursor: not-allowed; }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 2);
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  .radio-group legend {
+    color: var(--color-fg-middle);
+    margin-bottom: calc(var(--spacing) * 1);
+    padding: 0;
+  }
+}

@@ -1,0 +1,68 @@
+/*
+ * Input
+ *
+ * 機能:
+ *   テキスト・メール・数値など単一行の値を入力する要素。
+ *   選択肢から選ぶ操作は input ではなく select を使う。
+ *
+ * 使用法:
+ *   OK: ラベルと1対1で対応させ、<label> で関連付ける（htmlFor / 入れ子）。
+ *   OK: エラー時は input-error を付け、エラー文言を近くに表示する。
+ *   OK: 必須/任意はラベル側で示す（label-control、未実装）。placeholder に必須表示を書かない。
+ *   NG: placeholder をラベル代わりにしない（入力すると消えて用途が分からなくなる）。
+ *   NG: 色だけでエラーを伝えない → 文言も併記する。
+ *   NG: 生の border / padding を書かない → input クラスとサイズで決まる。
+ *
+ * アクセシビリティ:
+ *   <label> で関連付ける（placeholder はラベルの代わりにならない）
+ *   エラー時は aria-invalid="true" と aria-describedby でエラー文言に紐付ける
+ *   :focus-visible で info/600 のフォーカスリング（DS担保）
+ *
+ * Usage:
+ *   <label>
+ *     メールアドレス
+ *     <input class="input input-md" type="email">
+ *   </label>
+ *
+ *   <input class="input input-md input-error" aria-invalid="true" aria-describedby="email-error">
+ *   <p id="email-error" class="typo-small" style="color:var(--color-negative-600)">メールアドレスの形式が正しくありません</p>
+ */
+
+@layer components {
+  .input {
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    color: var(--color-fg-high);
+    background-color: #fff;
+    border: 1px solid var(--color-stroke-high);
+    border-radius: var(--radius-sm);
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+  .input::placeholder { color: var(--color-fg-low); }
+  .input:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-neutral-400); }
+  .input:focus-visible {
+    outline: none;
+    border-color: var(--color-info-600);
+    box-shadow: var(--shadow-focus-ring);
+  }
+  .input:disabled {
+    background-color: var(--color-neutral-50);
+    color: var(--color-fg-low);
+    cursor: not-allowed;
+  }
+
+  /* ===== Size ===== */
+  .input-sm { height: 32px; padding: 0 calc(var(--spacing) * 3); font-size: 13px; }
+  .input-md { height: 36px; padding: 0 calc(var(--spacing) * 3); font-size: 14px; }
+  .input-lg { height: 40px; padding: 0 calc(var(--spacing) * 4); font-size: 16px; }
+
+  /* ===== Error ===== */
+  .input-error {
+    border-color: var(--color-negative-500);
+  }
+  .input-error:focus-visible {
+    border-color: var(--color-negative-500);
+    box-shadow: var(--shadow-destructive);
+  }
+}

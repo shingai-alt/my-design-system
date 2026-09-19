@@ -1,0 +1,73 @@
+/*
+ * Design System — Colors
+ *
+ * primary: フォレストグリーン #2f9e6f (HSL 155° 54% 40%) を 500 とした 11 段階。
+ * Phase 0 合意: 彩度は抑えめ、装飾のための色を増やさない。
+ * status色（success/warning/negative/info）は primary と意味が混ざらないよう別の色相にする。
+ */
+
+@theme {
+  /* ===== Primary（brand green） ===== */
+  --color-primary-50:  #f4faf8;
+  --color-primary-100: #e5f5ee;
+  --color-primary-200: #c6ebdc;
+  --color-primary-300: #95dabd;
+  --color-primary-400: #5ec99d;
+  --color-primary-500: #2f9e6f;  /* base */
+  --color-primary-600: #25835c;
+  --color-primary-700: #1d6d4c;
+  --color-primary-800: #18593e;
+  --color-primary-900: #134932;
+  --color-primary-950: #0b2d1f;
+
+  /* ===== Neutral（slate） ===== */
+  --color-neutral-50:  #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+
+  /* ===== Status（primaryと色相を分ける） ===== */
+  --color-success-50:  #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-500: #16a34a;
+  --color-success-600: #15803d;
+  --color-success-700: #166534;
+
+  --color-warning-50:  #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+
+  --color-negative-50:  #fef2f2;
+  --color-negative-100: #fee2e2;
+  --color-negative-500: #ef4444;
+  --color-negative-600: #dc2626;
+  --color-negative-700: #b91c1c;
+
+  --color-info-50:  #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+
+  /* ===== Semantic roles（コンポーネントはこちらを使う。primitiveの直参照は最終手段） ===== */
+  --color-fg-high:   var(--color-neutral-900);  /* 本文・見出し */
+  --color-fg-middle: var(--color-neutral-700);  /* 本文（中優先） */
+  --color-fg-low:    var(--color-neutral-500);  /* 補足・キャプション */
+  --color-fg-high-inverse: #ffffff;
+
+  --color-stroke-high:   var(--color-neutral-300);
+  --color-stroke-middle: var(--color-neutral-200);
+  --color-stroke-low:    var(--color-neutral-100);
+
+  --color-page:    #ffffff;
+  --color-surface: var(--color-neutral-50);
+}

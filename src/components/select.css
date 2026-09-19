@@ -1,0 +1,72 @@
+/*
+ * Select
+ *
+ * 機能:
+ *   あらかじめ決まった選択肢から1つを選ぶ、ネイティブ <select> のスタイル。
+ *   自由入力は input、複数選択のトグルは checkbox を使う。
+ *
+ * 使用法:
+ *   OK: 見た目は input と揃える（サイズ・角丸・枠線を統一し、フォームの一貫性を保つ）。
+ *   OK: 選択肢が少ない（2〜4件・常に見せたい）場合は select ではなく radio-group を検討する。
+ *   NG: 独自の見た目のドロップダウンをJSで自作しない → まずネイティブ select を使う。
+ *   NG: 最初の option を「選択してください」のダミーにしたまま必須項目にしない
+ *       → placeholder用のoptionには disabled を付ける。
+ *
+ * アクセシビリティ:
+ *   <label> で関連付ける
+ *   ネイティブ要素なのでキーボード操作・スクリーンリーダー対応は標準で確立している
+ *   :focus-visible で info/600 のフォーカスリング（DS担保）
+ *
+ * Usage:
+ *   <label>
+ *     役割
+ *     <select class="select select-md">
+ *       <option value="" disabled selected>選択してください</option>
+ *       <option value="admin">管理者</option>
+ *       <option value="editor">編集者</option>
+ *     </select>
+ *   </label>
+ */
+
+@layer components {
+  .select {
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    color: var(--color-fg-high);
+    background-color: #fff;
+    border: 1px solid var(--color-stroke-high);
+    border-radius: var(--radius-sm);
+    appearance: none;
+    /* ハードコード例外: background-image の SVG data URI は var()/currentColor を
+       解決できないため、色を直書きしている（neutral-500 #64748b 相当）。 */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right calc(var(--spacing) * 3) center;
+    padding-right: calc(var(--spacing) * 8);
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+  .select:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-neutral-400); }
+  .select:focus-visible {
+    outline: none;
+    border-color: var(--color-info-600);
+    box-shadow: var(--shadow-focus-ring);
+  }
+  .select:disabled {
+    background-color: var(--color-neutral-50);
+    color: var(--color-fg-low);
+    cursor: not-allowed;
+  }
+
+  /* ===== Size（input と揃える） ===== */
+  .select-sm { height: 32px; padding-left: calc(var(--spacing) * 3); font-size: 13px; }
+  .select-md { height: 36px; padding-left: calc(var(--spacing) * 3); font-size: 14px; }
+  .select-lg { height: 40px; padding-left: calc(var(--spacing) * 4); font-size: 16px; }
+
+  /* ===== Error ===== */
+  .select-error { border-color: var(--color-negative-500); }
+  .select-error:focus-visible {
+    border-color: var(--color-negative-500);
+    box-shadow: var(--shadow-destructive);
+  }
+}

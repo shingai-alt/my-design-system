@@ -1,0 +1,20 @@
+/*
+ * Design System — Spacing
+ *
+ * Tailwind v4 single-base: --spacing から p-* / m-* / gap-* が自動派生する。
+ *
+ * 祝福される 9 段階（このスケール以外は使わない。5/7/9/10 等の倍数は禁止）:
+ *   spacing/0  =  0  px
+ *   spacing/1  =  4  px
+ *   spacing/2  =  8  px
+ *   spacing/3  = 12  px
+ *   spacing/4  = 16  px
+ *   spacing/6  = 24  px
+ *   spacing/8  = 32  px
+ *   spacing/12 = 48  px
+ *   spacing/16 = 64  px
+ */
+
+@theme {
+  --spacing: 0.25rem; /* 4px base */
+}

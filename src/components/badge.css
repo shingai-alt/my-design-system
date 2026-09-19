@@ -1,0 +1,53 @@
+/*
+ * Badge
+ *
+ * 機能:
+ *   状態・分類を一目で伝える小さなラベル。クリック不可（操作は filter-chip 等、未実装）。
+ *
+ * 使用法:
+ *   OK: 状態(有効/期限切れ/審査中など)には badge-{success,negative,warning} を使い分ける。
+ *   OK: 分類・タグには badge-neutral / badge-primary を使う。
+ *   NG: 全状態に同じ色を使わない → 意味が伝わらなくなる。
+ *   NG: 色だけに頼らない → テキストも状態を表す言葉にする（色覚多様性対応）。
+ *   NG: primaryボタンと並べる時、badge-primaryを乱用しない → 主操作(btn)と紛れる。
+ *       状態が primary の意味と重ならない限り badge-success 等の別色を選ぶ。
+ *
+ * アクセシビリティ:
+ *   色以外の手がかり（テキスト）を必ず併記する
+ *   装飾ではなく情報を持つため aria-hidden は付けない
+ *
+ * Usage:
+ *   <span class="badge badge-soft-success">有効</span>
+ *   <span class="badge badge-solid-negative">緊急</span>
+ *   <span class="badge badge-soft-neutral">下書き</span>
+ */
+
+@layer components {
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 calc(var(--spacing) * 2);
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  /* ===== Soft（既定。塗りは薄く、文字で色をはっきり出す） ===== */
+  .badge-soft-neutral  { background-color: var(--color-neutral-100); color: var(--color-neutral-700); }
+  .badge-soft-primary  { background-color: var(--color-primary-100); color: var(--color-primary-700); }
+  .badge-soft-success  { background-color: var(--color-success-100); color: var(--color-success-700); }
+  .badge-soft-warning  { background-color: var(--color-warning-100); color: var(--color-warning-700); }
+  .badge-soft-negative { background-color: var(--color-negative-100); color: var(--color-negative-700); }
+  .badge-soft-info     { background-color: var(--color-info-100); color: var(--color-info-700); }
+
+  /* ===== Solid（強い注意を引きたい時のみ。多用しない） ===== */
+  .badge-solid-neutral  { background-color: var(--color-neutral-700); color: #fff; }
+  .badge-solid-primary  { background-color: var(--color-primary-600); color: #fff; }
+  .badge-solid-success  { background-color: var(--color-success-600); color: #fff; }
+  .badge-solid-warning  { background-color: var(--color-warning-600); color: #fff; }
+  .badge-solid-negative { background-color: var(--color-negative-600); color: #fff; }
+  .badge-solid-info     { background-color: var(--color-info-600); color: #fff; }
+}

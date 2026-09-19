@@ -1,0 +1,90 @@
+/*
+ * Modal
+ *
+ * 機能:
+ *   画面の操作をブロックして、確認・入力など1つのタスクに集中させる一時レイヤー。
+ *   ネイティブ <dialog> ベース。開閉は showModal() / close()（JS側で実装。CSSはスタイルのみ）。
+ *
+ * 使用法:
+ *   OK: 破壊的操作の確認（削除など）に使う。実行ボタンは btn-negative。
+ *   OK: modal-title を <h2> 等に付け、dialog の aria-labelledby で紐付ける。
+ *   NG: 独自の position:fixed オーバーレイを自作しない → ネイティブ dialog を使う
+ *       （フォーカストラップ・Escで閉じる・backdrop が標準で付いてくる）。
+ *   NG: modal内にmodalを重ねない → 1画面1modal。
+ *   NG: 恒常的な情報表示に使わない → それは card や page-shell の役割。
+ *
+ * アクセシビリティ:
+ *   <dialog> はネイティブでフォーカストラップ・Escキーでの閉じる操作が確立している
+ *   aria-labelledby でタイトルと紐付ける
+ *   閉じるボタンには aria-label="閉じる" を付ける
+ *
+ * Usage:
+ *   <dialog class="modal" aria-labelledby="modal-title-1">
+ *     <div class="modal-header">
+ *       <h2 class="modal-title" id="modal-title-1">アカウントを削除しますか？</h2>
+ *       <button class="modal-close" aria-label="閉じる">✕</button>
+ *     </div>
+ *     <div class="modal-body">
+ *       <p class="typo-medium">この操作は取り消せません。</p>
+ *     </div>
+ *     <div class="modal-footer">
+ *       <button class="btn btn-md btn-neutral btn-ghost">キャンセル</button>
+ *       <button class="btn btn-md btn-negative btn-solid">削除する</button>
+ *     </div>
+ *   </dialog>
+ *
+ *   <script>
+ *     document.querySelector('dialog').showModal();
+ *     document.querySelector('dialog').close();
+ *   </script>
+ */
+
+@layer components {
+  dialog.modal {
+    border: none;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 0;
+    width: 90vw;
+    max-width: 420px;
+    color: var(--color-fg-high);
+  }
+  dialog.modal::backdrop {
+    background-color: rgb(15 23 42 / 0.4);
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 3);
+    padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6) calc(var(--spacing) * 3);
+    border-bottom: 1px solid var(--color-stroke-middle);
+  }
+  .modal-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .modal-close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-fg-low);
+  }
+  .modal-close:hover { color: var(--color-fg-high); }
+  .modal-close:focus-visible { outline: none; box-shadow: var(--shadow-focus-ring); border-radius: var(--radius-xs); }
+
+  .modal-body {
+    padding: calc(var(--spacing) * 6);
+  }
+
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6);
+    border-top: 1px solid var(--color-stroke-middle);
+  }
+}

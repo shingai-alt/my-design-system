@@ -1,0 +1,81 @@
+/*
+ * Alert
+ *
+ * 機能:
+ *   画面内に留まって状況を伝えるメッセージ。トースト（一定時間で消える通知）は未実装。
+ *   単発の入力エラーは input-error + エラー文言、画面全体に関わる状態は alert を使う。
+ *
+ * 使用法:
+ *   OK: 種別に応じて alert-{neutral,success,negative,warning,info} を使い分ける。
+ *   OK: 閉じられる場合は alert-close を右上に置き、aria-labelを付ける。
+ *   NG: 1画面に同種のalertを何個も積まない → 最も重要な1件に集約する。
+ *   NG: 恒常的な状態表示にalertを使わない（それはbadgeやページ内の文言の役割）。
+ *
+ * アクセシビリティ:
+ *   エラー系（negative）は role="alert"（即時読み上げ）、それ以外は role="status"
+ *   閉じるボタンには aria-label="閉じる" を付ける
+ *
+ * Usage:
+ *   <div class="alert alert-info" role="status">
+ *     <span class="alert-icon" aria-hidden="true">i</span>
+ *     <div class="alert-body">
+ *       <p class="alert-title">お知らせ</p>
+ *       <p>新しいバージョンが利用可能です。</p>
+ *     </div>
+ *   </div>
+ */
+
+@layer components {
+  .alert {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--spacing) * 3);
+    padding: calc(var(--spacing) * 3) calc(var(--spacing) * 4);
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+  }
+
+  .alert-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .alert-body { flex: 1; min-width: 0; }
+  .alert-title { font-weight: 700; margin: 0 0 calc(var(--spacing) * 1); }
+  .alert-body p { margin: 0; }
+
+  .alert-close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.6;
+  }
+  .alert-close:hover { opacity: 1; }
+  .alert-close:focus-visible { outline: none; box-shadow: var(--shadow-focus-ring); border-radius: var(--radius-xs); }
+
+  /* ===== Variants ===== */
+  .alert-neutral  { background-color: var(--color-neutral-50);  border-color: var(--color-stroke-middle); color: var(--color-fg-high); }
+  .alert-neutral  .alert-icon { background-color: var(--color-neutral-200); color: var(--color-neutral-700); }
+
+  .alert-success  { background-color: var(--color-success-50);  border-color: var(--color-success-100); color: var(--color-success-700); }
+  .alert-success  .alert-icon { background-color: var(--color-success-100); color: var(--color-success-600); }
+
+  .alert-negative { background-color: var(--color-negative-50); border-color: var(--color-negative-100); color: var(--color-negative-700); }
+  .alert-negative .alert-icon { background-color: var(--color-negative-100); color: var(--color-negative-600); }
+
+  .alert-warning  { background-color: var(--color-warning-50);  border-color: var(--color-warning-100); color: var(--color-warning-700); }
+  .alert-warning  .alert-icon { background-color: var(--color-warning-100); color: var(--color-warning-600); }
+
+  .alert-info     { background-color: var(--color-info-50);     border-color: var(--color-info-100); color: var(--color-info-700); }
+  .alert-info     .alert-icon { background-color: var(--color-info-100); color: var(--color-info-600); }
+}

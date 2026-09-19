@@ -1,0 +1,11 @@
+/*
+ * Design System — Container widths
+ * 情報密度を優先する方針のため、relay系よりやや広め〜同等に設定。
+ * 正本はここ。丸めはプロダクトの実測に応じて調整する。
+ */
+
+@theme {
+  --container-page:    76.25rem; /* 1220px — 一覧・帯（ヘッダー/フッター） */
+  --container-content: 56.25rem; /* 900px  — フォーム・設定・詳細 */
+  --container-article: 42rem;    /* 672px  — 長文本文 */
+}

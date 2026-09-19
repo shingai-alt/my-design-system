@@ -1,0 +1,14 @@
+/*
+ * Design System — Shadow
+ * elevation の表現にシャドウを使わない（surfaceはボーダー+背景色で区切る）。
+ * shadowを使ってよいのは modal / tooltip 等、最前面に重なる一時レイヤーだけ。
+ */
+
+@theme {
+  --shadow-sm: 0 1px 2px 0 rgb(15 23 42 / 0.06);
+  --shadow-md: 0 4px 12px -2px rgb(15 23 42 / 0.10), 0 2px 4px -2px rgb(15 23 42 / 0.06);
+  --shadow-lg: 0 12px 24px -4px rgb(15 23 42 / 0.14), 0 4px 8px -4px rgb(15 23 42 / 0.08);
+
+  --shadow-focus-ring:   0 0 0 3px var(--color-info-600);
+  --shadow-destructive:  0 0 0 3px var(--color-negative-500);
+}

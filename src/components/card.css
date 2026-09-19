@@ -1,0 +1,58 @@
+/*
+ * Card
+ *
+ * 機能:
+ *   関連する情報をひとまとまりの区画として提示するコンテナ。
+ *
+ * 使用法:
+ *   OK: border + 背景色で区切る（Phase0原則: 恒常的なsurfaceにシャドウを使わない）。
+ *   OK: card-header / card-body / card-footer で内部を構造化する。
+ *   NG: シャドウで浮き上がりを表現しない → シャドウは modal 等の一時レイヤー専用（未実装）。
+ *   NG: card内にネストしたcardを重ねない → 境界が曖昧になる。区切りたい場合は border-stroke-low を使う。
+ *
+ * アクセシビリティ:
+ *   カード自体に意味的な役割は無い（見出しは h2〜h4 等、文脈に合った要素を使う）
+ *   カード全体がリンクの場合は内部に <a> を1つだけ置き、他の操作要素と重ねない
+ *
+ * Usage:
+ *   <div class="card">
+ *     <div class="card-header">
+ *       <p class="card-title">プランA</p>
+ *     </div>
+ *     <div class="card-body">
+ *       <p class="typo-medium">本文</p>
+ *     </div>
+ *     <div class="card-footer">
+ *       <button class="btn btn-md btn-primary btn-solid">選択</button>
+ *     </div>
+ *   </div>
+ */
+
+@layer components {
+  .card {
+    background-color: #fff;
+    border: 1px solid var(--color-stroke-middle);
+    border-radius: var(--radius-md);
+  }
+
+  .card-header,
+  .card-body,
+  .card-footer {
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .card-header { border-bottom: 1px solid var(--color-stroke-middle); }
+  .card-footer { border-top: 1px solid var(--color-stroke-middle); }
+
+  .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-fg-high);
+    margin: 0;
+  }
+  .card-subtitle {
+    font-size: 13px;
+    color: var(--color-fg-low);
+    margin: calc(var(--spacing) * 1) 0 0;
+  }
+}
