@@ -107,6 +107,7 @@ shadow-destructive         : 0 0 0 3px #ef4444
 | 比率・100%・auto | スケール非依存値 |
 | 強制カラーモードのシステムカラー（`ButtonText`等） | OSの設定に追従する系統色のため |
 | `background-image` の SVG data URI 内の色 | `var()`/`currentColor` が解決できないため直書き。変更時はコメントの色名と実値を両方直す |
+| Figma仕様やアイコンとの位置合わせでoff-scaleな`calc(var(--spacing) * N)`が必要 | 祝福値に丸めるとズレる少数のケース限定。コメントでpx値と理由を明記（例: `modal.css`のmax-width、`accordion.css`のpanel padding-left） |
 
 ---
 
@@ -139,6 +140,9 @@ currentColorを継承するのでtext-primary-600等で着色可能
 
 ## より深く知りたいとき
 
+- **コンポーネント一覧・クラス名**: [README.md](README.md#コンポーネント一覧26個)
+- **コンポーネントの完全仕様（使用法OK/NG・アクセシビリティ）**: 各 [src/components/*.css](src/components/) の先頭コメント（正本）。MCPの `get_component` でも同じ内容を取得可能
+- **実例を見る**: [preview/index.html](preview/index.html)
 - **トークン値の正本**: [tokens/](tokens/)
 - **方向性の背景**: [PHASE0-DIRECTION.md](PHASE0-DIRECTION.md)
 - **ビルド**: `npm run build` → `dist/ds.css`

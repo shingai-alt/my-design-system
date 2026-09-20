@@ -67,6 +67,7 @@
   .accordion-label { flex: 1; }
 
   .accordion-panel {
+    /* ハードコード例外: 左paddingは祝福外(44px)。trigger側のicon幅+gapとテキスト位置を揃えるための固定値 */
     padding: 0 calc(var(--spacing) * 4) calc(var(--spacing) * 4) calc(var(--spacing) * 11);
     font-size: 14px;
     line-height: 24px;

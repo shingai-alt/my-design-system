@@ -46,11 +46,12 @@
     box-shadow: var(--shadow-lg);
     padding: 0;
     width: calc(100% - var(--spacing) * 8);
+    /* ハードコード例外: 480pxはFigma仕様のダイアログ幅。祝福値(112=448px/128=512px)では合わないため直書き */
     max-width: calc(var(--spacing) * 120); /* 480px */
     color: var(--color-fg-high);
   }
   dialog.modal::backdrop {
-    background-color: rgb(15 23 42 / 0.6);
+    background-color: color-mix(in srgb, var(--color-neutral-900) 60%, transparent);
   }
 
   /* header/body/footer の寸法・配色は card と揃える */
