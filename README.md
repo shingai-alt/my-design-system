@@ -38,7 +38,7 @@ npm run build
 
 全コンポーネントの動作確認は [`preview/index.html`](preview/index.html) を参照してください。
 
-## コンポーネント一覧（23個）
+## コンポーネント一覧（26個）
 
 | # | コンポーネント | 主要クラス |
 |---|---|---|
@@ -65,6 +65,9 @@ npm run build
 | 21 | Menu | `.menu`, `.menu-group`, `.menu-divider`, `.menu-item`, `.menu-item-sm`（現在地は`aria-current="page"`） |
 | 22 | Pagination | `.pagination`, `.pagination-item`, `.pagination-ellipsis`（現在ページは`aria-current="page"`） |
 | 23 | Stepper | `.stepper`, `.stepper-step`, `.stepper-marker`, `.stepper-label`（現在地は`aria-current="step"`、完了は`.is-completed`） |
+| 24 | Page Shell | `.page-shell`（`max-w-page`に中央寄せ）/ `.page-shell-content`（900pxに絞る。フォーム/設定/詳細） |
+| 25 | Simple Table | `.simple-table`（`<th>`/`<td>`を子要素として使用、rowspanでmerge可） |
+| 26 | Filter Chip | `.filter-chip`, `.filter-chip-{label,count,check}`（選択状態は`aria-pressed`） |
 
 アイコンは Lucide SVG sprite（`dist/icons.svg`、21種）を `.icon icon-{xs,sm,md,lg,xl}` で使用（詳細はDESIGN.md）。
 

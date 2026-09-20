@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Filter Chip — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Filter Chip</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Filter Chip</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">タグや単語でコンテンツを絞り込むトグル可能なチップです。選択と同時に結果がその場で更新される複数同時選択の絞り込みに使います。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">state</p></div>
+        <div style="padding: 8px 24px 24px; display:flex; gap:12px; flex-wrap:wrap;">
+          <button type="button" class="filter-chip" aria-pressed="false" id="chip-demo">
+            <span class="filter-chip-label">自治体連携</span>
+            <span class="filter-chip-count">124件</span>
+          </button>
+          <button type="button" class="filter-chip" aria-pressed="true">
+            <span class="filter-chip-label">選択済み</span>
+            <span class="filter-chip-count">58件</span>
+            <span class="filter-chip-check"><svg class="icon" aria-hidden="true"><use href="../icons.svg#lucide-check"></use></svg></span>
+          </button>
+          <button type="button" class="filter-chip" aria-pressed="false" disabled>
+            <span class="filter-chip-label">選択不可</span>
+            <span class="filter-chip-count">0件</span>
+          </button>
+        </div>
+        <p class="typo-small" style="padding:0 24px 16px; color:var(--color-fg-low);">1つ目のチップをクリックすると選択状態を切り替えられます</p>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>選択状態は aria-pressed="true|false"</li>
+            <li>件数表示は filter-chip-count</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>単一選択しか許さない設問に並べない → radio</li>
+            <li>送信やページ遷移を伴う絞り込みに使わない → checkbox/select + 明示的な適用ボタン（WCAG 3.2.2）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>選択状態を aria-pressed="true/false" で表し、トグルで更新する</li>
+            <li>選択は色だけでなくチェックマークでも示す</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+    document.getElementById('chip-demo').addEventListener('click', function() {
+      const pressed = this.getAttribute('aria-pressed') === 'true';
+      this.setAttribute('aria-pressed', String(!pressed));
+      let check = this.querySelector('.filter-chip-check');
+      if (!pressed && !check) {
+        check = document.createElement('span');
+        check.className = 'filter-chip-check';
+        check.innerHTML = '<svg class="icon" aria-hidden="true"><use href="../icons.svg#lucide-check"></use></svg>';
+        this.appendChild(check);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+/*
+ * Filter Chip
+ *
+ * 機能:
+ *   タグや単語でコンテンツを絞り込むトグル可能なチップ。選択と同時に結果が
+ *   その場で更新される（送信・ページ遷移を伴わない）複数同時選択の絞り込みに使う。
+ *   複数選択の絞り込み=filter-chip / 単一選択=radio / ON-OFF設定=checkbox。
+ *
+ * 使用法:
+ *   OK: 選択状態は aria-pressed="true|false"。
+ *   OK: 件数表示は filter-chip-count。
+ *   NG: 単一選択しか許さない設問に並べない → radio。
+ *   NG: 送信やページ遷移を伴う検索・絞り込みフォームに使わない → checkbox/select
+ *       + 明示的な適用ボタンにする（WCAG 3.2.2）。
+ *
+ * アクセシビリティ:
+ *   選択状態を aria-pressed="true/false" で表し、トグルで更新する
+ *   件数はラベルと共に読まれるようにする（例: 自治体連携 124件）
+ *   選択は色だけでなくチェックマークでも示す
+ *
+ * Usage:
+ *   <button type="button" class="filter-chip" aria-pressed="false">
+ *     <span class="filter-chip-label">自治体連携</span>
+ *     <span class="filter-chip-count">124件</span>
+ *   </button>
+ */
+
+@layer components {
+  .filter-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-stroke-middle);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background-color 150ms, border-color 150ms;
+  }
+  .filter-chip:hover:not(:disabled):not([aria-pressed="true"]) {
+    background-color: var(--color-neutral-50);
+    border-color: var(--color-stroke-high);
+  }
+  .filter-chip:disabled {
+    background-color: var(--color-neutral-100);
+    color: var(--color-fg-low);
+    cursor: not-allowed;
+  }
+  .filter-chip:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus-ring);
+  }
+
+  .filter-chip-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-neutral-600);
+  }
+  .filter-chip-count {
+    flex-shrink: 0;
+    font-size: 13px;
+    color: var(--color-fg-low);
+  }
+  .filter-chip:disabled .filter-chip-label,
+  .filter-chip:disabled .filter-chip-count {
+    color: var(--color-fg-low);
+  }
+
+  /* Selected */
+  .filter-chip[aria-pressed="true"] {
+    background-color: var(--color-primary-50);
+    border-color: var(--color-primary-500);
+  }
+  .filter-chip[aria-pressed="true"]:hover:not(:disabled) {
+    background-color: var(--color-primary-100);
+  }
+  .filter-chip[aria-pressed="true"] .filter-chip-label {
+    color: var(--color-primary-700);
+  }
+  .filter-chip[aria-pressed="true"]:disabled {
+    background-color: var(--color-primary-50);
+    border-color: var(--color-primary-200);
+  }
+
+  /* 選択中のみ表示するチェックマーク */
+  .filter-chip-check {
+    display: none;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary-500);
+    color: var(--color-white);
+  }
+  .filter-chip[aria-pressed="true"] .filter-chip-check { display: inline-flex; }
+  .filter-chip-check .icon { width: 10px; height: 10px; }
+}

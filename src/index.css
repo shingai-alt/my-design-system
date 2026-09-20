@@ -31,6 +31,9 @@
 @import "./components/menu.css";
 @import "./components/pagination.css";
 @import "./components/stepper.css";
+@import "./components/page-shell.css";
+@import "./components/simple-table.css";
+@import "./components/filter-chip.css";
 
 /* ── safelist ──────────────────────────────────────────────
  * source(none) のため、utility として使われていないトークンは

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Page Shell — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Page Shell</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Page Shell</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">ページのコンテンツ領域幅を全ページで揃えるためのラッパーです。ヘッダー/フッター/mainそれぞれの内側に置きます。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">page（一覧・帯向け）</p><p class="catalog-card-note">max-width: var(--container-page) = 1220px</p></div>
+        <div style="background:var(--color-neutral-100); padding:16px 0;">
+          <div class="page-shell" style="background:var(--color-white); border:1px dashed var(--color-stroke-high); padding-top:16px; padding-bottom:16px; text-align:center;">
+            <span class="typo-small" style="color:var(--color-fg-low);">page-shell（このグレー帯の中で最大1220pxに中央寄せ）</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">page-shell-content（フォーム・設定・詳細向け）</p><p class="catalog-card-note">max-width: var(--container-content) = 900px</p></div>
+        <div style="background:var(--color-neutral-100); padding:16px 0;">
+          <div class="page-shell page-shell-content" style="background:var(--color-white); border:1px dashed var(--color-stroke-high); padding-top:16px; padding-bottom:16px; text-align:center;">
+            <span class="typo-small" style="color:var(--color-fg-low);">page-shell page-shell-content（900pxに絞る）</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>全幅の帯（header/footer/section）の直下に置き、中身をこの中に入れる</li>
+            <li>フォームや設定・詳細は page-shell に .page-shell-content を併記して900pxに絞る</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>max-w-5xl等のサイズ名でコンテナ幅を新規に書かない</li>
+            <li>page-shellを入れ子にしない → 帯ごとに1つ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>ランドマーク要素（header/nav/main/footer）で領域を構造化する</li>
+            <li>page-shellは帯ごとに1つ（入れ子にしない）。DOM順＝読み上げ順を保つ</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>
