@@ -1,0 +1,39 @@
+/*
+ * Icon
+ *
+ * 機能:
+ *   Lucideスプライト（dist/icons.svg）からアイコンを表示するヘルパー。表示とサイズだけを担う。
+ *
+ * 使用法:
+ *   OK: サイズは icon-{xs,sm,md,lg,xl}。色は currentColor 継承なので text-* で着色。
+ *   OK: <use href="…#lucide-名前"> で参照する。
+ *   NG: 色やサイズを #hex/px で直書きしない → text-* と icon-* を使う。
+ *   NG: class="icon" だけでサイズクラスを省かない → icon 単体はSVG既定の300×150pxで描かれ
+ *       レイアウトを突き抜ける。icon-{xs,sm,md,lg,xl} を必ず併記する。
+ *
+ * アクセシビリティ:
+ *   装飾アイコンは aria-hidden="true"（意味を持たないアイコンは読み上げない）
+ *   単独で情報を表すアイコンは aria-label か <title> で代替テキストを与える
+ *   アイコンボタンでは icon-btn 側に aria-label、アイコンSVGは aria-hidden
+ *
+ * Usage:
+ *   <svg class="icon icon-md" aria-hidden="true">
+ *     <use href="dist/icons.svg#lucide-search"></use>
+ *   </svg>
+ *
+ * サイズ:
+ *   xs=12px  sm=16px  md=20px(既定)  lg=24px  xl=32px
+ */
+
+@layer components {
+  .icon {
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
+  }
+  .icon-xs { width: 12px; height: 12px; }
+  .icon-sm { width: 16px; height: 16px; }
+  .icon-md { width: 20px; height: 20px; }
+  .icon-lg { width: 24px; height: 24px; }
+  .icon-xl { width: 32px; height: 32px; }
+}

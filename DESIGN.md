@@ -122,6 +122,21 @@ shadow-destructive         : 0 0 0 3px #ef4444
 
 ---
 
+### Icons (Lucide SVG sprite, 21 icons)
+
+```
+<svg class="icon icon-md" aria-hidden="true"><use href="dist/icons.svg#lucide-search" /></svg>
+```
+
+装飾アイコンは `aria-hidden="true"`。単独で意味を持つアイコンは `aria-hidden` を外し `aria-label` か `<title>` を付ける。
+
+```
+icon-xs=12px  icon-sm=16px  icon-md=20px(既定)  icon-lg=24px  icon-xl=32px
+currentColorを継承するのでtext-primary-600等で着色可能
+```
+
+---
+
 ## より深く知りたいとき
 
 - **トークン値の正本**: [tokens/](tokens/)

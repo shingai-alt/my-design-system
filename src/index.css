@@ -7,6 +7,7 @@
 @import "../tokens/radius.css";
 @import "../tokens/shadow.css";
 
+@import "./components/icon.css";
 @import "./components/button.css";
 @import "./components/input.css";
 @import "./components/badge.css";
