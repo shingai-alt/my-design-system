@@ -1,0 +1,64 @@
+name: Deploy catalog site to GitHub Pages
+
+# preview/ を dist/ds.css と一緒にビルドし、GitHub Pagesへ公開する。
+# preview/index.html は元々 ../dist/ds.css を、preview/components/*.html は
+# ../../dist/ds.css を参照している（リポジトリではdist/がpreview/の兄弟）。
+# サイト直下（index.htmlがある階層）に着地するよう preview/ の中身をルートへ
+# フラットに展開し、dist参照だけ深さの差分（1階層減る）をsedで補正する。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build tokens/components CSS
+        run: npm run build
+
+      - name: Assemble site
+        run: |
+          mkdir -p site/dist
+          cp -r preview/. site/
+          cp dist/ds.css site/dist/ds.css
+          sed -i 's#\.\./dist/ds\.css#dist/ds.css#' site/index.html
+          sed -i 's#\.\./\.\./dist/ds\.css#../dist/ds.css#' site/components/*.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
