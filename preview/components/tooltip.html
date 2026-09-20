@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Tooltip — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Tooltip</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Tooltip</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">ホバーまたはキーボードフォーカスで、トリガー要素の近くに短い補足テキストを表示します。CSSのみで動作しJS不要です。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">基本形</p><p class="catalog-card-note">ホバーかフォーカスで表示（要素にカーソルを合わせてください）</p></div>
+        <div style="padding: 40px 24px 60px; display:flex; gap:32px;">
+          <span class="tooltip">
+            <button type="button" class="icon-btn icon-btn-md icon-btn-neutral icon-btn-ghost" aria-describedby="tip-1" aria-label="ヘルプ">
+              <svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-info"></use></svg>
+            </button>
+            <span class="tooltip-content" id="tip-1" role="tooltip">補足テキストが入ります</span>
+          </span>
+
+          <span class="tooltip">
+            <button type="button" class="btn btn-md btn-primary btn-outline" aria-describedby="tip-2">保存</button>
+            <span class="tooltip-content" id="tip-2" role="tooltip">下書きとして保存されます</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>フォーカスできる要素（button/a/input等）をトリガーにし、aria-describedbyで関連付ける</li>
+            <li>1〜2文の短い補足に限定する</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>操作に不可欠な情報（エラー・必須条件）を入れない → 見えるテキストやalertで常時表示する</li>
+            <li>spanやdivなどフォーカス不能な要素だけに付けない</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>トリガーに aria-describedby、吹き出しに role="tooltip" と一致するidを付ける</li>
+            <li>トリガーはフォーカス可能な要素にする（キーボード利用者にも表示される）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

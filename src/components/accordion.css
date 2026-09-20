@@ -1,0 +1,75 @@
+/*
+ * Accordion
+ *
+ * 機能:
+ *   見出しをクリック/キーで開閉して本文を出し入れする開示。ネイティブ<details>/<summary>
+ *   ベースで、開閉・キーボード操作（Enter/Space・フォーカス）はブラウザ標準に任せる（JS不要）。
+ *
+ * 使用法:
+ *   OK: 開閉アイコン（chevron）は見出しの左に置き、openで回転させて状態を示す。
+ *   OK: トリガーは必ず<summary>（accordion-trigger）にする。
+ *   NG: 重要・必須の情報を折り畳みの中だけに置かない → 常時見える場所でも提供する。
+ *   NG: chevronを見出しの右端だけに置かない → 視野狭窄で見落とすため左に置く。
+ *
+ * アクセシビリティ:
+ *   <details>/<summary>によりトグルの役割・展開状態・キーボード操作が標準で確立
+ *   開閉アイコンは見出しの左に置く
+ *   :focus-visible で info/600 のフォーカスリングを出す（トリガー全体が対象）
+ *
+ * Usage:
+ *   <div class="accordion">
+ *     <details class="accordion-item" open>
+ *       <summary class="accordion-trigger">
+ *         <svg class="icon icon-sm accordion-icon" aria-hidden="true"><use href="dist/icons.svg#lucide-chevron-right"></use></svg>
+ *         <span class="accordion-label">配送について</span>
+ *       </summary>
+ *       <div class="accordion-panel">通常3〜5営業日でお届けします。</div>
+ *     </details>
+ *   </div>
+ */
+
+@layer components {
+  .accordion {
+    border: 1px solid var(--color-stroke-middle);
+    border-radius: var(--radius-md);
+  }
+  .accordion-item + .accordion-item {
+    border-top: 1px solid var(--color-stroke-middle);
+  }
+
+  .accordion-trigger {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    padding: calc(var(--spacing) * 4);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-fg-high);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+  }
+  .accordion-trigger::-webkit-details-marker { display: none; }
+  .accordion-trigger:hover { background-color: var(--color-neutral-50); }
+  .accordion-trigger:focus-visible {
+    outline: 2px solid var(--color-info-600);
+    outline-offset: -2px;
+  }
+
+  .accordion-icon {
+    flex-shrink: 0;
+    color: var(--color-fg-middle);
+    transition: transform 150ms;
+  }
+  .accordion-item[open] > .accordion-trigger .accordion-icon {
+    transform: rotate(90deg);
+  }
+  .accordion-label { flex: 1; }
+
+  .accordion-panel {
+    padding: 0 calc(var(--spacing) * 4) calc(var(--spacing) * 4) calc(var(--spacing) * 11);
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--color-fg-high);
+  }
+}

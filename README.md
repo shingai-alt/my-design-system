@@ -38,7 +38,7 @@ npm run build
 
 全コンポーネントの動作確認は [`preview/index.html`](preview/index.html) を参照してください。
 
-## コンポーネント一覧（15個）
+## コンポーネント一覧（18個）
 
 | # | コンポーネント | 主要クラス |
 |---|---|---|
@@ -57,6 +57,9 @@ npm run build
 | 13 | Alert | `.alert`, `.alert-{neutral,success,negative,warning,info}`, `.alert-{icon,body,title,close}` |
 | 14 | Modal | `.modal`（ネイティブ `<dialog>` ベース。開閉は `showModal()` / `close()`） |
 | 15 | Tab | `.tabs`, `.tab`（現在地は `aria-selected="true"`）, `.tab-count` |
+| 16 | Toggle Switch | `.switch`, `.switch-sm`, `.switch-label`（`<input type="checkbox" role="switch">`ベース） |
+| 17 | Accordion | `.accordion`, `.accordion-item`, `.accordion-trigger`, `.accordion-icon`, `.accordion-panel`（ネイティブ`<details>/<summary>`ベース） |
+| 18 | Tooltip | `.tooltip`, `.tooltip-content`（CSSのみで動作。関連付けは`aria-describedby`。top配置のみ対応） |
 
 アイコンは Lucide SVG sprite（`dist/icons.svg`、21種）を `.icon icon-{xs,sm,md,lg,xl}` で使用（詳細はDESIGN.md）。
 

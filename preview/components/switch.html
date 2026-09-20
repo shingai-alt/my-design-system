@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Toggle Switch — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Toggle Switch</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Toggle Switch</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">設定のON/OFFを切り替え、結果が即座に反映されるフォーム部品です。送信ボタンで確定する項目は checkbox を使います。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">size / state</p></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">md, off</span><label class="switch-label"><input type="checkbox" role="switch" class="switch">通知を受け取る</label></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">md, on</span><label class="switch-label"><input type="checkbox" role="switch" class="switch" checked>通知を受け取る</label></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">sm, on</span><label class="switch-label"><input type="checkbox" role="switch" class="switch switch-sm" checked>コンパクト表示</label></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">disabled</span><label class="switch-label"><input type="checkbox" role="switch" class="switch" disabled>変更不可</label></div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>input type="checkbox" role="switch" を switch-label で囲み、ラベル全体を押せるようにする</li>
+            <li>切り替えた結果は即座に反映する（保存ボタンを待たない設定に使う）</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>フォーム送信で確定する入力に使わない → checkbox を使う</li>
+            <li>ラベルを状態で言い換えない（「ONにする」等）→ 機能名で固定する</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>各スイッチにラベルを switch-label で内包 か aria-labelledby で関連付ける</li>
+            <li>role="switch" で「オン/オフ」が伝わる。状態を色だけで表さない</li>
+            <li>switch-sm(高さ20px)はラベル併用でタップ領域24px以上を確保</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

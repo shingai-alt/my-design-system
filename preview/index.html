@@ -157,7 +157,7 @@
       </a>
 
       <a class="catalog-grid-card" href="components/modal.html">
-        <div class="catalog-grid-card-preview"><div style="width:100px;height:56px;background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-lg);"></div></div>
+        <div class="catalog-grid-card-preview"><div style="width:100px;height:56px;background:var(--color-white);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);"></div></div>
         <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Modal</p><p class="catalog-grid-card-desc">最前面に重ねる確認・入力ダイアログ</p></div>
       </a>
 
@@ -166,6 +166,27 @@
           <div class="tabs" style="pointer-events:none;"><span class="tab" aria-selected="true">概要</span><span class="tab" aria-selected="false">履歴</span></div>
         </div>
         <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Tab</p><p class="catalog-grid-card-desc">同一画面内でビューを切り替える</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/switch.html">
+        <div class="catalog-grid-card-preview"><input type="checkbox" role="switch" class="switch" checked style="pointer-events:none;" tabindex="-1"></div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Toggle Switch</p><p class="catalog-grid-card-desc">設定のON/OFFを即座に反映</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/accordion.html">
+        <div class="catalog-grid-card-preview" style="pointer-events:none;">
+          <div class="accordion" style="width:140px;">
+            <details class="accordion-item" open><summary class="accordion-trigger" style="padding:8px;font-size:12px;"><svg class="icon icon-xs accordion-icon" aria-hidden="true"><use href="icons.svg#lucide-chevron-right"></use></svg><span class="accordion-label">見出し</span></summary></details>
+          </div>
+        </div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Accordion</p><p class="catalog-grid-card-desc">見出しの開閉で本文を出し入れ</p></div>
+      </a>
+
+      <a class="catalog-grid-card" href="components/tooltip.html">
+        <div class="catalog-grid-card-preview" style="pointer-events:none;">
+          <span class="tooltip"><svg class="icon icon-md" aria-hidden="true"><use href="icons.svg#lucide-info"></use></svg><span class="tooltip-content" style="visibility:visible; opacity:1; position:static; translate:none; margin-left:8px;">補足</span></span>
+        </div>
+        <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Tooltip</p><p class="catalog-grid-card-desc">ホバー/フォーカスで補足を表示</p></div>
       </a>
 
     </div>

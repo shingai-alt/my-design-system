@@ -1,0 +1,73 @@
+/*
+ * Toggle Switch
+ *
+ * 機能:
+ *   設定のON/OFFを切り替え、結果が即座に反映されるフォーム部品。
+ *   送信ボタンで後から確定する項目は checkbox、絞り込みのトグルは filter-chip（未実装）。
+ *
+ * 使用法:
+ *   OK: input type="checkbox" role="switch" を switch-label で囲み、ラベル全体を押せるようにする。
+ *   OK: 切り替えた結果は即座に反映する（保存ボタンを待たない設定に使う）。
+ *   NG: フォーム送信で確定する入力に使わない → checkbox を使う。
+ *   NG: ラベルを状態で言い換えない（「ONにする」等）→ ラベルは機能名で固定し、状態はスイッチ自体が示す。
+ *
+ * アクセシビリティ:
+ *   各スイッチにラベルを switch-label で内包 か aria-labelledby で関連付ける
+ *   role="switch" で「オン/オフ」が伝わる。状態を色だけで表さない
+ *   switch-sm(高さ20px)はラベル併用でタップ領域24px以上を確保
+ *
+ * Usage:
+ *   <label class="switch-label">
+ *     <input type="checkbox" role="switch" class="switch">
+ *     通知を受け取る
+ *   </label>
+ */
+
+@layer components {
+  .switch {
+    display: inline-block;
+    flex-shrink: 0;
+    appearance: none;
+    cursor: pointer;
+    width: 44px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    border: none;
+    background-color: var(--color-neutral-400);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='white'/></svg>");
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: left 2px center;
+    transition: background-color 150ms, background-position 150ms;
+  }
+  .switch:checked { background-position: left 22px center; }
+
+  .switch:hover:not(:checked):not(:disabled) { background-color: var(--color-neutral-500); }
+  .switch:disabled:not(:checked) { background-color: var(--color-neutral-200); cursor: not-allowed; }
+
+  .switch:checked:not(:disabled) { background-color: var(--color-primary-600); }
+  .switch:checked:hover:not(:disabled) { background-color: var(--color-primary-700); }
+  .switch:checked:disabled { background-color: var(--color-primary-200); cursor: not-allowed; }
+
+  .switch:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus-ring);
+  }
+
+  .switch-sm {
+    width: 36px;
+    height: 20px;
+    background-size: 16px 16px;
+  }
+  .switch-sm:checked { background-position: left 18px center; }
+
+  .switch-label {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    cursor: pointer;
+    color: var(--color-fg-high);
+    font-size: 14px;
+  }
+  .switch-label:has(.switch:disabled) { color: var(--color-fg-low); cursor: not-allowed; }
+}

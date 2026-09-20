@@ -1,0 +1,75 @@
+/*
+ * Tooltip
+ *
+ * 機能:
+ *   ホバーまたはキーボードフォーカスで、トリガー要素の近くに短い補足テキストを
+ *   吹き出しで表示する。CSSのみで動作しJS不要。無くても操作が成立する
+ *   「あると助かる」情報のためのもの。常設で知らせるべき情報は alert、
+ *   フォーム項目の説明は label-control の補足テキストを使う。
+ *
+ * 使用法:
+ *   OK: フォーカスできる要素（button/a/input等）をトリガーにし、aria-describedbyで関連付ける。
+ *   OK: 1〜2文の短い補足に限定する。
+ *   NG: 操作に不可欠な情報（エラー・必須条件）を入れない → 見えるテキストやalertで常時表示する。
+ *   NG: spanやdivなどフォーカス不能な要素だけに付けない → キーボード利用者に表示されなくなる。
+ *
+ * アクセシビリティ:
+ *   トリガーに aria-describedby、吹き出しに role="tooltip" と一致するid
+ *   表示中はpointer-eventsを戻し、吹き出しの上にマウスを移しても消えない
+ *   トリガーはフォーカス可能な要素（button/link）にする
+ *
+ * Usage:
+ *   <span class="tooltip">
+ *     <button type="button" class="icon-btn icon-btn-md icon-btn-neutral icon-btn-ghost"
+ *             aria-describedby="tip-1" aria-label="ヘルプ">
+ *       <svg class="icon icon-md" aria-hidden="true"><use href="dist/icons.svg#lucide-info"></use></svg>
+ *     </button>
+ *     <span class="tooltip-content" id="tip-1" role="tooltip">補足テキスト</span>
+ *   </span>
+ */
+
+@layer components {
+  .tooltip {
+    position: relative;
+    display: inline-flex;
+  }
+
+  .tooltip-content {
+    position: absolute;
+    z-index: 10;
+    bottom: calc(100% + var(--spacing) * 2);
+    left: 50%;
+    translate: -50% 0;
+    width: max-content;
+    max-width: 240px;
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-fg-high);
+    color: var(--color-fg-high-inverse);
+    font-size: 13px;
+    line-height: 20px;
+    box-shadow: var(--shadow-md);
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 150ms;
+  }
+  .tooltip-content::before {
+    content: "";
+    position: absolute;
+    bottom: calc(var(--spacing) * -1);
+    left: 50%;
+    margin-left: calc(var(--spacing) * -1);
+    width: calc(var(--spacing) * 2);
+    height: calc(var(--spacing) * 2);
+    background-color: var(--color-fg-high);
+    transform: rotate(45deg);
+  }
+
+  .tooltip:hover .tooltip-content,
+  .tooltip:focus-within .tooltip-content {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}

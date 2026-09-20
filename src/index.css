@@ -23,6 +23,9 @@
 @import "./components/modal.css";
 @import "./components/tab.css";
 @import "./components/card.css";
+@import "./components/switch.css";
+@import "./components/accordion.css";
+@import "./components/tooltip.css";
 
 /* ── safelist ──────────────────────────────────────────────
  * source(none) のため、utility として使われていないトークンは

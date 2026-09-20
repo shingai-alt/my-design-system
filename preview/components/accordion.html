@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Accordion — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Accordion</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Accordion</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">見出しをクリック/キーで開閉して本文を出し入れする開示です。ネイティブ &lt;details&gt;/&lt;summary&gt; ベースでJS不要です。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">基本形</p></div>
+        <div style="padding: 8px 24px 24px;">
+          <div class="accordion">
+            <details class="accordion-item" open>
+              <summary class="accordion-trigger">
+                <svg class="icon icon-sm accordion-icon" aria-hidden="true"><use href="../icons.svg#lucide-chevron-right"></use></svg>
+                <span class="accordion-label">配送について</span>
+              </summary>
+              <div class="accordion-panel">通常3〜5営業日でお届けします。</div>
+            </details>
+            <details class="accordion-item">
+              <summary class="accordion-trigger">
+                <svg class="icon icon-sm accordion-icon" aria-hidden="true"><use href="../icons.svg#lucide-chevron-right"></use></svg>
+                <span class="accordion-label">返品・交換について</span>
+              </summary>
+              <div class="accordion-panel">商品到着後7日以内にご連絡ください。</div>
+            </details>
+            <details class="accordion-item">
+              <summary class="accordion-trigger">
+                <svg class="icon icon-sm accordion-icon" aria-hidden="true"><use href="../icons.svg#lucide-chevron-right"></use></svg>
+                <span class="accordion-label">支払い方法について</span>
+              </summary>
+              <div class="accordion-panel">クレジットカード・銀行振込に対応しています。</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>開閉アイコン（chevron）は見出しの左に置き、openで回転させて状態を示す</li>
+            <li>トリガーは必ず &lt;summary&gt;（accordion-trigger）にする</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>重要・必須の情報を折り畳みの中だけに置かない</li>
+            <li>chevronを見出しの右端だけに置かない → 視野狭窄で見落とすため左に置く</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>&lt;details&gt;/&lt;summary&gt;によりトグルの役割・展開状態・キーボード操作が標準で確立</li>
+            <li>開閉アイコンは見出しの左に置く</li>
+            <li>:focus-visible で info/600 のフォーカスリングを出す</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>
