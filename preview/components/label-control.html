@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Label Control — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Label Control</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Label Control</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">フォーム項目のラベル＋必須/任意バッジ＋サポートテキストのまとまりです。入力欄の直上に置きます。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須 / 任意バッジ</p></div>
+        <div style="padding: 8px 24px 24px; display:flex; flex-direction:column; gap:20px; max-width:360px;">
+          <div class="label-control">
+            <div class="label-control-row">
+              <label class="label-control-text" for="lc-email">メールアドレス</label>
+              <span class="label-badge label-badge-required">必須</span>
+            </div>
+            <input id="lc-email" class="input input-md" type="email" required aria-describedby="lc-email-support">
+            <p id="lc-email-support" class="field-support-text">受信可能なアドレスを入力してください</p>
+          </div>
+
+          <div class="label-control">
+            <div class="label-control-row">
+              <label class="label-control-text" for="lc-memo">補足メモ</label>
+              <span class="label-badge label-badge-optional">任意</span>
+            </div>
+            <input id="lc-memo" class="input input-md" type="text">
+          </div>
+
+          <div class="label-control">
+            <div class="label-control-row">
+              <label class="label-control-text" for="lc-pw">パスワード</label>
+              <span class="label-badge label-badge-required">必須</span>
+            </div>
+            <input id="lc-pw" class="input input-md input-error" type="password" aria-invalid="true" aria-describedby="lc-pw-err">
+            <p id="lc-pw-err" class="field-error-text">8文字以上で入力してください</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>必須/任意は label-badge-required / label-badge-optional で示す</li>
+            <li>補足は label-control-support、エラー/補足文は field-error-text / field-support-text を入力欄の直後に置く</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>必須を色だけで示さない → テキストのバッジを使う</li>
+            <li>対象フィールドと切り離して遠くに置かない → 直上に置く</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>label-control-text を &lt;label for&gt; にして入力欄のidと結ぶ</li>
+            <li>サポート文にidを付け、入力欄のaria-describedbyで参照する</li>
+            <li>必須はバッジ（視覚）+ 入力欄のrequired（プログラム的）を両方付ける</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

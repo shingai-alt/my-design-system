@@ -38,21 +38,24 @@ npm run build
 
 全コンポーネントの動作確認は [`preview/index.html`](preview/index.html) を参照してください。
 
-## コンポーネント一覧（10個）
+## コンポーネント一覧（11個）
 
 | # | コンポーネント | 主要クラス |
 |---|---|---|
 | 1 | Button | `.btn` + `.btn-{primary,neutral,negative}` + `.btn-{solid,outline,ghost}` + `.btn-{sm,md,lg}` |
-| 2 | Input | `.input`, `.input-{sm,md,lg}`, `.input-error` |
-| 3 | Select | `.select`, `.select-{sm,md,lg}`, `.select-error`（見た目はInputと統一） |
-| 4 | Checkbox | `.checkbox`, `.checkbox-label`, `.checkbox-error` |
-| 5 | Radio | `.radio`, `.radio-label`, `.radio-group` |
-| 6 | Badge | `.badge` + `.badge-{soft,solid}-{neutral,primary,success,warning,negative,info}` |
-| 7 | Card | `.card`, `.card-{header,title,subtitle,body,footer}` |
-| 8 | Data Table | `.data-table`, `.data-table-num`, `.data-table-empty` |
-| 9 | Alert | `.alert`, `.alert-{neutral,success,negative,warning,info}`, `.alert-{icon,body,title,close}` |
-| 10 | Modal | `.modal`（ネイティブ `<dialog>` ベース。開閉は `showModal()` / `close()`） |
-| 11 | Tab | `.tabs`, `.tab`（現在地は `aria-selected="true"`）, `.tab-count` |
+| 2 | Label Control | `.label-control`, `.label-control-{row,text,support}`, `.label-badge-{required,optional}`, `.field-{error,support}-text` |
+| 3 | Input | `.input`, `.input-{sm,md,lg}`, `.input-error` |
+| 4 | Select | `.select`, `.select-{sm,md,lg}`, `.select-error`（見た目はInputと統一） |
+| 5 | Checkbox | `.checkbox`, `.checkbox-label`, `.checkbox-error` |
+| 6 | Radio | `.radio`, `.radio-label`, `.radio-group` |
+| 7 | Badge | `.badge` + `.badge-{soft,solid}-{neutral,primary,success,warning,negative,info}` |
+| 8 | Card | `.card`, `.card-{header,title,subtitle,body,footer}` |
+| 9 | Data Table | `.data-table`, `.data-table-num`, `.data-table-empty` |
+| 10 | Alert | `.alert`, `.alert-{neutral,success,negative,warning,info}`, `.alert-{icon,body,title,close}` |
+| 11 | Modal | `.modal`（ネイティブ `<dialog>` ベース。開閉は `showModal()` / `close()`） |
+| 12 | Tab | `.tabs`, `.tab`（現在地は `aria-selected="true"`）, `.tab-count` |
+
+アイコンは Lucide SVG sprite（`dist/icons.svg`、21種）を `.icon icon-{xs,sm,md,lg,xl}` で使用（詳細はDESIGN.md）。
 
 各コンポーネントの完成形HTML・使用法（OK/NG）・アクセシビリティ対応は `src/components/*.css` の先頭コメントを参照してください（正本）。
 

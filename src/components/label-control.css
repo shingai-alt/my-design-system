@@ -1,0 +1,95 @@
+/*
+ * Label Control
+ *
+ * 機能:
+ *   フォーム項目のラベル＋必須/任意バッジ＋サポートテキストのまとまり。
+ *   入力欄（input / select / textarea等）の直上に置く。
+ *
+ * 使用法:
+ *   OK: 必須/任意は label-badge-required / label-badge-optional で示す。
+ *   OK: 補足は label-control-support に書く。
+ *   OK: エラー/補足は field-error-text / field-support-text を入力欄の直後（真下）に置く。
+ *   NG: 必須を色だけで示さない → テキストの label-badge-required を使う。
+ *   NG: 対象フィールドと切り離して遠くに置かない → 直上に置く。
+ *
+ * アクセシビリティ:
+ *   label-control-text を <label for> にして入力欄のidと結ぶ
+ *   サポート文にidを付け、入力欄のaria-describedbyで参照する
+ *   必須はlabel-badge-required（視覚）+ 入力欄のrequired（プログラム的）を両方付ける
+ *   エラー/補足は入力欄の真下に置き、aria-describedbyで結ぶ（操作対象と同じ視野に入れる）
+ *
+ * Usage:
+ *   <div class="label-control">
+ *     <div class="label-control-row">
+ *       <label class="label-control-text" for="email">メールアドレス</label>
+ *       <span class="label-badge label-badge-required">必須</span>
+ *     </div>
+ *     <input id="email" class="input input-md" type="email" required
+ *            aria-describedby="email-support">
+ *     <p id="email-support" class="field-support-text">受信可能なアドレスを入力してください</p>
+ *   </div>
+ *
+ *   <!-- エラー時 -->
+ *   <input id="pw" class="input input-md input-error" aria-invalid="true" aria-describedby="pw-err">
+ *   <p id="pw-err" class="field-error-text">8文字以上で入力してください</p>
+ */
+
+@layer components {
+  .label-control {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 1);
+  }
+  .label-control-row {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    flex-wrap: wrap;
+  }
+
+  .label-control-text {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-fg-high);
+  }
+  .label-control-support {
+    font-size: 13px;
+    color: var(--color-fg-low);
+    margin: 0;
+  }
+
+  /* 入力欄の直後（真下）に置くメッセージ */
+  .field-error-text {
+    margin-top: calc(var(--spacing) * 1);
+    font-size: 12px;
+    color: var(--color-negative-600);
+  }
+  .field-support-text {
+    margin-top: calc(var(--spacing) * 1);
+    font-size: 12px;
+    color: var(--color-fg-low);
+  }
+
+  /* バッジ（required / optional のみ。他の種別は必要になってから追加） */
+  .label-badge {
+    display: inline-flex;
+    align-items: center;
+    height: 20px;
+    padding: 0 calc(var(--spacing) * 2);
+    border-radius: var(--radius-xs);
+    border: 1px solid transparent;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .label-badge-required {
+    background-color: var(--color-white);
+    color: var(--color-negative-500);
+    border-color: var(--color-negative-500);
+  }
+  .label-badge-optional {
+    background-color: var(--color-white);
+    color: var(--color-neutral-400);
+    border-color: var(--color-neutral-400);
+  }
+}
