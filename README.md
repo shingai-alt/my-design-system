@@ -74,3 +74,22 @@ npm run build     # dist/ds.css をビルド
 
 新しいトークン/クラスを `src/index.css` の `@source inline(...)` safelist に含めないと、
 実際に使うコンポーネントが増えるまでビルドで刈り取られる点に注意（Tailwind v4の `source(none)` 設定のため）。
+
+## MCP（AIコーディングツール連携）
+
+AI（Claude Code等）にこのDSのコンポーネント仕様・トークン・原則を直接読ませるMCPサーバーを同梱しています（`src/mcp/`、ツールは3つ: `get_component` / `get_tokens` / `get_design_principles`）。
+
+```bash
+claude mcp add ds-mcp --scope project -- node "$(pwd)/src/mcp/server.mjs"
+```
+
+登録後、そのプロジェクトで最初に `claude` を対話起動した時に一度だけ承認が必要です（`.mcp.json` はマシン固有の絶対パスを含むためgitignore対象。各自ローカルで上記コマンドを実行してください）。
+
+## 回帰スイート（evals）
+
+固定のお題をAIに解かせて自動採点する仕組みです。詳細は [evals/README.md](evals/README.md) を参照してください。
+
+```bash
+npm run eval             # 全お題を実行（claude CLIとMCP接続が必要）
+npm run eval:report      # 実行履歴の推移表（無料）
+```

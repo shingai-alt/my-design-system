@@ -8,7 +8,9 @@
   },
   "scripts": {
     "build": "vite build",
-    "mcp": "node src/mcp/server.mjs"
+    "mcp": "node src/mcp/server.mjs",
+    "eval": "node evals/run.mjs",
+    "eval:report": "node evals/report.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",

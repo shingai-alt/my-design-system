@@ -1,2 +1,9 @@
 node_modules/
 dist/
+
+# Agent eval artifacts（生成UIとスコア履歴。正本ではない）
+evals/output/
+evals/results/
+
+# ローカルのMCP登録（claude mcp add が生成。絶対パスでマシン固有のためコミットしない）
+.mcp.json
