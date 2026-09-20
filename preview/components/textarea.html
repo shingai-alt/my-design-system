@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Textarea — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Textarea</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Textarea</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">複数行のテキスト入力です。文字数カウンタを付けられます。1行入力は input を使います。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">基本形（文字数カウンタ付き）</p></div>
+        <div style="padding: 8px 24px 24px; max-width:400px;">
+          <div class="textarea-control">
+            <textarea class="textarea textarea-md" maxlength="100" placeholder="コメントを入力"></textarea>
+            <div class="textarea-footer">
+              <span class="textarea-counter" aria-live="polite">0/100</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">state</p></div>
+        <div class="catalog-state-row" style="align-items:flex-start;"><span class="catalog-state-label">error</span><textarea class="textarea textarea-md textarea-error" style="max-width:280px;">不正な入力</textarea></div>
+        <div class="catalog-state-row" style="align-items:flex-start;"><span class="catalog-state-label">disabled</span><textarea class="textarea textarea-md" disabled style="max-width:280px;">編集できません</textarea></div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>textarea-control で囲み、必要なら maxlength + textarea-counter を出す</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>1行入力に使わない → input</li>
+            <li>エラー色を直書きしない → textarea-error を使う</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>可視ラベルを for/id か aria-labelledby で関連付ける（placeholderはラベルにしない）</li>
+            <li>エラー時は aria-invalid="true" + aria-describedby</li>
+            <li>文字数カウンターは aria-live="polite" で残量・超過を通知</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

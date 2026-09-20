@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Search Input — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Search Input</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Search Input</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">フリーワード検索の入力です。クリア（×）と送信（検索）を内蔵しています。通常の1行入力は input を使います。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">基本形</p><p class="catalog-card-note">入力するとクリアボタンが現れる（CSSのみ、:placeholder-shownで検知）</p></div>
+        <div style="padding: 8px 24px 24px; display:flex; flex-direction:column; gap:16px; max-width:400px;">
+          <form role="search" class="search-input search-input-md">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../icons.svg#lucide-search"></use></svg>
+            <input type="search" class="search-input-field" placeholder="空（クリア非表示）" aria-label="検索">
+            <button type="button" class="search-input-clear" aria-label="クリア"><svg class="icon icon-sm" aria-hidden="true"><use href="../icons.svg#lucide-x"></use></svg></button>
+            <button type="submit" class="search-input-submit">検索</button>
+          </form>
+          <form role="search" class="search-input search-input-md">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../icons.svg#lucide-search"></use></svg>
+            <input type="search" class="search-input-field" value="relay" aria-label="検索">
+            <button type="button" class="search-input-clear" aria-label="クリア"><svg class="icon icon-sm" aria-hidden="true"><use href="../icons.svg#lucide-x"></use></svg></button>
+            <button type="submit" class="search-input-submit">検索</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">state</p></div>
+        <div class="catalog-state-row">
+          <span class="catalog-state-label">error</span>
+          <form role="search" class="search-input search-input-md search-input-error" style="max-width:280px;">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../icons.svg#lucide-search"></use></svg>
+            <input type="search" class="search-input-field" placeholder="検索" aria-label="検索">
+          </form>
+        </div>
+        <div class="catalog-state-row">
+          <span class="catalog-state-label">disabled</span>
+          <form role="search" class="search-input search-input-md" style="max-width:280px;">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="../icons.svg#lucide-search"></use></svg>
+            <input type="search" class="search-input-field" placeholder="検索" aria-label="検索" disabled>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>type="search"。md/lgでは送信ボタンを出す</li>
+            <li>&lt;form role="search"&gt; で包む</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>一般のテキスト入力に流用しない → input</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>検索フォームを &lt;form role="search"&gt; で包む</li>
+            <li>入力欄に可視ラベル か aria-label で名前を付ける</li>
+            <li>クリアボタンに aria-label="クリア"、検索アイコンは aria-hidden="true"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

@@ -38,22 +38,25 @@ npm run build
 
 全コンポーネントの動作確認は [`preview/index.html`](preview/index.html) を参照してください。
 
-## コンポーネント一覧（11個）
+## コンポーネント一覧（15個）
 
 | # | コンポーネント | 主要クラス |
 |---|---|---|
 | 1 | Button | `.btn` + `.btn-{primary,neutral,negative}` + `.btn-{solid,outline,ghost}` + `.btn-{sm,md,lg}` |
-| 2 | Label Control | `.label-control`, `.label-control-{row,text,support}`, `.label-badge-{required,optional}`, `.field-{error,support}-text` |
-| 3 | Input | `.input`, `.input-{sm,md,lg}`, `.input-error` |
-| 4 | Select | `.select`, `.select-{sm,md,lg}`, `.select-error`（見た目はInputと統一） |
-| 5 | Checkbox | `.checkbox`, `.checkbox-label`, `.checkbox-error` |
-| 6 | Radio | `.radio`, `.radio-label`, `.radio-group` |
-| 7 | Badge | `.badge` + `.badge-{soft,solid}-{neutral,primary,success,warning,negative,info}` |
-| 8 | Card | `.card`, `.card-{header,title,subtitle,body,footer}` |
-| 9 | Data Table | `.data-table`, `.data-table-num`, `.data-table-empty` |
-| 10 | Alert | `.alert`, `.alert-{neutral,success,negative,warning,info}`, `.alert-{icon,body,title,close}` |
-| 11 | Modal | `.modal`（ネイティブ `<dialog>` ベース。開閉は `showModal()` / `close()`） |
-| 12 | Tab | `.tabs`, `.tab`（現在地は `aria-selected="true"`）, `.tab-count` |
+| 2 | Icon Button | `.icon-btn` + `.icon-btn-{primary,neutral,negative}` + `.icon-btn-{solid,outline,ghost}` + `.icon-btn-{sm,md,lg}` |
+| 3 | Label Control | `.label-control`, `.label-control-{row,text,support}`, `.label-badge-{required,optional}`, `.field-{error,support}-text` |
+| 4 | Input | `.input`, `.input-{sm,md,lg}`, `.input-error` |
+| 5 | Textarea | `.textarea-control`, `.textarea`, `.textarea-{sm,md,error}`, `.textarea-{footer,counter}` |
+| 6 | Search Input | `.search-input`, `.search-input-{sm,md,lg,error}`, `.search-input-{field,clear,submit}` |
+| 7 | Select | `.select`, `.select-{sm,md,lg}`, `.select-error`（見た目はInputと統一） |
+| 8 | Checkbox | `.checkbox`, `.checkbox-label`, `.checkbox-error` |
+| 9 | Radio | `.radio`, `.radio-label`, `.radio-group` |
+| 10 | Badge | `.badge` + `.badge-{soft,solid}-{neutral,primary,success,warning,negative,info}` |
+| 11 | Card | `.card`, `.card-{header,title,subtitle,body,footer}` |
+| 12 | Data Table | `.data-table`, `.data-table-num`, `.data-table-empty` |
+| 13 | Alert | `.alert`, `.alert-{neutral,success,negative,warning,info}`, `.alert-{icon,body,title,close}` |
+| 14 | Modal | `.modal`（ネイティブ `<dialog>` ベース。開閉は `showModal()` / `close()`） |
+| 15 | Tab | `.tabs`, `.tab`（現在地は `aria-selected="true"`）, `.tab-count` |
 
 アイコンは Lucide SVG sprite（`dist/icons.svg`、21種）を `.icon icon-{xs,sm,md,lg,xl}` で使用（詳細はDESIGN.md）。
 

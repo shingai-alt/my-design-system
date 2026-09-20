@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Icon Button — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Icon Button</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Icon Button</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">アイコンのみで操作を表すボタンです。省スペースな操作に使います。文言ラベルを見せたい主操作は button を使います。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">Variant × Theme</p><p class="catalog-card-note">size = md</p></div>
+        <table class="catalog-matrix">
+          <thead><tr><th></th><th>solid</th><th>outline</th><th>ghost</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>primary</td>
+              <td><button class="icon-btn icon-btn-md icon-btn-primary icon-btn-solid" aria-label="編集"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-pencil"></use></svg></button></td>
+              <td><button class="icon-btn icon-btn-md icon-btn-primary icon-btn-outline" aria-label="編集"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-pencil"></use></svg></button></td>
+              <td><button class="icon-btn icon-btn-md icon-btn-primary icon-btn-ghost" aria-label="編集"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-pencil"></use></svg></button></td>
+            </tr>
+            <tr>
+              <td>neutral</td>
+              <td><button class="icon-btn icon-btn-md icon-btn-neutral icon-btn-solid" aria-label="設定"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-settings"></use></svg></button></td>
+              <td><button class="icon-btn icon-btn-md icon-btn-neutral icon-btn-outline" aria-label="設定"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-settings"></use></svg></button></td>
+              <td><button class="icon-btn icon-btn-md icon-btn-neutral icon-btn-ghost" aria-label="設定"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-settings"></use></svg></button></td>
+            </tr>
+            <tr>
+              <td>negative</td>
+              <td><button class="icon-btn icon-btn-md icon-btn-negative icon-btn-solid" aria-label="削除"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-trash-2"></use></svg></button></td>
+              <td><button class="icon-btn icon-btn-md icon-btn-negative icon-btn-outline" aria-label="削除"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-trash-2"></use></svg></button></td>
+              <td><button class="icon-btn icon-btn-md icon-btn-negative icon-btn-ghost" aria-label="削除"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-trash-2"></use></svg></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">size</p><p class="catalog-card-note">primary / solid</p></div>
+        <table class="catalog-matrix">
+          <tbody>
+            <tr><td>sm</td><td><button class="icon-btn icon-btn-sm icon-btn-primary icon-btn-solid" aria-label="編集"><svg class="icon icon-sm" aria-hidden="true"><use href="../icons.svg#lucide-pencil"></use></svg></button></td><td class="catalog-state-note">32×32</td></tr>
+            <tr><td>md（既定）</td><td><button class="icon-btn icon-btn-md icon-btn-primary icon-btn-solid" aria-label="編集"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-pencil"></use></svg></button></td><td class="catalog-state-note">40×40</td></tr>
+            <tr><td>lg</td><td><button class="icon-btn icon-btn-lg icon-btn-primary icon-btn-solid" aria-label="編集"><svg class="icon icon-lg" aria-hidden="true"><use href="../icons.svg#lucide-pencil"></use></svg></button></td><td class="catalog-state-note">48×48</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">state</p></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">enable</span><button class="icon-btn icon-btn-md icon-btn-primary icon-btn-solid" aria-label="編集"><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-pencil"></use></svg></button></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">disabled</span><button class="icon-btn icon-btn-md icon-btn-primary icon-btn-solid" aria-label="編集" disabled><svg class="icon icon-md" aria-hidden="true"><use href="../icons.svg#lucide-pencil"></use></svg></button></div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>必ず aria-label で操作名を与える</li>
+            <li>リストの各行に同じ操作ボタンが並ぶ時は aria-label に対象を含めて一意化する（例:「りんごを削除」）</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>aria-label を省略しない</li>
+            <li>遷移に使わない → link（未実装）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>すべてのアイコンボタンに aria-label（操作名）を付ける</li>
+            <li>アイコンSVGは aria-hidden="true"</li>
+            <li>sm(32px)以上でタップ領域24px以上を満たす（DS担保）</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

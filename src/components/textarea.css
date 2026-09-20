@@ -1,0 +1,84 @@
+/*
+ * Textarea
+ *
+ * 機能:
+ *   複数行のテキスト入力。文字数カウンタ付き。1行入力なら textarea ではなく input。
+ *
+ * 使用法:
+ *   OK: textarea-control で囲み、必要なら maxlength + textarea-counter を出す。
+ *   NG: 1行入力に使わない → input。
+ *   NG: エラー色を直書きしない → textarea-error を使う。
+ *
+ * アクセシビリティ:
+ *   可視ラベルを for/id か aria-labelledby で関連付ける（placeholderはラベルにしない）
+ *   エラー時は aria-invalid="true" + aria-describedby
+ *   文字数カウンターは aria-live="polite" で残量・超過を通知
+ *
+ * Usage:
+ *   <div class="textarea-control">
+ *     <textarea class="textarea textarea-md" maxlength="100"></textarea>
+ *     <div class="textarea-footer">
+ *       <span class="textarea-counter" aria-live="polite">0/100</span>
+ *     </div>
+ *   </div>
+ */
+
+@layer components {
+  .textarea-control {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 1);
+    width: 100%;
+  }
+
+  .textarea {
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    color: var(--color-fg-high);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-neutral-400);
+    border-radius: var(--radius-sm);
+    padding: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 150ms;
+  }
+  .textarea::placeholder { color: var(--color-fg-low); }
+  .textarea:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-neutral-500); }
+  .textarea:focus-visible {
+    outline: 2px solid var(--color-info-600);
+    outline-offset: 2px;
+  }
+  .textarea:disabled {
+    background-color: var(--color-neutral-50);
+    color: var(--color-fg-low);
+    cursor: not-allowed;
+  }
+
+  .textarea-sm { font-size: 13px; }
+  .textarea-md { font-size: 14px; }
+
+  .textarea-error {
+    background-color: var(--color-negative-50);
+    border-width: 2px;
+    border-color: var(--color-negative-500);
+  }
+  .textarea-error:hover:not(:disabled),
+  .textarea-error:focus-visible {
+    border-color: var(--color-negative-600);
+  }
+
+  .textarea-footer {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: calc(var(--spacing) * 4);
+  }
+  .textarea-counter {
+    flex-shrink: 0;
+    font-size: 12px;
+    color: var(--color-fg-low);
+    font-variant-numeric: tabular-nums;
+  }
+}
