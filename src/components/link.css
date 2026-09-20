@@ -1,0 +1,64 @@
+/*
+ * Link
+ *
+ * 機能:
+ *   コンテンツがナビゲーション可能であることを示すインラインリンク。
+ *   結果が「移動」なら link、「処理の実行」なら button。
+ *
+ * 使用法:
+ *   OK: 本文中に置き font-size は周囲から inherit（サイズを固定しない）。
+ *   OK: 別タブは target="_blank" rel="noopener noreferrer" + 外部リンクアイコン。
+ *   OK: 緑を目立たせたくない補助的なリンク（フッター等）は link-neutral。
+ *   OK: 暗い背景の上では link-inverse（白）を使う。
+ *   NG: 送信などのアクションに link を使わない → button。
+ *   NG: フォントサイズを固定しない → 本文と行が不揃いになる。
+ *   NG: 下線を消さない（色は default/neutral/inverseの3択）。
+ *
+ * アクセシビリティ:
+ *   リンク文言だけで目的が分かるようにする（「こちら」「詳細」を避ける）
+ *   新規タブは target="_blank"+rel="noopener noreferrer" と、外部/新規タブの手がかりを添える
+ *   下線を消さない。遷移でなく操作ならbuttonを使う
+ *
+ * Usage:
+ *   <a class="link" href="…" target="_blank" rel="noopener noreferrer">
+ *     <span class="link-label">リンクテキスト</span>
+ *     <svg class="icon" aria-hidden="true"><use href="dist/icons.svg#lucide-external-link"></use></svg>
+ *   </a>
+ *   ニュートラル色: <a class="link link-neutral"><span class="link-label">利用規約</span></a>
+ *   暗い背景の上: <a class="link link-inverse"><span class="link-label">ヘルプ</span></a>
+ */
+
+@layer components {
+  .link {
+    display: inline-flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 1);
+    font-weight: 500;
+    color: var(--color-primary-700);
+    text-decoration: none;
+    cursor: pointer;
+    font-size: inherit;
+    line-height: inherit;
+  }
+  .link .link-label {
+    text-decoration: underline;
+  }
+  .link .icon {
+    flex-shrink: 0;
+    width: 1em;
+    height: 1em;
+  }
+  .link:hover:not([aria-disabled="true"]) { color: var(--color-primary-800); }
+
+  .link.link-neutral { color: var(--color-fg-middle); }
+  .link.link-neutral:hover:not([aria-disabled="true"]) { color: var(--color-fg-high); }
+
+  .link.link-inverse { color: var(--color-fg-high-inverse); }
+  .link.link-inverse:hover:not([aria-disabled="true"]) { color: var(--color-neutral-200); }
+
+  .link:focus-visible {
+    outline: none;
+    border-radius: var(--radius-xs);
+    box-shadow: var(--shadow-focus-ring);
+  }
+}

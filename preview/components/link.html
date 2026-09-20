@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Link — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Link</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Link</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">コンテンツがナビゲーション可能であることを示すインラインリンクです。結果が「移動」なら link、「処理の実行」なら button を使います。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">色のバリエーション</p></div>
+        <div style="padding: 8px 24px 24px;" class="typo-medium">
+          <p>本文中に<a class="link" href="#"><span class="link-label">こういう色のリンク</span></a>を置きます。</p>
+          <p>別タブで開く場合は<a class="link" href="#" target="_blank" rel="noopener noreferrer"><span class="link-label">外部リンクアイコン付き</span><svg class="icon icon-sm" aria-hidden="true"><use href="../icons.svg#lucide-external-link"></use></svg></a>になります。</p>
+          <p>補助的なリンクは<a class="link link-neutral" href="#"><span class="link-label">ニュートラル色</span></a>を使います。</p>
+          <div style="background:var(--color-neutral-900); padding:16px; border-radius:var(--radius-md); margin-top:8px;">
+            <a class="link link-inverse" href="#"><span class="link-label">暗い背景の上のリンク</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>本文中に置きfont-sizeは周囲からinherit（サイズを固定しない）</li>
+            <li>別タブは target="_blank" rel="noopener noreferrer" + 外部リンクアイコン</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>送信などのアクションに link を使わない → button</li>
+            <li>下線を消さない</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>リンク文言だけで目的が分かるようにする（「こちら」「詳細」を避ける）</li>
+            <li>新規タブは target="_blank"+rel="noopener noreferrer" と、外部/新規タブの手がかりを添える</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

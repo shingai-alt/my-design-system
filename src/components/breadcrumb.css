@@ -1,0 +1,52 @@
+/*
+ * Breadcrumb
+ *
+ * 機能:
+ *   現在のページ階層を示し、親階層へ戻れるようにするナビゲーション。
+ *   ページ内の節移動ではなくサイト階層のパス表示に使う。
+ *
+ * 使用法:
+ *   OK: 各項目は .link（外部アイコンなし）、現在ページは breadcrumb-current（リンクにせず aria-current="page"）。
+ *   OK: 区切りは chevron-right を breadcrumb-sep でラップ。
+ *   NG: 現在ページをリンクにしない → aria-current="page" の breadcrumb-current。
+ *   NG: 階層が1つしかないページに無理に置かない。
+ *
+ * アクセシビリティ:
+ *   <nav aria-label="パンくずリスト"> で包む
+ *   末尾（現在地）は非リンクにし aria-current="page" を付ける
+ *   区切り記号の要素に aria-hidden="true"
+ *
+ * Usage:
+ *   <nav class="breadcrumb" aria-label="パンくずリスト">
+ *     <ol>
+ *       <li><a class="link" href="#"><span class="link-label">前のページ</span></a></li>
+ *       <li class="breadcrumb-sep" aria-hidden="true"><svg class="icon icon-sm"><use href="dist/icons.svg#lucide-chevron-right"></use></svg></li>
+ *       <li><span class="breadcrumb-current" aria-current="page">現在のページ</span></li>
+ *     </ol>
+ *   </nav>
+ */
+
+@layer components {
+  .breadcrumb ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    row-gap: calc(var(--spacing) * 2);
+  }
+  .breadcrumb li {
+    display: inline-flex;
+    align-items: center;
+  }
+  .breadcrumb-sep {
+    color: var(--color-fg-low);
+    margin: 0 calc(var(--spacing) * 1);
+  }
+  .breadcrumb-current {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-fg-high);
+  }
+}

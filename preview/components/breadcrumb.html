@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Breadcrumb — Design System</title>
+<link rel="stylesheet" href="../../dist/ds.css">
+<link rel="stylesheet" href="../catalog.css">
+</head>
+<body>
+  <header class="catalog-header">
+    <div><p class="catalog-header-title">Design System</p><p class="catalog-header-sub">Tailwind v4</p></div>
+  </header>
+  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Components &gt; Breadcrumb</p>
+
+  <main class="catalog-main">
+    <div class="catalog-page-title-row">
+      <h1 class="typo-2xlarge">Breadcrumb</h1>
+      <span class="badge badge-soft-primary">component</span>
+    </div>
+    <p class="catalog-page-desc typo-medium">現在のページ階層を示し、親階層へ戻れるようにするナビゲーションです。</p>
+
+    <div class="catalog-tabs" role="tablist" id="page-tabs">
+      <button class="catalog-tab" role="tab" aria-selected="true" data-panel="overview">概要</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="guideline">ガイドライン</button>
+      <button class="catalog-tab" role="tab" aria-selected="false" data-panel="a11y">アクセシビリティ</button>
+    </div>
+
+    <div data-tabpanel="overview">
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">基本形</p></div>
+        <div style="padding: 8px 24px 24px;">
+          <nav class="breadcrumb" aria-label="パンくずリスト">
+            <ol>
+              <li><a class="link" href="#"><span class="link-label">ホーム</span></a></li>
+              <li class="breadcrumb-sep" aria-hidden="true"><svg class="icon icon-sm"><use href="../icons.svg#lucide-chevron-right"></use></svg></li>
+              <li><a class="link" href="#"><span class="link-label">契約一覧</span></a></li>
+              <li class="breadcrumb-sep" aria-hidden="true"><svg class="icon icon-sm"><use href="../icons.svg#lucide-chevron-right"></use></svg></li>
+              <li><span class="breadcrumb-current" aria-current="page">契約詳細</span></li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="guideline" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">使用法</p></div>
+        <div style="padding: 0 24px 24px;">
+          <p class="typo-medium" style="color:var(--color-success-700); margin: 16px 0 4px;">OK</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>各項目は .link、現在ページは breadcrumb-current（リンクにせずaria-current="page"）</li>
+            <li>区切りは chevron-right を breadcrumb-sep でラップ</li>
+          </ul>
+          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>現在ページをリンクにしない</li>
+            <li>階層が1つしかないページに無理に置かない</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div data-tabpanel="a11y" hidden>
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">必須対応</p></div>
+        <div style="padding: 0 24px 24px;">
+          <ul class="typo-medium" style="margin:0; padding-left:20px;">
+            <li>&lt;nav aria-label="パンくずリスト"&gt; で包む</li>
+            <li>末尾（現在地）は非リンクにし aria-current="page" を付ける</li>
+            <li>区切り記号の要素に aria-hidden="true"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('page-tabs').addEventListener('click', (e) => {
+      const btn = e.target.closest('.catalog-tab');
+      if (!btn) return;
+      document.querySelectorAll('#page-tabs .catalog-tab').forEach(t => t.setAttribute('aria-selected', String(t === btn)));
+      const target = btn.dataset.panel;
+      document.querySelectorAll('[data-tabpanel]').forEach(p => p.hidden = p.dataset.tabpanel !== target);
+    });
+  </script>
+</body>
+</html>

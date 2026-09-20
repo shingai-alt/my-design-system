@@ -1,0 +1,102 @@
+/*
+ * Menu
+ *
+ * 機能:
+ *   縦に項目を並べる汎用メニュー。リンクで移動するナビゲーション（サイドナビ）にも、
+ *   button で操作を並べるアクションメニュー（設定・ログアウト等）にも使う。
+ *
+ * 使用法:
+ *   OK: ナビ用途は nav 要素で包んでaria-labelを付け、現在地にaria-current="page"を付ける。
+ *   OK: 項目は遷移ならa、操作（ログアウト等）ならbuttonを使う。どちらも下線なし
+ *       （menu-itemは角丸・背景付きの項目形状のため「常に下線」原則の例外）。
+ *   OK: グループはmenu-group、区切りはmenu-divider。
+ *   OK: 項目数が多く密度を上げたいナビはmenu-item-sm。通常はmd（既定）。
+ *   NG: 現在地をクラスだけで示さない → aria-current="page"を付ける。
+ *   NG: 横並びのコンテンツ切替に流用しない → tab。
+ *   NG: 一部の項目だけにアイコンを付けない → 全項目に付けるか全項目で外す。
+ *
+ * アクセシビリティ:
+ *   ナビは <nav aria-label="…"> で包む
+ *   現在地に aria-current="page"（色・太字だけに頼らない）
+ *   遷移は<a>、操作は<button>と要素で役割を分ける
+ *   装飾アイコンはaria-hidden
+ *
+ * Usage:
+ *   <nav class="menu" aria-label="マイページ" style="width:280px;">
+ *     <ul class="menu-group">
+ *       <li><a class="menu-item" href="…" aria-current="page">
+ *         <svg class="icon icon-md" aria-hidden="true"><use href="dist/icons.svg#lucide-user"></use></svg>
+ *         マイページTOP
+ *       </a></li>
+ *     </ul>
+ *     <hr class="menu-divider">
+ *     <ul class="menu-group">
+ *       <li><button type="button" class="menu-item">
+ *         <svg class="icon icon-md" aria-hidden="true"><use href="dist/icons.svg#lucide-settings"></use></svg>
+ *         アカウント設定
+ *       </button></li>
+ *     </ul>
+ *   </nav>
+ */
+
+@layer components {
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 4);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    padding: calc(var(--spacing) * 4);
+  }
+
+  .menu-group {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--spacing) * 1);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu-divider {
+    margin: 0;
+    border: none;
+    border-top: 1px solid var(--color-stroke-middle);
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    width: 100%;
+    padding: calc(var(--spacing) * 3);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--color-fg-middle);
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    text-align: left;
+    font-family: inherit;
+    transition: background-color 150ms, color 150ms;
+  }
+  .menu-item-sm { padding: calc(var(--spacing) * 2); }
+
+  .menu-item .icon { flex-shrink: 0; }
+  .menu-item-trailing { margin-left: auto; }
+
+  .menu-item:hover { background-color: var(--color-neutral-100); color: var(--color-fg-high); }
+
+  .menu-item[aria-current="page"] {
+    background-color: var(--color-primary-50);
+    color: var(--color-primary-600);
+    font-weight: 700;
+  }
+  .menu-item[aria-current="page"]:hover { background-color: var(--color-primary-50); }
+
+  .menu-item:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus-ring);
+  }
+}

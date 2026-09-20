@@ -1,0 +1,93 @@
+/*
+ * Pagination
+ *
+ * 機能:
+ *   一覧が複数ページに分かれるとき、ページを行き来するナビゲーション。
+ *   同一ページ内の表示切替は tab、手続きの進捗は stepper。
+ *
+ * 使用法:
+ *   OK: 現在ページは aria-current="page"。端では矢印を aria-disabled="true"。
+ *   OK: 省略は pagination-ellipsis で示す。
+ *   NG: 現在ページもリンクで押せるようにしない → aria-current で示す。
+ *   NG: 1ページに収まる時は表示しない。
+ *
+ * アクセシビリティ:
+ *   <nav aria-label="ページネーション"> で包む
+ *   現在ページに aria-current="page"、前/次の矢印に aria-label を付ける
+ *   端で押せない矢印は aria-disabled="true"、省略記号は aria-hidden="true"
+ *
+ * Usage:
+ *   <nav class="pagination" aria-label="ページネーション">
+ *     <ul>
+ *       <li><a class="pagination-item" href="#" aria-label="前のページ" aria-disabled="true"><svg class="icon icon-sm" aria-hidden="true"><use href="dist/icons.svg#lucide-chevron-left"></use></svg></a></li>
+ *       <li><a class="pagination-item" href="#" aria-current="page">1</a></li>
+ *       <li><a class="pagination-item" href="#">2</a></li>
+ *       <li><span class="pagination-ellipsis" aria-hidden="true">…</span></li>
+ *       <li><a class="pagination-item" href="#">10</a></li>
+ *       <li><a class="pagination-item" href="#" aria-label="次のページ"><svg class="icon icon-sm" aria-hidden="true"><use href="dist/icons.svg#lucide-chevron-right"></use></svg></a></li>
+ *     </ul>
+ *   </nav>
+ */
+
+@layer components {
+  .pagination ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--spacing) * 2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .pagination-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid var(--color-stroke-middle);
+    background-color: var(--color-white);
+    color: var(--color-fg-middle);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 150ms, border-color 150ms;
+  }
+
+  .pagination-item:hover:not([aria-disabled="true"]):not([aria-current="page"]) {
+    background-color: var(--color-neutral-50);
+    border-color: var(--color-stroke-high);
+  }
+
+  .pagination-item:focus-visible:not([aria-disabled="true"]) {
+    outline: none;
+    box-shadow: var(--shadow-focus-ring);
+  }
+
+  .pagination-item[aria-current="page"] {
+    background-color: var(--color-primary-700);
+    border-color: transparent;
+    color: var(--color-white);
+    cursor: default;
+  }
+
+  .pagination-item[aria-disabled="true"] {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .pagination-ellipsis {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 14px;
+    color: var(--color-fg-low);
+    user-select: none;
+  }
+}

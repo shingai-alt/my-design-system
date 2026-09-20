@@ -26,6 +26,11 @@
 @import "./components/switch.css";
 @import "./components/accordion.css";
 @import "./components/tooltip.css";
+@import "./components/link.css";
+@import "./components/breadcrumb.css";
+@import "./components/menu.css";
+@import "./components/pagination.css";
+@import "./components/stepper.css";
 
 /* ── safelist ──────────────────────────────────────────────
  * source(none) のため、utility として使われていないトークンは
@@ -42,3 +47,4 @@
 @source inline("max-w-page max-w-content max-w-article");
 @source inline("rounded-{none,xs,sm,md,lg,full}");
 @source inline("shadow-{sm,md,lg} shadow-focus-ring shadow-destructive");
+@source inline("sr-only");

@@ -38,7 +38,7 @@ npm run build
 
 全コンポーネントの動作確認は [`preview/index.html`](preview/index.html) を参照してください。
 
-## コンポーネント一覧（18個）
+## コンポーネント一覧（23個）
 
 | # | コンポーネント | 主要クラス |
 |---|---|---|
@@ -60,6 +60,11 @@ npm run build
 | 16 | Toggle Switch | `.switch`, `.switch-sm`, `.switch-label`（`<input type="checkbox" role="switch">`ベース） |
 | 17 | Accordion | `.accordion`, `.accordion-item`, `.accordion-trigger`, `.accordion-icon`, `.accordion-panel`（ネイティブ`<details>/<summary>`ベース） |
 | 18 | Tooltip | `.tooltip`, `.tooltip-content`（CSSのみで動作。関連付けは`aria-describedby`。top配置のみ対応） |
+| 19 | Link | `.link`, `.link-label`, `.link-{neutral,inverse}`（下線+周囲からfont-size継承） |
+| 20 | Breadcrumb | `.breadcrumb`, `.breadcrumb-sep`, `.breadcrumb-current`（`.link`+chevron区切り） |
+| 21 | Menu | `.menu`, `.menu-group`, `.menu-divider`, `.menu-item`, `.menu-item-sm`（現在地は`aria-current="page"`） |
+| 22 | Pagination | `.pagination`, `.pagination-item`, `.pagination-ellipsis`（現在ページは`aria-current="page"`） |
+| 23 | Stepper | `.stepper`, `.stepper-step`, `.stepper-marker`, `.stepper-label`（現在地は`aria-current="step"`、完了は`.is-completed`） |
 
 アイコンは Lucide SVG sprite（`dist/icons.svg`、21種）を `.icon icon-{xs,sm,md,lg,xl}` で使用（詳細はDESIGN.md）。
 
