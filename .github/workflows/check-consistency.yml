@@ -1,0 +1,36 @@
+name: Check docs consistency
+
+# 正本（コード側）と派生ドキュメント（README/DESIGN.md等）の数表記・登録漏れのズレを検知する。
+# チェック内容と修正方法は scripts/check-consistency.mjs 冒頭コメントを参照。
+# 依存パッケージ不要のため npm ci は行わない（node単体で実行できる）。
+#
+# relayはpull_request契機のみだが、このリポジトリは現状mainへ直pushする運用のため
+# pushでも実行する（PR運用に切り替わってもpull_requestは効き続ける）。
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-consistency-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run consistency check
+        run: node scripts/check-consistency.mjs
