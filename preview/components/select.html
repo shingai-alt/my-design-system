@@ -43,6 +43,28 @@
         <div class="catalog-state-row"><span class="catalog-state-label">error</span><select class="select select-md select-error" style="width:200px"><option disabled selected>選択してください</option></select><span class="catalog-state-note">select-error</span></div>
         <div class="catalog-state-row"><span class="catalog-state-label">disabled</span><select class="select select-md" disabled style="width:200px"><option>disabled</option></select><span class="catalog-state-note">:disabled</span></div>
       </div>
+
+      <div class="catalog-card">
+        <div class="catalog-card-header"><p class="catalog-card-title">selector（左アイコン付き）</p><p class="catalog-card-note">md</p></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">enable</span>
+          <div class="selector selector-md" style="width:200px">
+            <svg class="icon icon-sm selector-icon" aria-hidden="true"><use href="../icons.svg#lucide-user"></use></svg>
+            <select class="select select-md"><option disabled selected>選択してください</option><option>管理者</option></select>
+          </div>
+        <span class="catalog-state-note">selector + selector-icon</span></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">error</span>
+          <div class="selector selector-md selector-error" style="width:200px">
+            <svg class="icon icon-sm selector-icon" aria-hidden="true"><use href="../icons.svg#lucide-user"></use></svg>
+            <select class="select select-md"><option disabled selected>選択してください</option></select>
+          </div>
+        <span class="catalog-state-note">selector-error</span></div>
+        <div class="catalog-state-row"><span class="catalog-state-label">disabled</span>
+          <div class="selector selector-md" style="width:200px">
+            <svg class="icon icon-sm selector-icon" aria-hidden="true"><use href="../icons.svg#lucide-user"></use></svg>
+            <select class="select select-md" disabled><option>disabled</option></select>
+          </div>
+        <span class="catalog-state-note">:disabled</span></div>
+      </div>
     </div>
 
     <div data-tabpanel="guideline" hidden>

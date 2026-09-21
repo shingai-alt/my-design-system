@@ -1,0 +1,99 @@
+/*
+ * Selector
+ *
+ * 機能:
+ *   左アイコンスロットを持つ select。アイコン付きの単一選択が要るときに使う
+ *   select の拡張版。アイコンが不要なら selector で包まず select 単体で足りる。
+ *
+ * 使用法:
+ *   OK: 中の <select> は select と共通の class="select"（selector が枠・アイコン・
+ *       フォーカスリングを引き受け、select 単体の枠・背景色は自動で透明になる。
+ *       select 自身が持つシェブロンはそのまま見える）。
+ *   OK: サイズは selector-{sm,md,lg}（wrapper側）。中の select にも同じサイズを付ける
+ *       （select-{sm,md,lg} が文字サイズ・左パディングを持つ）。
+ *   OK: エラーは wrapper に selector-error を付けるだけでよい（中の select には
+ *       select-error を付けない。二重に枠がつくのを防ぐ）。
+ *   NG: 中の <select> に別クラスを新規に書かない → class="select"（select.css と共通）。
+ *   NG: アイコンが不要なのに selector で包まない → select 単体を使う。
+ *   NG: 少数（2〜4件）の選択肢には使わない → radio-group の方が一覧性が上がる。
+ *
+ * アクセシビリティ:
+ *   <label> で関連付ける（select と同じ）
+ *   装飾アイコン（selector-icon）は aria-hidden="true"
+ *   フォーカスリングは wrapper の :focus-within に出す（中の select 自体には出さない、二重防止）
+ *
+ * Usage:
+ *   <div class="selector selector-md">
+ *     <svg class="icon icon-sm selector-icon" aria-hidden="true"><use href="dist/icons.svg#lucide-globe"></use></svg>
+ *     <select class="select select-md">
+ *       <option value="" disabled selected>選択してください</option>
+ *       <option value="ja">日本語</option>
+ *     </select>
+ *   </div>
+ */
+
+@layer components {
+  .selector {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-neutral-400);
+    border-radius: var(--radius-sm);
+    transition: border-color 150ms;
+  }
+  .selector:hover:not(:has(.select:disabled)):not(:focus-within) { border-color: var(--color-neutral-500); }
+  .selector:focus-within {
+    outline: 2px solid var(--color-info-600);
+    outline-offset: 2px;
+  }
+  .selector:has(.select:disabled) {
+    background-color: var(--color-neutral-50);
+    border-color: var(--color-neutral-200);
+    cursor: not-allowed;
+  }
+
+  .selector-sm { height: 32px; }
+  .selector-md { height: 40px; }
+  .selector-lg { height: 48px; }
+
+  /* wrapper が枠・背景・フォーカスを引き受けるので、中の .select は透明なフィールドとして
+     振る舞う（select 単体の枠・背景色を打ち消す。シェブロンの background-image は select
+     自身のものをそのまま使うので触らない） */
+  .selector .select {
+    background-color: transparent;
+    border: 0;
+    outline: none;
+  }
+
+  .selector-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-self: center;
+    color: var(--color-primary-500);
+    margin-left: calc(var(--spacing) * 3);
+  }
+  .selector:has(.select:disabled) .selector-icon { color: var(--color-neutral-400); }
+
+  /* Error — wrapper だけで完結させる（中の select に select-error は付けない） */
+  .selector-error {
+    background-color: var(--color-negative-50);
+    border-width: 2px;
+    border-color: var(--color-negative-500);
+  }
+  .selector-error:hover:not(:has(.select:disabled)),
+  .selector-error:focus-within {
+    border-color: var(--color-negative-600);
+  }
+
+  /* 強制カラーモード: フォーカスをborder色の変化だけで示しているためoutlineで可視化する。
+   * シェブロンは中のselect自身が持つ背景画像で、select.css側のforced-colors対応
+   * （appearance:auto化）がそのまま効くのでここでは触らない。
+   * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .selector:focus-within {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
+}

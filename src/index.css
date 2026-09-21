@@ -16,6 +16,7 @@
 @import "./components/search-input.css";
 @import "./components/badge.css";
 @import "./components/select.css";
+@import "./components/selector.css";
 @import "./components/checkbox.css";
 @import "./components/radio.css";
 @import "./components/data-table.css";
