@@ -81,6 +81,7 @@ npm run build
 | [DESIGN.md](DESIGN.md) | 1枚にまとめた憲法（トークン値・非交渉原則・禁止パターン） |
 | [PHASE0-DIRECTION.md](PHASE0-DIRECTION.md) | 参考プロダクト・ブランドカラー・デザイン原則の決定背景 |
 | [docs/ICONS.md](docs/ICONS.md) | アイコン（Lucide SVG sprite）の使い方・同梱一覧・ビルドの仕組み |
+| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Git運用・コミット規約・整合性チェックの読み方 |
 | [src/components/](src/components/) | コンポーネントCSS（先頭コメントが仕様の正本） |
 | [tokens/](tokens/) | デザイントークンの正本 |
 
