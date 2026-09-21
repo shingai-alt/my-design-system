@@ -5,7 +5,7 @@ relay-design-systemのevalsを、このDS（MCP最小構成・コンポーネン
 
 - お題の正本: [cases.mjs](cases.mjs)
 - ランナー: [run.mjs](run.mjs)
-- 履歴ビュー: [report.mjs](report.mjs)
+- 履歴ビュー: [report.mjs](report.mjs)（テキスト）/ [report-html.mjs](report-html.mjs)（HTML・無料）
 
 ## 実行
 
@@ -16,6 +16,7 @@ npm run eval -- --skip-generate    # 既存の生成物を再採点（LLM審査�
 npm run eval -- --skip-judge       # 機械チェックのみ（LLM不使用・無料）
 npm run eval -- --votes 3          # 審査3回の多数決（審査員のブレ対策）
 npm run eval:report                # 実行履歴の推移表（無料）
+npm run eval:report:html           # HTMLレポート（推移 + 最新実行のシーケンス・突合。無料）
 ```
 
 生成物は `evals/output/*.html`（ブラウザで目視可）、結果は `evals/results/*.json`（いずれもgitignored）。
@@ -47,3 +48,9 @@ relayの方針を踏襲: **机上で発明せず、実運用で実際に起き�
 
 - MCP（`src/mcp/`）・DESIGN.md・コンポーネントヘッダを変更したPRの前後（変更の効果測定）
 - 定期的に（週1回目安）— モデル更新によるドリフト検知
+
+## 人のレビューの記録先
+
+evalの合否そのものだけでなく、**それを判定しているLLM審査員が信頼できるか**も別途チェックする。
+月1回目安で抜き取り監査し、[review-log.md](review-log.md) に記録する。監査時に採点対象だった
+HTMLのスナップショットは [audited/](audited/) にコピーして残す（運用はaudited/README.md参照）。

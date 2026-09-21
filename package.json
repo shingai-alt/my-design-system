@@ -11,7 +11,8 @@
     "build:icons": "node scripts/build-icons.mjs",
     "mcp": "node src/mcp/server.mjs",
     "eval": "node evals/run.mjs",
-    "eval:report": "node evals/report.mjs"
+    "eval:report": "node evals/report.mjs",
+    "eval:report:html": "node evals/report-html.mjs"
   },
   "devDependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",

@@ -28,6 +28,7 @@ import { fileURLToPath } from "node:url";
 import { execSync, spawnSync } from "node:child_process";
 import { CASES, COMMON_PATTERNS } from "./cases.mjs";
 import { classifyResult, isError, STATUS_SYMBOL } from "./status.mjs";
+import { summarizeTranscript } from "./transcript.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
@@ -281,6 +282,9 @@ const archiveDir = path.join(resultsDir, "outputs", stamp);
 function runTrial(c) {
   const outPath = path.join(outputDir, `${c.id}.html`);
 
+  // 生成時の行動ログ。error:generation でも保存する（ハーネス故障の診断に使うため）
+  let transcriptRef = null;
+  let agentMetrics = null;
   if (!skipGenerate) {
     process.stdout.write("  生成中…（数分かかることがあります）\n");
     fs.rmSync(outPath, { force: true });
@@ -291,15 +295,31 @@ function runTrial(c) {
     if (gen.transcript) {
       fs.mkdirSync(archiveDir, { recursive: true });
       fs.writeFileSync(path.join(archiveDir, `${c.id}.transcript.jsonl`), gen.transcript);
+      transcriptRef = `outputs/${stamp}/${c.id}.transcript.jsonl`;
+      agentMetrics = summarizeTranscript(gen.transcript);
+      const calls = Object.entries(agentMetrics.toolCalls)
+        .map(([name, n]) => (n > 1 ? `${name}×${n}` : name))
+        .join(", ");
+      console.log(`  ⚙ ${calls || "ツール呼び出しなし"}${agentMetrics.numTurns != null ? ` — ${agentMetrics.numTurns} turns` : ""}`);
     }
     if (!gen.ok) {
       console.error(`  G 生成失敗（ハーネス起因・品質シグナルではない）: ${gen.detail}`);
-      return { generated: false, pass: false, status: "error:generation" };
+      return {
+        generated: false,
+        pass: false,
+        status: "error:generation",
+        ...(transcriptRef ? { transcript: transcriptRef, agentMetrics } : {}),
+      };
     }
   }
   if (!fs.existsSync(outPath)) {
     console.error(`  G 生成物がありません（ハーネス起因・品質シグナルではない）: evals/output/${c.id}.html`);
-    return { generated: false, pass: false, status: "error:generation" };
+    return {
+      generated: false,
+      pass: false,
+      status: "error:generation",
+      ...(transcriptRef ? { transcript: transcriptRef, agentMetrics } : {}),
+    };
   }
 
   const html = fs.readFileSync(outPath, "utf8");
@@ -331,7 +351,17 @@ function runTrial(c) {
   const machinePass = hardcode.pass && classes.pass && patterns.pass;
   const pass = machinePass && (skipJudge || rubric.pass);
   const status = rubric?.error ? (machinePass ? "error:judge" : "fail") : pass ? "pass" : "fail";
-  return { generated: true, status, pass, hardcode, classes, patterns, ...(rubric ? { rubric } : {}) };
+  return {
+    generated: true,
+    status,
+    pass,
+    output: `outputs/${stamp}/${c.id}.html`, // 採点したHTMLのアーカイブ（resultsDir相対）
+    ...(transcriptRef ? { transcript: transcriptRef, agentMetrics } : {}),
+    hardcode,
+    classes,
+    patterns,
+    ...(rubric ? { rubric } : {}),
+  };
 }
 
 for (const c of cases) {
@@ -344,6 +374,7 @@ const summary = {
   ranAt: new Date().toISOString(),
   model: process.env.EVAL_MODEL ?? "(cli default)",
   judgeModel: skipJudge ? null : process.env.EVAL_JUDGE_MODEL ?? "(cli default)",
+  dsVersion: JSON.parse(fs.readFileSync(path.join(projectRoot, "package.json"), "utf8")).version,
   skipGenerate, skipJudge, votes,
   passed: results.filter((r) => r.pass).length,
   total: results.length,
