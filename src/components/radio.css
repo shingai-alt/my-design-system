@@ -61,4 +61,14 @@
     margin-bottom: calc(var(--spacing) * 1);
     padding: 0;
   }
+
+  /* 強制カラーモード: ネイティブ<input>なので選択状態はOSが自動的に正しく描画する。
+   * box-shadowのフォーカスリングだけは強制カラーで消えるためoutlineを出す。
+   * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .radio:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
 }

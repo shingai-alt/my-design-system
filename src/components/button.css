@@ -118,4 +118,43 @@
   .btn-negative:not(.btn-solid)[data-loading]::after { color: var(--color-negative-600); }
 
   @keyframes btn-spin { to { transform: rotate(360deg); } }
+
+  /* ============================================================
+   * 強制カラーモード (Windows ハイコントラスト等) 対応
+   *   solidの塗りは背景色で表現しているため強制カラー時に消え、solid/outline/ghost
+   *   の変種ヒエラルキー（＝重要度の非色ヒント）が失われる。すべてのボタンに輪郭線を
+   *   出し、solidはButtonTextの面で塗り直して「塗り=主/枠のみ=副/文字=3次」を保つ。
+   *   フォーカスはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
+   * ============================================================ */
+  @media (forced-colors: active) {
+    .btn { border-color: ButtonText; }
+    .btn:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+    .btn-primary.btn-solid,
+    .btn-neutral.btn-solid,
+    .btn-negative.btn-solid,
+    .btn-primary.btn-solid:hover:not(:disabled),
+    .btn-neutral.btn-solid:hover:not(:disabled),
+    .btn-negative.btn-solid:hover:not(:disabled) {
+      forced-color-adjust: none;
+      background-color: ButtonText;
+      color: ButtonFace;
+      border-color: ButtonText;
+    }
+    .btn:disabled {
+      color: GrayText;
+      border-color: GrayText;
+    }
+    .btn-primary.btn-solid:disabled,
+    .btn-neutral.btn-solid:disabled,
+    .btn-negative.btn-solid:disabled {
+      forced-color-adjust: none;
+      background-color: GrayText;
+      color: ButtonFace;
+      border-color: GrayText;
+    }
+  }
 }

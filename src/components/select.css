@@ -77,4 +77,15 @@
   .select-error:focus-visible {
     border-color: var(--color-negative-600);
   }
+
+  /* 強制カラーモード: 背景シェブロンはCanvas化して消えるが、appearance:noneを外せば
+   * OSがネイティブの矢印を描く。フォーカスはborder色の変化だけで示しておりoutlineで可視化する。
+   * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .select { appearance: auto; background-image: none; }
+    .select:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
 }

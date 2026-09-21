@@ -72,4 +72,15 @@
     background-color: var(--color-neutral-50);
     border-color: var(--color-negative-200);
   }
+
+  /* 強制カラーモード: フォーカスをborder色の変化だけで示す箇所は強制カラーでborderが
+   * どの状態でもCanvasText化され判別できないため、outlineで可視化する
+   * （全focusable共通のoutline 2px solid CanvasText / offset 2px）。
+   * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .input:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
 }

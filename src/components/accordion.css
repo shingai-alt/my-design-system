@@ -73,4 +73,15 @@
     line-height: 24px;
     color: var(--color-fg-high);
   }
+
+  /* 強制カラーモード: フォーカスのoutlineをCanvasTextに統一。chevronは<svg>自身の色
+   * (text-fg-middle相当)が強制カラーでsystem colorに変換されず著者色のまま残ることが
+   * あるためCanvasTextを明示する。※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .accordion-trigger:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: -2px;
+    }
+    .accordion-icon { color: CanvasText; }
+  }
 }

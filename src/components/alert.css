@@ -78,4 +78,15 @@
 
   .alert-info     { background-color: var(--color-info-50);     border-color: var(--color-info-100); color: var(--color-info-700); }
   .alert-info     .alert-icon { background-color: var(--color-info-100); color: var(--color-info-600); }
+
+  /* 強制カラーモード: フォーカスはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   * 閉じるボタンのopacity(0.6)も文字を薄くしすぎるため強制カラー時は戻す。
+   * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .alert-close:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+    .alert-close { opacity: 1; }
+  }
 }

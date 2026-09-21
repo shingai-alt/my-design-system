@@ -72,4 +72,16 @@
     opacity: 1;
     pointer-events: auto;
   }
+
+  /* 強制カラーモード: 吹き出しの立体感をbox-shadowだけで表現しているため、強制カラーでは
+   * 影が無視されて背景(Canvas)と同化し輪郭が消える。吹き出しと矢印にCanvasTextの
+   * 輪郭線を出して縁取る。※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .tooltip-content {
+      border: 1px solid CanvasText;
+    }
+    .tooltip-content::before {
+      border: 1px solid CanvasText;
+    }
+  }
 }

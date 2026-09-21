@@ -97,4 +97,34 @@
     background-color: var(--color-primary-600);
     color: var(--color-white);
   }
+
+  /* ============================================================
+   * 強制カラーモード (Windows ハイコントラスト等) 対応
+   *   マーカーの円と接続線をbackground(塗り)で描いているため、強制カラーでは
+   *   背景がCanvas化して塗りベースの円・線が消える（borderを持つ現在地の円だけ残る）。
+   *   全マーカーに輪郭を出して円を見せ、状態は形＋system colorで示す:
+   *     completed = 塗り(CanvasText)＋抜き文字 / current = Highlightの輪郭 /
+   *     upcoming = CanvasTextの輪郭のみ。接続線もsystem colorで描き直す。
+   *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
+   * ============================================================ */
+  @media (forced-colors: active) {
+    .stepper-marker {
+      border: 2px solid CanvasText;
+    }
+    .stepper-step.is-completed .stepper-marker {
+      forced-color-adjust: none;
+      background-color: CanvasText;
+      color: Canvas;
+      border-color: CanvasText;
+    }
+    .stepper-step[aria-current="step"] .stepper-marker {
+      border-color: Highlight;
+    }
+    .stepper-step + .stepper-step::before {
+      background-color: CanvasText;
+    }
+    .stepper-step.is-completed + .stepper-step::before {
+      background-color: Highlight;
+    }
+  }
 }

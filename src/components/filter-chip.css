@@ -97,4 +97,14 @@
   }
   .filter-chip[aria-pressed="true"] .filter-chip-check { display: inline-flex; }
   .filter-chip-check .icon { width: 10px; height: 10px; }
+
+  /* 強制カラーモード: フォーカスはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   * 選択状態はチェックマークの表示/非表示（色に依存しない構造的な差）で既に区別できるため、
+   * それ以上の対応は不要。※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .filter-chip:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
 }

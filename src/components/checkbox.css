@@ -49,4 +49,15 @@
     cursor: pointer;
   }
   .checkbox-label:has(.checkbox:disabled) { color: var(--color-fg-low); cursor: not-allowed; }
+
+  /* 強制カラーモード: ネイティブ<input>なので選択状態の見た目はOSが描画し自動対応する
+   * （accent-colorは強制カラーで無視されるが、ブラウザがシステム色で正しく描き直す）。
+   * box-shadowのフォーカスリングだけは強制カラーで消えるためoutlineを出す。
+   * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .checkbox:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
 }

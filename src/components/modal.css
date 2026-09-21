@@ -90,4 +90,19 @@
     background-color: var(--color-neutral-50);
     border-top: 1px solid var(--color-stroke-middle);
   }
+
+  /* ============================================================
+   * 強制カラーモード (Windows ハイコントラスト等) 対応
+   *   浮き上がりはshadow-lgで表現しているが、強制カラー時は影が無視され
+   *   ダイアログと背景の境界が失われる。輪郭線を出して境界を確保する。
+   *   閉じるボタンのフォーカスもbox-shadowのリングが消えるためoutlineを出す。
+   *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
+   * ============================================================ */
+  @media (forced-colors: active) {
+    dialog.modal { border: 1px solid CanvasText; }
+    .modal-close:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
 }

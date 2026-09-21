@@ -61,4 +61,13 @@
     border-radius: var(--radius-xs);
     box-shadow: var(--shadow-focus-ring);
   }
+
+  /* 強制カラーモード: box-shadowのフォーカスリングは強制カラーで消えるためoutlineを出す。
+   * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
+  @media (forced-colors: active) {
+    .link:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+  }
 }

@@ -81,4 +81,22 @@
     background-color: var(--color-primary-100);
     color: var(--color-primary-700);
   }
+
+  /* ============================================================
+   * 強制カラーモード (Windows ハイコントラスト等) 対応
+   *   選択状態をprimary/700の下線「色」だけで示しているため強制カラー時に判別しづらい。
+   *   選択タブの下線をHighlightにし、太さ(4px)と合わせて選択を示す
+   *   （checkbox/radio/switchと同じ「選択色=Highlight」の流儀）。
+   *   focusはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
+   * ============================================================ */
+  @media (forced-colors: active) {
+    .tab:focus-visible {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+    .tab[aria-selected="true"] {
+      border-bottom-color: Highlight;
+    }
+  }
 }

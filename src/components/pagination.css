@@ -90,4 +90,25 @@
     color: var(--color-fg-low);
     user-select: none;
   }
+
+  /* ============================================================
+   * 強制カラーモード (Windows ハイコントラスト等) 対応
+   *   現在ページをbg(primary-700)＋透明枠で示しており、強制カラーでは背景が
+   *   Canvas化・透明枠は透明のままで、現在ページが他と区別できなくなる。
+   *   Highlightで塗って明確に示す（backplate対策でforced-color-adjust:none）。
+   *   focusはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
+   * ============================================================ */
+  @media (forced-colors: active) {
+    .pagination-item:focus-visible:not([aria-disabled="true"]) {
+      outline: 2px solid CanvasText;
+      outline-offset: 2px;
+    }
+    .pagination-item[aria-current="page"] {
+      forced-color-adjust: none;
+      background-color: Highlight;
+      color: HighlightText;
+      border-color: Highlight;
+    }
+  }
 }
