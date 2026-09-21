@@ -38,7 +38,7 @@ npm run build
 
 全コンポーネントの動作確認は [`preview/index.html`](preview/index.html) を参照してください。
 
-## コンポーネント一覧（26個）
+## コンポーネント一覧（27個）
 
 | # | コンポーネント | 主要クラス |
 |---|---|---|
@@ -49,25 +49,26 @@ npm run build
 | 5 | Textarea | `.textarea-control`, `.textarea`, `.textarea-{sm,md,error}`, `.textarea-{footer,counter}` |
 | 6 | Search Input | `.search-input`, `.search-input-{sm,md,lg,error}`, `.search-input-{field,clear,submit}` |
 | 7 | Select | `.select`, `.select-{sm,md,lg}`, `.select-error`（見た目はInputと統一） |
-| 8 | Checkbox | `.checkbox`, `.checkbox-label`, `.checkbox-error` |
-| 9 | Radio | `.radio`, `.radio-label`, `.radio-group` |
-| 10 | Badge | `.badge` + `.badge-{soft,solid}-{neutral,primary,success,warning,negative,info}` |
-| 11 | Card | `.card`, `.card-{header,title,subtitle,body,footer}` |
-| 12 | Data Table | `.data-table`, `.data-table-num`, `.data-table-empty` |
-| 13 | Alert | `.alert`, `.alert-{neutral,success,negative,warning,info}`, `.alert-{icon,body,title,close}` |
-| 14 | Modal | `.modal`（ネイティブ `<dialog>` ベース。開閉は `showModal()` / `close()`） |
-| 15 | Tab | `.tabs`, `.tab`（現在地は `aria-selected="true"`）, `.tab-count` |
-| 16 | Toggle Switch | `.switch`, `.switch-sm`, `.switch-label`（`<input type="checkbox" role="switch">`ベース） |
-| 17 | Accordion | `.accordion`, `.accordion-item`, `.accordion-trigger`, `.accordion-icon`, `.accordion-panel`（ネイティブ`<details>/<summary>`ベース） |
-| 18 | Tooltip | `.tooltip`, `.tooltip-content`（CSSのみで動作。関連付けは`aria-describedby`。top配置のみ対応） |
-| 19 | Link | `.link`, `.link-label`, `.link-{neutral,inverse}`（下線+周囲からfont-size継承） |
-| 20 | Breadcrumb | `.breadcrumb`, `.breadcrumb-sep`, `.breadcrumb-current`（`.link`+chevron区切り） |
-| 21 | Menu | `.menu`, `.menu-group`, `.menu-divider`, `.menu-item`, `.menu-item-sm`（現在地は`aria-current="page"`） |
-| 22 | Pagination | `.pagination`, `.pagination-item`, `.pagination-ellipsis`（現在ページは`aria-current="page"`） |
-| 23 | Stepper | `.stepper`, `.stepper-step`, `.stepper-marker`, `.stepper-label`（現在地は`aria-current="step"`、完了は`.is-completed`） |
-| 24 | Page Shell | `.page-shell`（`max-w-page`に中央寄せ）/ `.page-shell-content`（900pxに絞る。フォーム/設定/詳細） |
-| 25 | Simple Table | `.simple-table`（`<th>`/`<td>`を子要素として使用、rowspanでmerge可） |
-| 26 | Filter Chip | `.filter-chip`, `.filter-chip-{label,count,check}`（選択状態は`aria-pressed`） |
+| 8 | Selector | `.selector`, `.selector-{sm,md,lg}`, `.selector-icon`, `.selector-error`（左アイコン付きselect） |
+| 9 | Checkbox | `.checkbox`, `.checkbox-label`, `.checkbox-error` |
+| 10 | Radio | `.radio`, `.radio-label`, `.radio-group` |
+| 11 | Badge | `.badge` + `.badge-{soft,solid}-{neutral,primary,success,warning,negative,info}` |
+| 12 | Card | `.card`, `.card-{header,title,subtitle,body,footer}` |
+| 13 | Data Table | `.data-table`, `.data-table-num`, `.data-table-empty` |
+| 14 | Alert | `.alert`, `.alert-{neutral,success,negative,warning,info}`, `.alert-{icon,body,title,close}` |
+| 15 | Modal | `.modal`（ネイティブ `<dialog>` ベース。開閉は `showModal()` / `close()`） |
+| 16 | Tab | `.tabs`, `.tab`（現在地は `aria-selected="true"`）, `.tab-count` |
+| 17 | Toggle Switch | `.switch`, `.switch-sm`, `.switch-label`（`<input type="checkbox" role="switch">`ベース） |
+| 18 | Accordion | `.accordion`, `.accordion-item`, `.accordion-trigger`, `.accordion-icon`, `.accordion-panel`（ネイティブ`<details>/<summary>`ベース） |
+| 19 | Tooltip | `.tooltip`, `.tooltip-content`（CSSのみで動作。関連付けは`aria-describedby`。top配置のみ対応） |
+| 20 | Link | `.link`, `.link-label`, `.link-{neutral,inverse}`（下線+周囲からfont-size継承） |
+| 21 | Breadcrumb | `.breadcrumb`, `.breadcrumb-sep`, `.breadcrumb-current`（`.link`+chevron区切り） |
+| 22 | Menu | `.menu`, `.menu-group`, `.menu-divider`, `.menu-item`, `.menu-item-sm`（現在地は`aria-current="page"`） |
+| 23 | Pagination | `.pagination`, `.pagination-item`, `.pagination-ellipsis`（現在ページは`aria-current="page"`） |
+| 24 | Stepper | `.stepper`, `.stepper-step`, `.stepper-marker`, `.stepper-label`（現在地は`aria-current="step"`、完了は`.is-completed`） |
+| 25 | Page Shell | `.page-shell`（`max-w-page`に中央寄せ）/ `.page-shell-content`（900pxに絞る。フォーム/設定/詳細） |
+| 26 | Simple Table | `.simple-table`（`<th>`/`<td>`を子要素として使用、rowspanでmerge可） |
+| 27 | Filter Chip | `.filter-chip`, `.filter-chip-{label,count,check}`（選択状態は`aria-pressed`） |
 
 アイコンは Lucide SVG sprite（`dist/icons.svg`、21種）を `.icon icon-{xs,sm,md,lg,xl}` で使用（詳細はDESIGN.md）。
 

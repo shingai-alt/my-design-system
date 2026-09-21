@@ -15,7 +15,7 @@ const ROOT = resolve(__dirname, "../..");
 
 const COMPONENT_NAMES = [
   "button", "icon-button", "label-control", "input", "textarea", "search-input",
-  "select", "checkbox", "radio", "badge", "card", "data-table", "alert", "modal",
+  "select", "selector", "checkbox", "radio", "badge", "card", "data-table", "alert", "modal",
   "tab", "switch", "accordion", "tooltip", "link", "breadcrumb", "menu",
   "pagination", "stepper", "page-shell", "simple-table", "filter-chip", "icon",
 ];
