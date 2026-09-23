@@ -3,7 +3,7 @@ dist/
 
 # ビルド生成物（npm run build:icons が書き出す。ローカル閲覧用のコピー）
 preview/icons.svg
-preview/foundations/colors.html
+preview/foundations/
 
 # Agent eval artifacts（生成UIとスコア履歴。正本ではない）
 evals/output/

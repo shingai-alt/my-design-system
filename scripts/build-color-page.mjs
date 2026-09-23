@@ -10,6 +10,7 @@
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { esc, blockBody as block, declarations as decls, foundationPage } from "./catalog-page.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
@@ -17,27 +18,8 @@ const outFile = path.join(projectRoot, "preview/foundations/colors.html");
 
 const css = await readFile(path.join(projectRoot, "tokens/colors.css"), "utf8");
 
-/** `marker` の直後の { … } の中身（入れ子対応） */
-function blockBody(marker) {
-  const start = css.indexOf(marker);
-  if (start < 0) throw new Error(`tokens/colors.css に ${marker} が見つかりません`);
-  const open = css.indexOf("{", start);
-  let depth = 0;
-  for (let i = open; i < css.length; i++) {
-    if (css[i] === "{") depth++;
-    if (css[i] === "}" && --depth === 0) return css.slice(open + 1, i);
-  }
-  throw new Error(`${marker} のブロックが閉じていません`);
-}
-
-/** 宣言を順番どおりに取り出す。同じ行の末尾コメントを説明として拾う */
-function declarations(body) {
-  const list = [];
-  for (const m of body.matchAll(/(--color-[\w-]+)\s*:\s*([^;]+);[ \t]*(?:\/\*\s*(.*?)\s*\*\/)?/g)) {
-    list.push({ name: m[1], value: m[2].trim(), note: m[3] ?? "" });
-  }
-  return list;
-}
+const blockBody = (marker) => block(css, marker, "tokens/colors.css");
+const declarations = (body) => decls(body, "--color-");
 
 const lightDecls = declarations(blockBody("@theme static"));
 const darkDecls = declarations(blockBody('[data-color-mode="dark"]'));
@@ -51,8 +33,6 @@ const resolve = (vars, name, depth = 0) => {
 };
 /** 参照先を1段だけ（例: var(--color-neutral-50) → neutral-50） */
 const ref = (value) => value.match(/^var\(--color-([\w-]+)\)$/)?.[1] ?? value;
-
-const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 const STEPS = ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900", "950"];
 const PRIMITIVES = [
@@ -137,22 +117,16 @@ ${rows}
 
 const semanticCount = lightDecls.filter((d) => /^--color-(bg|fg|stroke)-|^--color-(scrim|shadow)$/.test(d.name)).length;
 
-const html = `<!DOCTYPE html>
-<html lang="ja">
-<head>
-<meta charset="UTF-8">
-<title>Colors — Design System</title>
-<link rel="stylesheet" href="../../dist/ds.css">
-<link rel="stylesheet" href="../catalog.css">
-<script src="../theme-toggle.js"></script>
-<!-- このファイルは scripts/build-color-page.mjs が tokens/colors.css から生成する。直接編集しない -->
-<style>
-.cp-scroll { overflow-x: auto; }
+const html = foundationPage({
+  title: "Colors",
+  source: "scripts/build-color-page.mjs が tokens/colors.css",
+  desc: `色は「原料（primitive）→ 役割ごとの色番号表（key）→ 用途（semantic）」の3層で定義しています。コンポーネントが使うのは semantic だけなので、ダークモードやブランド色の差し替えはトークン側を変えるだけで全体に反映されます。`,
+  style: `.cp-scroll { overflow-x: auto; }
 .cp-table, .cp-grid { width: 100%; border-collapse: collapse; font-size: 13px; }
 .cp-table th, .cp-table td, .cp-grid th, .cp-grid td { padding: calc(var(--spacing) * 3) calc(var(--spacing) * 4); border-top: 1px solid var(--color-stroke-middle); text-align: left; vertical-align: middle; }
 .cp-table thead th, .cp-grid thead th { color: var(--color-fg-low); font-weight: 600; border-top: none; }
 .cp-grid td, .cp-grid thead th:not(:first-child) { text-align: center; padding-left: calc(var(--spacing) * 1); padding-right: calc(var(--spacing) * 1); }
-.cp-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--color-fg-high); display: block; }
+.cp-mono { font-family: var(--font-mono); font-size: 12px; color: var(--color-fg-high); display: block; }
 .cp-sub { display: block; font-size: 12px; font-weight: 400; color: var(--color-fg-low); margin-top: 2px; }
 .cp-dot { display: inline-block; width: 28px; height: 28px; border-radius: var(--radius-xs); border: 1px solid var(--color-stroke-middle); vertical-align: middle; }
 .cp-dot-sm { width: 18px; height: 18px; margin-right: 2px; }
@@ -165,26 +139,8 @@ const html = `<!DOCTYPE html>
 .cp-layer p { margin: 0 0 calc(var(--spacing) * 2); }
 .cp-body { padding: 0 calc(var(--spacing) * 6) calc(var(--spacing) * 6); }
 .cp-code { background: var(--color-bg-sunken); border: 1px solid var(--color-stroke-middle); border-radius: var(--radius-sm); padding: calc(var(--spacing) * 4); font-size: 12px; overflow-x: auto; }
-</style>
-</head>
-<body>
-
-  <header class="catalog-header">
-    <div>
-      <p class="catalog-header-title">Design System</p>
-      <p class="catalog-header-sub">Tailwind v4</p>
-    </div>
-  </header>
-
-  <p class="catalog-breadcrumb"><a href="../index.html">ホーム</a> &gt; Foundation &gt; Colors</p>
-
-  <main class="catalog-main">
-    <div class="catalog-page-title-row">
-      <h1 class="typo-2xlarge">Colors</h1>
-      <span class="badge badge-soft-neutral">foundation</span>
-    </div>
-    <p class="catalog-page-desc typo-medium">色は「原料（primitive）→ 役割ごとの色番号表（key）→ 用途（semantic）」の3層で定義しています。コンポーネントが使うのは semantic だけなので、ダークモードやブランド色の差し替えはトークン側を変えるだけで全体に反映されます。</p>
-
+`,
+  body: `
     <div class="catalog-card">
       <div class="catalog-card-header"><p class="catalog-card-title">3層の構成</p><p class="catalog-card-note">正本は <code>tokens/colors.css</code></p></div>
       <div class="cp-layers">
@@ -225,10 +181,8 @@ ${semanticTables()}
         </ul>
       </div>
     </div>
-  </main>
-</body>
-</html>
-`;
+`,
+});
 
 await mkdir(path.dirname(outFile), { recursive: true });
 await writeFile(outFile, html);
