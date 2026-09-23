@@ -18,3 +18,15 @@
 @theme {
   --spacing: 0.25rem; /* 4px base */
 }
+
+/*
+ * 部品の高さ（button・icon-button・input・select・search-input・selector・pagination）。
+ * 余白の9段とは別の「高さ専用の段」。40px（× 10）はここだけで使う。
+ * 文字を含む部品は min-height（利用者が文字サイズ・行間を上書きしても内容がはみ出さない。WCAG 1.4.12）、
+ * 正方形の部品（icon-button・pagination）は width / height に使う。
+ */
+:root {
+  --control-height-sm: calc(var(--spacing) * 8);   /* 32px */
+  --control-height-md: calc(var(--spacing) * 10);  /* 40px */
+  --control-height-lg: calc(var(--spacing) * 12);  /* 48px */
+}

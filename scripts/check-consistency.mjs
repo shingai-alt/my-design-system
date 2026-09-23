@@ -31,6 +31,9 @@
  *                          文字 4.5:1 / UI部品・フォーカスリング 3:1 を下回ったらエラー（disabled は対象外）
  *  10. タイポのトークン   — src/components/*.css の font / font-size / font-weight / line-height が
  *                          トークン（font: var(--typo-*)、太さだけの var(--font-weight-*)）か inherit であること
+ *  11. 余白のスケール     — src/components/*.css の余白（padding / margin / gap / top 等）の var(--spacing) * N が
+ *                          9段のどれかで、px 直書きが無いこと（例外は scripts/spacing-exceptions.mjs に理由付きで登録）。
+ *                          部品の高さ 32 / 40 / 48px の直書きも検知する（--control-height-* を使う）
  *
  * 実行: npm run check:consistency（依存パッケージ不要・ネットワーク不要）
  *
@@ -41,6 +44,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { SPACING_SCALE, SPACING_EXCEPTIONS } from "./spacing-exceptions.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const projectRoot = path.resolve(__dirname, "..");
@@ -369,6 +373,41 @@ function checkComponentsUseTypoTokens() {
 }
 
 // ---------------------------------------------------------------------------
+// 11. 余白のスケール — 9段（scripts/spacing-exceptions.mjs）と部品の高さトークン
+// ---------------------------------------------------------------------------
+
+const SPACING_PROP = /^(padding|margin|gap|row-gap|column-gap|inset|top|right|bottom|left)(-[a-z-]+)?$/;
+const CONTROL_FILES = ["button", "icon-button", "input", "select", "search-input", "selector", "pagination"];
+
+function checkSpacingScale() {
+  const dir = path.join(projectRoot, "src/components");
+  const used = new Set();
+  for (const name of fs.readdirSync(dir).filter((f) => f.endsWith(".css")).sort()) {
+    const code = fs.readFileSync(path.join(dir, name), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    for (const [, rawSel, body] of code.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      const selector = rawSel.trim().replace(/\s+/g, " ");
+      for (const [, prop, value] of body.matchAll(/(?<![-\w])([a-z-]+)\s*:\s*([^;]+)/g)) {
+        const ex = SPACING_EXCEPTIONS.findIndex((e) => e.file === name && e.selector === selector && e.prop === prop);
+        if (SPACING_PROP.test(prop)) {
+          const offScale = [...value.matchAll(/var\(--spacing\)\s*\*\s*([\d.]+)/g)].map((m) => Number(m[1])).filter((n) => !SPACING_SCALE.includes(n));
+          const px = [...value.matchAll(/(?<![\w.])-?\d*\.?\d+px/g)].map((m) => m[0]).filter((v) => !/^-?0px$/.test(v));
+          if (offScale.length || px.length) {
+            if (ex >= 0) used.add(ex);
+            else fail("spacing-scale", `src/components/${name}: ${selector} の ${prop}: ${value.trim()} が9段スケール外です（${[...offScale.map((n) => `× ${n}`), ...px].join(", ")}）。9段に丸めるか、理由を付けて scripts/spacing-exceptions.mjs に登録してください`);
+          }
+        }
+        if (CONTROL_FILES.includes(name.replace(/\.css$/, "")) && /^(min-)?(height|width)$/.test(prop) && /^(32|40|48)px$/.test(value.trim())) {
+          fail("spacing-scale", `src/components/${name}: ${selector} の ${prop}: ${value.trim()} は部品の高さの直書きです。var(--control-height-*) を使ってください`);
+        }
+      }
+    }
+  }
+  SPACING_EXCEPTIONS.forEach((e, i) => {
+    if (!used.has(i)) fail("spacing-scale", `scripts/spacing-exceptions.mjs: ${e.file} ${e.selector} ${e.prop} の例外は使われていません。削除してください`);
+  });
+}
+
+// ---------------------------------------------------------------------------
 
 const CHECKS = [
   ["icon-count", checkIconCount],
@@ -381,6 +420,7 @@ const CHECKS = [
   ["dark-blocks", checkDarkBlocksMatch],
   ["contrast", checkContrast],
   ["typo-tokens", checkComponentsUseTypoTokens],
+  ["spacing-scale", checkSpacingScale],
 ];
 
 for (const [name, run] of CHECKS) {

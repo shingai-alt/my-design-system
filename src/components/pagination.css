@@ -44,8 +44,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: var(--control-height-md);
+    height: var(--control-height-md);
     border-radius: var(--radius-sm);
     border: 1px solid var(--color-stroke-middle);
     background-color: var(--color-bg-raised);
@@ -83,8 +83,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: var(--control-height-md);
+    height: var(--control-height-md);
     color: var(--color-fg-low);
     user-select: none;
     font: var(--typo-body);

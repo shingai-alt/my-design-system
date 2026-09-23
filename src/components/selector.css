@@ -53,9 +53,9 @@
     cursor: not-allowed;
   }
 
-  .selector-sm { height: 32px; }
-  .selector-md { height: 40px; }
-  .selector-lg { height: 48px; }
+  .selector-sm { min-height: var(--control-height-sm); }
+  .selector-md { min-height: var(--control-height-md); }
+  .selector-lg { min-height: var(--control-height-lg); }
 
   /* wrapper が枠・背景・フォーカスを引き受けるので、中の .select は透明なフィールドとして
      振る舞う（select 単体の枠・背景色を打ち消す。シェブロンの background-image は select
@@ -64,6 +64,7 @@
     background-color: transparent;
     border: 0;
     outline: none;
+    min-height: 0;  /* 高さは wrapper（.selector-*）が持つ。select-* の min-height を足すと枠線の分はみ出す */
   }
 
   .selector-icon {
