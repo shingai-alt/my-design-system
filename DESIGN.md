@@ -94,8 +94,8 @@
 ```
 rounded-{none,xs,sm,md,lg,full} = 0 / 4 / 8 / 16 / 24 / 9999 px
 shadow-{sm,md,lg}          : 一時レイヤー(modal/tooltip)専用
-shadow-focus-ring          : 0 0 0 3px #2563eb（info-600固定）
-shadow-destructive         : 0 0 0 3px #ef4444
+shadow-focus-ring          : 0 0 0 3px stroke-focus（info-600固定。ダークは info-400）
+shadow-destructive         : 0 0 0 3px stroke-control-error（negative-500）
 ```
 
 **elevationの表現にシャドウを使わない。** 恒常的なsurface（カード等）はborder + 背景色で区切る。
@@ -123,7 +123,7 @@ shadow-destructive         : 0 0 0 3px #ef4444
 | 1箇所限定のbespoke装飾色（パレットに無い） | トークン化するほどではない。コメントで由来を明記 |
 | 比率・100%・auto | スケール非依存値 |
 | 強制カラーモードのシステムカラー（`ButtonText`等） | OSの設定に追従する系統色のため |
-| `background-image` の SVG data URI 内の色 | `var()`/`currentColor` が解決できないため直書き。変更時はコメントの色名と実値を両方直す |
+| `background-image` の SVG data URI 内の色 | `var()`/`currentColor` が解決できないため直書き。コンポーネントには書かず、`tokens/colors.css` の変数（例: `--select-arrow`）にライト・ダーク両方の値を置く。変更時はコメントの色名と実値を両方直す |
 | Figma仕様やアイコンとの位置合わせでoff-scaleな`calc(var(--spacing) * N)`が必要 | 祝福値に丸めるとズレる少数のケース限定。コメントでpx値と理由を明記（例: `modal.css`のmax-width、`accordion.css`のpanel padding-left） |
 
 ---
@@ -132,7 +132,7 @@ shadow-destructive         : 0 0 0 3px #ef4444
 
 | 設定 | 値 |
 |---|---|
-| カラーモード | ライトのみ |
+| カラーモード | ライト（既定）/ ダーク（`data-color-mode="dark"` / `"auto"`） |
 | Primary | `#2f9e6f`（500）/ 主に使うのは600 `#25835c` |
 | Font | Inter + Noto Sans JP |
 | ベーススペーシング | 4px |
