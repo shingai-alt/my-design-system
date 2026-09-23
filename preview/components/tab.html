@@ -5,6 +5,7 @@
 <title>Tab — Design System</title>
 <link rel="stylesheet" href="../../dist/ds.css">
 <link rel="stylesheet" href="../catalog.css">
+<script src="../theme-toggle.js"></script>
 </head>
 <body>
   <header class="catalog-header">
@@ -52,7 +53,7 @@
             <li>tabs で囲み、各項目に role="tab" + aria-selected を付ける</li>
             <li>件数を添えたい時は tab-count を項目内に置く</li>
           </ul>
-          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <p class="typo-medium" style="color:var(--color-fg-negative-strong); margin: 16px 0 4px;">NG</p>
           <ul class="typo-medium" style="margin:0; padding-left:20px;">
             <li>5個を超えるタブを並べない → select や別のナビゲーションを検討する</li>
             <li>現在地の表現を色だけにしない → aria-selected を必ず付ける</li>

@@ -25,6 +25,10 @@
  *   7. semantic のみ      — src/components/*.css が参照する色は semantic 層（bg-* / fg-* / stroke-* /
  *                          scrim）だけであること。key（primary-600 等）や primitive（slate-400 等）を
  *                          直接使うとダークモード・ブランド差し替えに追従しないため
+ *   8. ダーク定義の一致   — tokens/colors.css の [data-color-mode="dark"] と
+ *                          @media (prefers-color-scheme: dark) 内の [data-color-mode="auto"] が同じ内容であること
+ *   9. コントラスト       — 「文字 × 背景」「UI部品 × 背景」のペアをライト・ダーク両方で計算し、
+ *                          文字 4.5:1 / UI部品・フォーカスリング 3:1 を下回ったらエラー（disabled は対象外）
  *
  * 実行: npm run check:consistency（依存パッケージ不要・ネットワーク不要）
  *
@@ -245,6 +249,112 @@ function checkComponentsUseSemanticColors() {
 }
 
 // ---------------------------------------------------------------------------
+// 8〜9. ダーク定義 — tokens/colors.css を読み、ライト/ダークそれぞれの値を解決する
+// ---------------------------------------------------------------------------
+
+const colorsCss = () => read("tokens/colors.css").replace(/\/\*[\s\S]*?\*\//g, "");
+
+/** `marker` の直後の { … } の中身を返す（入れ子対応） */
+function blockBody(css, marker) {
+  const start = css.indexOf(marker);
+  if (start < 0) return null;
+  const open = css.indexOf("{", start);
+  let depth = 0;
+  for (let i = open; i < css.length; i++) {
+    if (css[i] === "{") depth++;
+    if (css[i] === "}" && --depth === 0) return css.slice(open + 1, i);
+  }
+  return null;
+}
+
+const declarations = (body) =>
+  Object.fromEntries([...body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
+
+function checkDarkBlocksMatch() {
+  const css = colorsCss();
+  const dark = blockBody(css, '[data-color-mode="dark"]');
+  const auto = blockBody(css, '[data-color-mode="auto"]');
+  if (!dark || !auto) {
+    fail("dark-blocks", 'tokens/colors.css: [data-color-mode="dark"] または [data-color-mode="auto"] のブロックが見つかりません');
+    return;
+  }
+  const normalize = (b) => b.split("\n").map((l) => l.trim()).filter(Boolean).join("\n");
+  if (normalize(dark) !== normalize(auto)) {
+    fail("dark-blocks", 'tokens/colors.css: [data-color-mode="dark"] と auto（prefers-color-scheme: dark）の中身が一致していません。片方だけ変更していないか確認してください');
+  }
+}
+
+// 文字は 4.5:1、UI部品（枠線・トラック・フォーカスリング・塗り）は 3:1（WCAG 1.4.3 / 1.4.11）
+const TEXT = 4.5;
+const UI = 3;
+const CONTRAST_PAIRS = [
+  ...["bg-page", "bg-raised", "bg-sunken", "bg-overlay", "bg-neutral-low"].flatMap((bg) =>
+    ["fg-high", "fg-middle", "fg-low", "fg-primary", "fg-negative"].map((fg) => [fg, bg, TEXT]),
+  ),
+  ["fg-high", "bg-disabled", TEXT], ["fg-low", "bg-disabled", TEXT],
+  ["fg-middle", "bg-neutral-middle", TEXT], ["fg-middle", "bg-neutral-high", UI],
+  ["fg-primary-hover", "bg-raised", TEXT],
+  ["fg-primary", "bg-primary-subtle", TEXT], ["fg-primary", "bg-primary-muted", TEXT],
+  ["fg-on-primary", "bg-primary", TEXT], ["fg-on-primary", "bg-primary-hover", TEXT],
+  ["fg-on-negative", "bg-negative", TEXT], ["fg-on-negative", "bg-negative-hover", TEXT],
+  ["fg-on-success", "bg-success", TEXT], ["fg-on-info", "bg-info", TEXT], ["fg-on-warning", "bg-warning", TEXT],
+  ["fg-inverse", "bg-inverse", TEXT], ["fg-inverse", "bg-inverse-hover", TEXT], ["fg-inverse-middle", "bg-inverse", TEXT],
+  ["fg-negative", "bg-negative-subtle", TEXT],
+  ["fg-negative-strong", "bg-negative-subtle", TEXT], ["fg-negative-strong", "bg-negative-muted", TEXT],
+  ...["success", "warning", "info"].flatMap((r) => [[`fg-${r}`, `bg-${r}-subtle`, TEXT], [`fg-${r}`, `bg-${r}-muted`, TEXT]]),
+  ["stroke-control", "bg-raised", UI], ["stroke-control-error", "bg-raised", UI], ["stroke-control-error", "bg-negative-subtle", UI],
+  ["stroke-primary", "bg-raised", UI], ["stroke-focus", "bg-page", UI], ["stroke-focus", "bg-raised", UI],
+  ["bg-primary", "bg-page", UI], ["bg-primary", "bg-raised", UI], ["bg-control-off", "bg-raised", UI],
+];
+
+// 既知の未達（ライト）。ダーク対応以前からの値で、変えると見た目が変わるためユーザー判断待ち。
+// 直したらここから消す（消し忘れは「未達でなくなった」エラーで検出する）
+const KNOWN_CONTRAST_GAPS = new Set([
+  "light:fg-negative/bg-negative-subtle", // negative の outline ボタン文字 4.41:1
+  "light:stroke-control/bg-raised",       // 入力欄の枠 2.56:1
+  "light:bg-control-off/bg-raised",       // switch の OFF トラック 2.56:1
+]);
+
+function luminance(hex) {
+  const m = hex.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
+  if (!m) return null;
+  const h = m[1].length === 3 ? [...m[1]].map((c) => c + c).join("") : m[1];
+  const [r, g, b] = [0, 2, 4].map((i) => {
+    const c = parseInt(h.slice(i, i + 2), 16) / 255;
+    return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function checkContrast() {
+  const css = colorsCss();
+  const light = declarations(blockBody(css, "@theme static") ?? "");
+  const themes = { light, dark: { ...light, ...declarations(blockBody(css, '[data-color-mode="dark"]') ?? "") } };
+  for (const [theme, vars] of Object.entries(themes)) {
+    const resolve = (name, depth = 0) => {
+      const v = vars[name];
+      const ref = v?.match(/^var\((--[\w-]+)\)$/);
+      return ref && depth < 20 ? resolve(ref[1], depth + 1) : v;
+    };
+    for (const [fg, bg, min] of CONTRAST_PAIRS) {
+      const [a, b] = [resolve(`--color-${fg}`), resolve(`--color-${bg}`)].map((v) => (v ? luminance(v) : null));
+      if (a == null || b == null) {
+        fail("contrast", `tokens/colors.css (${theme}): ${fg} / ${bg} を hex に解決できません`);
+        continue;
+      }
+      const ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
+      const key = `${theme}:${fg}/${bg}`;
+      if (ratio < min && !KNOWN_CONTRAST_GAPS.has(key)) {
+        fail("contrast", `tokens/colors.css (${theme}): ${fg} on ${bg} が ${ratio.toFixed(2)}:1 で基準 ${min}:1 未満です`);
+      }
+      if (ratio >= min && KNOWN_CONTRAST_GAPS.has(key)) {
+        fail("contrast", `scripts/check-consistency.mjs: ${key} は基準を満たすようになりました。KNOWN_CONTRAST_GAPS から消してください`);
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 
 const CHECKS = [
   ["icon-count", checkIconCount],
@@ -254,6 +364,8 @@ const CHECKS = [
   ["index-css", checkIndexCss],
   ["color-tokens", checkColorTokensDefined],
   ["semantic-colors", checkComponentsUseSemanticColors],
+  ["dark-blocks", checkDarkBlocksMatch],
+  ["contrast", checkContrast],
 ];
 
 for (const [name, run] of CHECKS) {

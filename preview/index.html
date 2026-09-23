@@ -5,8 +5,9 @@
 <title>Design System</title>
 <link rel="stylesheet" href="../dist/ds.css">
 <link rel="stylesheet" href="catalog.css">
+<script src="theme-toggle.js"></script>
 <style>
-.hero { background: var(--color-primary-50); padding: 48px 24px; text-align: center; }
+.hero { background: var(--color-bg-primary-subtle); padding: 48px 24px; text-align: center; }
 .hero-title { margin: 0 0 8px; }
 .hero-desc { color: var(--color-fg-middle); margin: 0; }
 .swatch { width: 64px; height: 40px; border-radius: var(--radius-xs); border: 1px solid var(--color-stroke-middle); }
@@ -185,7 +186,7 @@
       </a>
 
       <a class="catalog-grid-card" href="components/card.html">
-        <div class="catalog-grid-card-preview"><div style="width:80px;height:48px;background:#fff;border:1px solid var(--color-stroke-middle);border-radius:var(--radius-sm);"></div></div>
+        <div class="catalog-grid-card-preview"><div style="width:80px;height:48px;background:var(--color-bg-raised);border:1px solid var(--color-stroke-middle);border-radius:var(--radius-sm);"></div></div>
         <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Card</p><p class="catalog-grid-card-desc">情報をひとまとまりにするコンテナ</p></div>
       </a>
 
@@ -204,7 +205,7 @@
       </a>
 
       <a class="catalog-grid-card" href="components/modal.html">
-        <div class="catalog-grid-card-preview"><div style="width:100px;height:56px;background:var(--color-white);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);"></div></div>
+        <div class="catalog-grid-card-preview"><div style="width:100px;height:56px;background:var(--color-bg-overlay);border-radius:var(--radius-md);box-shadow:var(--shadow-lg);"></div></div>
         <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Modal</p><p class="catalog-grid-card-desc">最前面に重ねる確認・入力ダイアログ</p></div>
       </a>
 
@@ -266,15 +267,15 @@
       <a class="catalog-grid-card" href="components/stepper.html">
         <div class="catalog-grid-card-preview" style="pointer-events:none; gap:8px;">
           <span class="stepper-marker" style="width:24px;height:24px;font-size:11px;">1</span>
-          <span class="stepper-marker" style="width:24px;height:24px;font-size:11px;background:var(--color-primary-600);color:var(--color-white);">2</span>
+          <span class="stepper-marker" style="width:24px;height:24px;font-size:11px;background:var(--color-bg-primary);color:var(--color-fg-on-primary);">2</span>
         </div>
         <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Stepper</p><p class="catalog-grid-card-desc">複数ステップの進捗を示す</p></div>
       </a>
 
       <a class="catalog-grid-card" href="components/page-shell.html">
         <div class="catalog-grid-card-preview" style="pointer-events:none;">
-          <div style="width:100px;height:56px;background:var(--color-neutral-100); display:flex; align-items:center; justify-content:center;">
-            <div style="width:70px;height:36px;background:var(--color-white);border:1px dashed var(--color-stroke-high);"></div>
+          <div style="width:100px;height:56px;background:var(--color-bg-neutral-middle); display:flex; align-items:center; justify-content:center;">
+            <div style="width:70px;height:36px;background:var(--color-bg-raised);border:1px dashed var(--color-stroke-high);"></div>
           </div>
         </div>
         <div class="catalog-grid-card-body"><p class="catalog-grid-card-title">Page Shell</p><p class="catalog-grid-card-desc">コンテンツ幅を全ページで揃える</p></div>

@@ -5,6 +5,7 @@
 <title>Card — Design System</title>
 <link rel="stylesheet" href="../../dist/ds.css">
 <link rel="stylesheet" href="../catalog.css">
+<script src="../theme-toggle.js"></script>
 </head>
 <body>
   <header class="catalog-header">
@@ -60,7 +61,7 @@
             <li>border + 背景色で区切る（恒常的なsurfaceにシャドウを使わない）</li>
             <li>card-header / card-body / card-footer で内部を構造化する</li>
           </ul>
-          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <p class="typo-medium" style="color:var(--color-fg-negative-strong); margin: 16px 0 4px;">NG</p>
           <ul class="typo-medium" style="margin:0; padding-left:20px;">
             <li>シャドウで浮き上がりを表現しない → シャドウは modal 等の一時レイヤー専用</li>
             <li>card内にネストしたcardを重ねない</li>

@@ -47,6 +47,18 @@
   枠線      : stroke-{high,middle,low} / stroke-control(-hover) / stroke-{primary,negative} / stroke-focus (info-600 固定)
 ```
 
+### テーマ（ライト / ダーク）
+
+```html
+<html data-color-mode="dark">  <!-- 常にダーク -->
+<html data-color-mode="auto">  <!-- OS の設定に追従 -->
+<html>                         <!-- 属性なし = ライト（既定） -->
+```
+
+- 切り替わるのは semantic 層だけ（`tokens/colors.css` 末尾）。コンポーネント側に `dark:` やテーマ分岐は書かない
+- ダークでは sunken → page = raised → overlay の順に明るくする。primary / status の塗りはライトと同じ段のまま、文字・枠線を明るい段に選び直す
+- コントラスト（文字 4.5:1、UI部品 3:1）は `npm run check:consistency` が両テーマで検査する
+
 > primaryとsuccessは別の緑にしている。brand色（主操作）と成功状態を混同させないため。
 
 ### Spacing Scale（祝福される9段階）

@@ -5,6 +5,7 @@
 <title>Filter Chip — Design System</title>
 <link rel="stylesheet" href="../../dist/ds.css">
 <link rel="stylesheet" href="../catalog.css">
+<script src="../theme-toggle.js"></script>
 </head>
 <body>
   <header class="catalog-header">
@@ -56,7 +57,7 @@
             <li>選択状態は aria-pressed="true|false"</li>
             <li>件数表示は filter-chip-count</li>
           </ul>
-          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <p class="typo-medium" style="color:var(--color-fg-negative-strong); margin: 16px 0 4px;">NG</p>
           <ul class="typo-medium" style="margin:0; padding-left:20px;">
             <li>単一選択しか許さない設問に並べない → radio</li>
             <li>送信やページ遷移を伴う絞り込みに使わない → checkbox/select + 明示的な適用ボタン（WCAG 3.2.2）</li>

@@ -5,6 +5,7 @@
 <title>Tooltip — Design System</title>
 <link rel="stylesheet" href="../../dist/ds.css">
 <link rel="stylesheet" href="../catalog.css">
+<script src="../theme-toggle.js"></script>
 </head>
 <body>
   <header class="catalog-header">
@@ -53,7 +54,7 @@
             <li>フォーカスできる要素（button/a/input等）をトリガーにし、aria-describedbyで関連付ける</li>
             <li>1〜2文の短い補足に限定する</li>
           </ul>
-          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <p class="typo-medium" style="color:var(--color-fg-negative-strong); margin: 16px 0 4px;">NG</p>
           <ul class="typo-medium" style="margin:0; padding-left:20px;">
             <li>操作に不可欠な情報（エラー・必須条件）を入れない → 見えるテキストやalertで常時表示する</li>
             <li>spanやdivなどフォーカス不能な要素だけに付けない</li>

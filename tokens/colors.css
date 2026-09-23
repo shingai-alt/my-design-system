@@ -7,7 +7,7 @@
  *   ② key       — 意味ごとのスケール別名（primary / neutral / status）。
  *                 ブランド色の差し替えはこの層の参照先だけを変える。
  *   ③ semantic  — 用途（bg-* / fg-* / stroke-*）。コンポーネントはここを使う。
- *                 ライト/ダークの切り替えはこの層の値だけを変える（ダークは未実装）。
+ *                 ライト/ダークの切り替えはこの層の値だけを変える（ファイル末尾のダーク定義）。
  *
  * primary: フォレストグリーン #2f9e6f (HSL 155° 54% 40%) を 500 とした 11 段階。
  * Phase 0 合意: 彩度は抑えめ、装飾のための色を増やさない。
@@ -262,4 +262,170 @@
   --color-stroke-negative-subtle: var(--color-negative-100);
   --color-stroke-info-subtle:     var(--color-info-100);
   --color-stroke-focus:         var(--color-info-600);     /* フォーカスリングは info 青で固定 */
+
+  --color-shadow: var(--color-neutral-900);  /* shadow-* の色（tokens/shadow.css） */
+}
+
+/* テーマで色が変わる画像（select の矢印）。SVG data URI は var() を解決できないため、
+ * テーマごとに値ごと差し替える。色はライト=neutral-600 / disabled=neutral-400 */
+:root {
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-arrow-disabled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+/* =====================================================================
+ *  ③ Semantic（ダーク）
+ *  <html data-color-mode="dark"> で常にダーク、data-color-mode="auto" で OS の設定に追従。
+ *  属性なしはライトのまま（既存の利用ページが OS 設定で急にダークにならないよう opt-in にする）。
+ *  下の2ブロックは同じ内容にする（npm run check:consistency の dark-blocks で照合）。
+ *  値は key 層から選び直す（反転しない）。ブランド差し替えはそのまま効く。
+ * ===================================================================== */
+[data-color-mode="dark"] {
+  color-scheme: dark;
+
+  --color-bg-sunken:  var(--color-neutral-950);
+  --color-bg-page:    var(--color-neutral-900);
+  --color-bg-raised:  var(--color-neutral-900);
+  --color-bg-overlay: var(--color-neutral-800);
+  --color-scrim:      rgb(2 6 23 / 0.7);
+
+  --color-bg-neutral-low:    var(--color-neutral-800);
+  --color-bg-neutral-middle: var(--color-neutral-700);
+  --color-bg-neutral-high:   var(--color-neutral-600);
+  --color-bg-disabled:       var(--color-neutral-950);
+  --color-bg-control-off:       var(--color-neutral-500);
+  --color-bg-control-off-hover: var(--color-neutral-400);
+
+  --color-bg-inverse:       var(--color-neutral-100);
+  --color-bg-inverse-hover: var(--color-neutral-200);
+
+  --color-bg-primary-disabled: var(--color-primary-900);
+  --color-bg-primary-muted:    var(--color-primary-900);
+  --color-bg-primary-subtle:   var(--color-primary-950);
+
+  --color-bg-negative-disabled: var(--color-negative-950);
+  --color-bg-negative-muted:    var(--color-negative-900);
+  --color-bg-negative-subtle:   var(--color-negative-950);
+
+  --color-bg-success-muted:  var(--color-success-900);
+  --color-bg-success-subtle: var(--color-success-950);
+  --color-bg-warning-muted:  var(--color-warning-900);
+  --color-bg-warning-subtle: var(--color-warning-950);
+  --color-bg-info-muted:     var(--color-info-900);
+  --color-bg-info-subtle:    var(--color-info-950);
+
+  --color-fg-high:           var(--color-neutral-50);
+  --color-fg-middle:         var(--color-neutral-300);
+  --color-fg-low:            var(--color-neutral-400);
+  --color-fg-placeholder:    var(--color-neutral-500);
+  --color-fg-disabled:       var(--color-neutral-600);
+  --color-fg-inverse:        var(--color-neutral-900);
+  --color-fg-inverse-middle: var(--color-neutral-700);
+
+  --color-fg-primary:          var(--color-primary-400);
+  --color-fg-primary-hover:    var(--color-primary-300);
+  --color-fg-primary-disabled: var(--color-primary-800);
+  --color-fg-negative:          var(--color-negative-400);
+  --color-fg-negative-strong:   var(--color-negative-300);
+  --color-fg-negative-disabled: var(--color-negative-900);
+  --color-fg-success: var(--color-success-400);
+  --color-fg-warning: var(--color-warning-400);
+  --color-fg-info:    var(--color-info-300);
+
+  --color-stroke-high:          var(--color-neutral-600);
+  --color-stroke-middle:        var(--color-neutral-700);
+  --color-stroke-low:           var(--color-neutral-800);
+  --color-stroke-control:       var(--color-neutral-500);
+  --color-stroke-control-hover: var(--color-neutral-400);
+  --color-stroke-control-error: var(--color-negative-400);
+  --color-stroke-primary:          var(--color-primary-500);
+  --color-stroke-primary-disabled: var(--color-primary-800);
+  --color-stroke-negative:          var(--color-negative-500);
+  --color-stroke-negative-disabled: var(--color-negative-900);
+  --color-stroke-success-subtle:  var(--color-success-900);
+  --color-stroke-warning-subtle:  var(--color-warning-900);
+  --color-stroke-negative-subtle: var(--color-negative-900);
+  --color-stroke-info-subtle:     var(--color-info-900);
+  --color-stroke-focus:         var(--color-info-400);
+
+  --color-shadow: var(--color-black);
+
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  --select-arrow-disabled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+  [data-color-mode="auto"] {
+    color-scheme: dark;
+
+    --color-bg-sunken:  var(--color-neutral-950);
+    --color-bg-page:    var(--color-neutral-900);
+    --color-bg-raised:  var(--color-neutral-900);
+    --color-bg-overlay: var(--color-neutral-800);
+    --color-scrim:      rgb(2 6 23 / 0.7);
+
+    --color-bg-neutral-low:    var(--color-neutral-800);
+    --color-bg-neutral-middle: var(--color-neutral-700);
+    --color-bg-neutral-high:   var(--color-neutral-600);
+    --color-bg-disabled:       var(--color-neutral-950);
+    --color-bg-control-off:       var(--color-neutral-500);
+    --color-bg-control-off-hover: var(--color-neutral-400);
+
+    --color-bg-inverse:       var(--color-neutral-100);
+    --color-bg-inverse-hover: var(--color-neutral-200);
+
+    --color-bg-primary-disabled: var(--color-primary-900);
+    --color-bg-primary-muted:    var(--color-primary-900);
+    --color-bg-primary-subtle:   var(--color-primary-950);
+
+    --color-bg-negative-disabled: var(--color-negative-950);
+    --color-bg-negative-muted:    var(--color-negative-900);
+    --color-bg-negative-subtle:   var(--color-negative-950);
+
+    --color-bg-success-muted:  var(--color-success-900);
+    --color-bg-success-subtle: var(--color-success-950);
+    --color-bg-warning-muted:  var(--color-warning-900);
+    --color-bg-warning-subtle: var(--color-warning-950);
+    --color-bg-info-muted:     var(--color-info-900);
+    --color-bg-info-subtle:    var(--color-info-950);
+
+    --color-fg-high:           var(--color-neutral-50);
+    --color-fg-middle:         var(--color-neutral-300);
+    --color-fg-low:            var(--color-neutral-400);
+    --color-fg-placeholder:    var(--color-neutral-500);
+    --color-fg-disabled:       var(--color-neutral-600);
+    --color-fg-inverse:        var(--color-neutral-900);
+    --color-fg-inverse-middle: var(--color-neutral-700);
+
+    --color-fg-primary:          var(--color-primary-400);
+    --color-fg-primary-hover:    var(--color-primary-300);
+    --color-fg-primary-disabled: var(--color-primary-800);
+    --color-fg-negative:          var(--color-negative-400);
+    --color-fg-negative-strong:   var(--color-negative-300);
+    --color-fg-negative-disabled: var(--color-negative-900);
+    --color-fg-success: var(--color-success-400);
+    --color-fg-warning: var(--color-warning-400);
+    --color-fg-info:    var(--color-info-300);
+
+    --color-stroke-high:          var(--color-neutral-600);
+    --color-stroke-middle:        var(--color-neutral-700);
+    --color-stroke-low:           var(--color-neutral-800);
+    --color-stroke-control:       var(--color-neutral-500);
+    --color-stroke-control-hover: var(--color-neutral-400);
+    --color-stroke-control-error: var(--color-negative-400);
+    --color-stroke-primary:          var(--color-primary-500);
+    --color-stroke-primary-disabled: var(--color-primary-800);
+    --color-stroke-negative:          var(--color-negative-500);
+    --color-stroke-negative-disabled: var(--color-negative-900);
+    --color-stroke-success-subtle:  var(--color-success-900);
+    --color-stroke-warning-subtle:  var(--color-warning-900);
+    --color-stroke-negative-subtle: var(--color-negative-900);
+    --color-stroke-info-subtle:     var(--color-info-900);
+    --color-stroke-focus:         var(--color-info-400);
+
+    --color-shadow: var(--color-black);
+
+    --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    --select-arrow-disabled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  }
 }

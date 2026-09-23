@@ -5,6 +5,7 @@
 <title>Page Shell — Design System</title>
 <link rel="stylesheet" href="../../dist/ds.css">
 <link rel="stylesheet" href="../catalog.css">
+<script src="../theme-toggle.js"></script>
 </head>
 <body>
   <header class="catalog-header">
@@ -28,8 +29,8 @@
     <div data-tabpanel="overview">
       <div class="catalog-card">
         <div class="catalog-card-header"><p class="catalog-card-title">page（一覧・帯向け）</p><p class="catalog-card-note">max-width: var(--container-page) = 1220px</p></div>
-        <div style="background:var(--color-neutral-100); padding:16px 0;">
-          <div class="page-shell" style="background:var(--color-white); border:1px dashed var(--color-stroke-high); padding-top:16px; padding-bottom:16px; text-align:center;">
+        <div style="background:var(--color-bg-neutral-middle); padding:16px 0;">
+          <div class="page-shell" style="background:var(--color-bg-raised); border:1px dashed var(--color-stroke-high); padding-top:16px; padding-bottom:16px; text-align:center;">
             <span class="typo-small" style="color:var(--color-fg-low);">page-shell（このグレー帯の中で最大1220pxに中央寄せ）</span>
           </div>
         </div>
@@ -37,8 +38,8 @@
 
       <div class="catalog-card">
         <div class="catalog-card-header"><p class="catalog-card-title">page-shell-content（フォーム・設定・詳細向け）</p><p class="catalog-card-note">max-width: var(--container-content) = 900px</p></div>
-        <div style="background:var(--color-neutral-100); padding:16px 0;">
-          <div class="page-shell page-shell-content" style="background:var(--color-white); border:1px dashed var(--color-stroke-high); padding-top:16px; padding-bottom:16px; text-align:center;">
+        <div style="background:var(--color-bg-neutral-middle); padding:16px 0;">
+          <div class="page-shell page-shell-content" style="background:var(--color-bg-raised); border:1px dashed var(--color-stroke-high); padding-top:16px; padding-bottom:16px; text-align:center;">
             <span class="typo-small" style="color:var(--color-fg-low);">page-shell page-shell-content（900pxに絞る）</span>
           </div>
         </div>
@@ -54,7 +55,7 @@
             <li>全幅の帯（header/footer/section）の直下に置き、中身をこの中に入れる</li>
             <li>フォームや設定・詳細は page-shell に .page-shell-content を併記して900pxに絞る</li>
           </ul>
-          <p class="typo-medium" style="color:var(--color-negative-700); margin: 16px 0 4px;">NG</p>
+          <p class="typo-medium" style="color:var(--color-fg-negative-strong); margin: 16px 0 4px;">NG</p>
           <ul class="typo-medium" style="margin:0; padding-left:20px;">
             <li>max-w-5xl等のサイズ名でコンテナ幅を新規に書かない</li>
             <li>page-shellを入れ子にしない → 帯ごとに1つ</li>

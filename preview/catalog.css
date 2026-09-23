@@ -14,7 +14,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: calc(var(--spacing) * 4) calc(var(--spacing) * 6);
-  background: #fff;
+  background: var(--color-bg-raised);
   border-bottom: 1px solid var(--color-stroke-middle);
 }
 .catalog-header-title { font-size: 16px; font-weight: 700; margin: 0; }
@@ -26,7 +26,7 @@ body {
   font-size: 13px;
   color: var(--color-fg-low);
 }
-.catalog-breadcrumb a { color: var(--color-primary-700); text-decoration: underline; }
+.catalog-breadcrumb a { color: var(--color-fg-primary); text-decoration: underline; }
 
 /* ===== Page container ===== */
 .catalog-main { max-width: 900px; margin: 0 auto; padding: calc(var(--spacing) * 6) calc(var(--spacing) * 6) calc(var(--spacing) * 16); }
@@ -49,16 +49,16 @@ body {
   cursor: pointer;
 }
 .catalog-tab[aria-selected="true"] {
-  color: var(--color-primary-700);
+  color: var(--color-fg-primary);
   border-bottom-width: 4px;
-  border-bottom-color: var(--color-primary-600);
+  border-bottom-color: var(--color-stroke-primary);
   padding-bottom: calc(var(--spacing) * 2 - 3px);
 }
 .catalog-tabpanel[hidden] { display: none; }
 
 /* ===== Demo card（バリアント表などを囲む箱） ===== */
 .catalog-card {
-  background: #fff;
+  background: var(--color-bg-raised);
   border: 1px solid var(--color-stroke-middle);
   border-radius: var(--radius-md);
   margin-bottom: calc(var(--spacing) * 6);
@@ -85,7 +85,7 @@ body {
 .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: calc(var(--spacing) * 4); }
 .catalog-grid-card {
   display: block;
-  background: #fff;
+  background: var(--color-bg-raised);
   border: 1px solid var(--color-stroke-middle);
   border-radius: var(--radius-md);
   text-decoration: none;
@@ -97,7 +97,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--color-primary-50);
+  background: var(--color-bg-primary-subtle);
 }
 .catalog-grid-card-body { padding: calc(var(--spacing) * 4); }
 .catalog-grid-card-title { font-size: 14px; font-weight: 700; margin: 0 0 2px; }

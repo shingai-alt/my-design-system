@@ -38,9 +38,8 @@
     border: 1px solid var(--color-stroke-control);
     border-radius: var(--radius-sm);
     appearance: none;
-    /* ハードコード例外: background-image の SVG data URI は var()/currentColor を
-       解決できないため、色を直書きしている（neutral-600 #475569 相当） */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    /* 矢印は SVG data URI（var() を解決できない）なので、テーマごとの画像を tokens/colors.css の --select-arrow で切り替える */
+    background-image: var(--select-arrow);
     background-repeat: no-repeat;
     background-position: right calc(var(--spacing) * 3) center;
     padding-right: calc(var(--spacing) * 8);
@@ -57,8 +56,7 @@
     border-color: var(--color-stroke-middle);
     color: var(--color-fg-low);
     cursor: not-allowed;
-    /* ハードコード例外: disabled時は矢印もneutral-400 #94a3b8相当に薄くする */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: var(--select-arrow-disabled);
   }
 
   /* ===== Size（input と揃える） ===== */
