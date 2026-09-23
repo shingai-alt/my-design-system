@@ -47,27 +47,24 @@
     flex-wrap: wrap;
   }
 
-  .label-control-text {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-fg-high);
+  .label-control-text {    color: var(--color-fg-high);
+    font: var(--typo-label-strong);
   }
-  .label-control-support {
-    font-size: 13px;
-    color: var(--color-fg-low);
+  .label-control-support {    color: var(--color-fg-low);
     margin: 0;
+    font: var(--typo-body-small);
   }
 
   /* 入力欄の直後（真下）に置くメッセージ */
   .field-error-text {
     margin-top: calc(var(--spacing) * 1);
-    font-size: 12px;
     color: var(--color-fg-negative);
+    font: var(--typo-caption);
   }
   .field-support-text {
     margin-top: calc(var(--spacing) * 1);
-    font-size: 12px;
     color: var(--color-fg-low);
+    font: var(--typo-caption);
   }
 
   /* バッジ（required / optional のみ。他の種別は必要になってから追加） */
@@ -78,9 +75,8 @@
     padding: 0 calc(var(--spacing) * 2);
     border-radius: var(--radius-xs);
     border: 1px solid transparent;
-    font-size: 12px;
-    font-weight: 600;
     white-space: nowrap;
+    font: var(--typo-caption-strong);
   }
   .label-badge-required {
     background-color: var(--color-bg-raised);

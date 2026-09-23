@@ -63,10 +63,8 @@
     padding: calc(var(--spacing) * 6);
     border-bottom: 1px solid var(--color-stroke-middle);
   }
-  .modal-title {
-    font-size: 16px;
-    font-weight: 700;
-    margin: 0;
+  .modal-title {    margin: 0;
+    font: var(--typo-heading-sm);
   }
   .modal-close {
     flex-shrink: 0;

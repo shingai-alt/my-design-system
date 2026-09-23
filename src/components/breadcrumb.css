@@ -44,9 +44,7 @@
     color: var(--color-fg-low);
     margin: 0 calc(var(--spacing) * 1);
   }
-  .breadcrumb-current {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--color-fg-high);
+  .breadcrumb-current {    color: var(--color-fg-high);
+    font: var(--typo-label);
   }
 }

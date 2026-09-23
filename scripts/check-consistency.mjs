@@ -29,6 +29,8 @@
  *                          @media (prefers-color-scheme: dark) 内の [data-color-mode="auto"] が同じ内容であること
  *   9. コントラスト       — 「文字 × 背景」「UI部品 × 背景」のペアをライト・ダーク両方で計算し、
  *                          文字 4.5:1 / UI部品・フォーカスリング 3:1 を下回ったらエラー（disabled は対象外）
+ *  10. タイポのトークン   — src/components/*.css の font / font-size / font-weight / line-height が
+ *                          トークン（font: var(--typo-*)、太さだけの var(--font-weight-*)）か inherit であること
  *
  * 実行: npm run check:consistency（依存パッケージ不要・ネットワーク不要）
  *
@@ -344,6 +346,29 @@ function checkContrast() {
 }
 
 // ---------------------------------------------------------------------------
+// 10. タイポのトークン — コンポーネントは font: var(--typo-*) で指定する（tokens/typography.css ②）
+// ---------------------------------------------------------------------------
+
+const TYPO_ALLOWED = {
+  font: /^var\(--typo-[a-z-]+\)$/,
+  "font-weight": /^var\(--font-weight-[a-z]+\)$/, // 状態で太さだけ変える場合
+  "font-size": /^inherit$/,
+  "line-height": /^inherit$/,
+};
+
+function checkComponentsUseTypoTokens() {
+  const dir = path.join(projectRoot, "src/components");
+  for (const name of fs.readdirSync(dir).filter((f) => f.endsWith(".css")).sort()) {
+    const code = fs.readFileSync(path.join(dir, name), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    for (const [, prop, value] of code.matchAll(/(?<![-\w])(font|font-size|font-weight|line-height)\s*:\s*([^;}]+)/g)) {
+      if (!TYPO_ALLOWED[prop].test(value.trim())) {
+        fail("typo-tokens", `src/components/${name}: ${prop}: ${value.trim()} は直書きです。font: var(--typo-*) を使ってください（太さだけ変える場合は var(--font-weight-*)）`);
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 
 const CHECKS = [
   ["icon-count", checkIconCount],
@@ -355,6 +380,7 @@ const CHECKS = [
   ["semantic-colors", checkComponentsUseSemanticColors],
   ["dark-blocks", checkDarkBlocksMatch],
   ["contrast", checkContrast],
+  ["typo-tokens", checkComponentsUseTypoTokens],
 ];
 
 for (const [name, run] of CHECKS) {

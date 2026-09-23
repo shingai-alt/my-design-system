@@ -56,8 +56,8 @@
     cursor: not-allowed;
   }
 
-  .textarea-sm { font-size: 13px; }
-  .textarea-md { font-size: 14px; }
+  .textarea-sm { font: var(--typo-body-small); }
+  .textarea-md { font: var(--typo-body); }
 
   .textarea-error {
     background-color: var(--color-bg-negative-subtle);
@@ -77,9 +77,9 @@
   }
   .textarea-counter {
     flex-shrink: 0;
-    font-size: 12px;
     color: var(--color-fg-low);
-    font-variant-numeric: tabular-nums;
+    font: var(--typo-caption);
+    font-variant-numeric: tabular-nums;  /* font ショートハンドより後に置く（前だとリセットされる） */
   }
 
   /* 強制カラーモード: フォーカスをborder色の変化だけで示す箇所はoutlineで可視化する。

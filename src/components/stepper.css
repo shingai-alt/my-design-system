@@ -72,15 +72,13 @@
     width: 32px;
     height: 32px;
     border-radius: var(--radius-full);
-    font-size: 14px;
-    font-weight: 600;
     background-color: var(--color-bg-neutral-middle);
     color: var(--color-fg-middle);
+    font: var(--typo-label);
   }
 
-  .stepper-label {
-    font-size: 14px;
-    color: var(--color-fg-middle);
+  .stepper-label {    color: var(--color-fg-middle);
+    font: var(--typo-body);
   }
 
   .stepper-step[aria-current="step"] .stepper-marker {
@@ -88,9 +86,8 @@
     border: 2px solid var(--color-stroke-primary);
     color: var(--color-fg-primary);
   }
-  .stepper-step[aria-current="step"] .stepper-label {
-    font-weight: 700;
-    color: var(--color-fg-high);
+  .stepper-step[aria-current="step"] .stepper-label {    color: var(--color-fg-high);
+    font-weight: var(--font-weight-bold);
   }
 
   .stepper-step.is-completed .stepper-marker {

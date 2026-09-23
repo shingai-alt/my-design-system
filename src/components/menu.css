@@ -71,15 +71,14 @@
     width: 100%;
     padding: calc(var(--spacing) * 3);
     border-radius: var(--radius-sm);
-    font-size: 14px;
     color: var(--color-fg-middle);
     text-decoration: none;
     cursor: pointer;
     background: transparent;
     border: none;
     text-align: left;
-    font-family: inherit;
     transition: background-color 150ms, color 150ms;
+    font: var(--typo-body);
   }
   .menu-item-sm { padding: calc(var(--spacing) * 2); }
 
@@ -91,7 +90,7 @@
   .menu-item[aria-current="page"] {
     background-color: var(--color-bg-primary-subtle);
     color: var(--color-fg-primary);
-    font-weight: 700;
+    font-weight: var(--font-weight-bold);
   }
   .menu-item[aria-current="page"]:hover { background-color: var(--color-bg-primary-subtle); }
 

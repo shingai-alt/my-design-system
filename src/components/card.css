@@ -44,15 +44,12 @@
   .card-header { border-bottom: 1px solid var(--color-stroke-middle); }
   .card-footer { border-top: 1px solid var(--color-stroke-middle); }
 
-  .card-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-fg-high);
+  .card-title {    color: var(--color-fg-high);
     margin: 0;
+    font: var(--typo-heading-sm);
   }
-  .card-subtitle {
-    font-size: 13px;
-    color: var(--color-fg-low);
+  .card-subtitle {    color: var(--color-fg-low);
     margin: calc(var(--spacing) * 1) 0 0;
+    font: var(--typo-body-small);
   }
 }

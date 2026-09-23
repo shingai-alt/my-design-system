@@ -60,9 +60,9 @@
   }
 
   /* ===== Size（input と揃える） ===== */
-  .select-sm { height: 32px; padding-left: calc(var(--spacing) * 3); font-size: 13px; }
-  .select-md { height: 40px; padding-left: calc(var(--spacing) * 4); font-size: 14px; }
-  .select-lg { height: 48px; padding-left: calc(var(--spacing) * 4); font-size: 16px; }
+  .select-sm { height: 32px; padding-left: calc(var(--spacing) * 3); font: var(--typo-body-small); }
+  .select-md { height: 40px; padding-left: calc(var(--spacing) * 4); font: var(--typo-body); }
+  .select-lg { height: 48px; padding-left: calc(var(--spacing) * 4); font: var(--typo-body-large); }
 
   /* ===== Error ===== */
   /* フォーカスリングはerror時もinfo青固定（DESIGN.md原則8）。枠だけnegativeを濃くする。 */

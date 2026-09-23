@@ -58,8 +58,8 @@
     background: transparent;
     border: 0;
     outline: none;
-    font-size: 14px;
     color: var(--color-fg-high);
+    font: var(--typo-body);
   }
   .search-input-field::placeholder { color: var(--color-fg-low); }
   .search-input-field::-webkit-search-cancel-button { display: none; }
@@ -88,9 +88,8 @@
     border-radius: var(--radius-xs);
     background-color: var(--color-bg-primary);
     color: var(--color-fg-on-primary);
-    font-size: 13px;
-    font-weight: 600;
     cursor: pointer;
+    font: var(--typo-label-small);
   }
   .search-input-submit:hover { background-color: var(--color-bg-primary-hover); }
 

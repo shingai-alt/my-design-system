@@ -34,7 +34,6 @@
     align-items: center;
     justify-content: center;
     gap: calc(var(--spacing) * 2);
-    font-weight: 600;
     white-space: nowrap;
     user-select: none;
     cursor: pointer;
@@ -52,9 +51,9 @@
   }
 
   /* ===== Size（relay同様 h-8/h-10/h-12 相当。余白感もrelay寄りに） ===== */
-  .btn-sm { height: 32px; padding: 0 calc(var(--spacing) * 3); font-size: 13px; }
-  .btn-md { height: 40px; padding: 0 calc(var(--spacing) * 6); font-size: 14px; }
-  .btn-lg { height: 48px; padding: 0 calc(var(--spacing) * 6); font-size: 16px; }
+  .btn-sm { height: 32px; padding: 0 calc(var(--spacing) * 3); font: var(--typo-label-small); }
+  .btn-md { height: 40px; padding: 0 calc(var(--spacing) * 6); font: var(--typo-label); }
+  .btn-lg { height: 48px; padding: 0 calc(var(--spacing) * 6); font: var(--typo-label-large); }
 
   /* ===== PRIMARY ===== */
   .btn-primary.btn-solid { background-color: var(--color-bg-primary); color: var(--color-fg-on-primary); }

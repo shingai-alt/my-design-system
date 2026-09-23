@@ -41,10 +41,9 @@
     border: none;
     border-bottom: 1px solid transparent;
     border-radius: var(--radius-xs) var(--radius-xs) 0 0;
-    font-size: 14px;
-    font-weight: 600;
     color: var(--color-fg-low);
     cursor: pointer;
+    font: var(--typo-label);
   }
   .tab:hover:not([aria-selected="true"]) {
     color: var(--color-fg-high);
@@ -74,8 +73,8 @@
     border-radius: var(--radius-full);
     background-color: var(--color-bg-neutral-middle);
     color: var(--color-fg-middle);
-    font-size: 11px;
-    font-weight: 700;
+    font: var(--typo-caption-small);
+    font-weight: var(--font-weight-bold);
   }
   .tab[aria-selected="true"] .tab-count {
     background-color: var(--color-bg-primary-muted);

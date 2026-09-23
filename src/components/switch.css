@@ -68,7 +68,7 @@
     gap: calc(var(--spacing) * 2);
     cursor: pointer;
     color: var(--color-fg-high);
-    font-size: 14px;
+    font: var(--typo-body);
   }
   .switch-label:has(.switch:disabled) { color: var(--color-fg-low); cursor: not-allowed; }
 

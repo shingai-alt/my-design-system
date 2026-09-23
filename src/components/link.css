@@ -33,12 +33,12 @@
     display: inline-flex;
     align-items: center;
     gap: calc(var(--spacing) * 1);
-    font-weight: 500;
     color: var(--color-fg-primary);
     text-decoration: none;
     cursor: pointer;
     font-size: inherit;
     line-height: inherit;
+    font-weight: var(--font-weight-semibold);
   }
   .link .link-label {
     text-decoration: underline;

@@ -29,10 +29,8 @@
     height: 20px;
     padding: 0 calc(var(--spacing) * 2);
     border-radius: var(--radius-full);
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1;
     white-space: nowrap;
+    font: var(--typo-caption-strong);
   }
 
   /* ===== Soft（既定。塗りは薄く、文字で色をはっきり出す） ===== */

@@ -42,9 +42,9 @@
     display: inline-flex;
     align-items: center;
     gap: calc(var(--spacing) * 2);
-    font-size: 14px;
     color: var(--color-fg-high);
     cursor: pointer;
+    font: var(--typo-body);
   }
   .radio-label:has(.radio:disabled) { color: var(--color-fg-low); cursor: not-allowed; }
 

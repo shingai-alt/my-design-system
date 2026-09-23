@@ -52,15 +52,13 @@
     box-shadow: var(--shadow-focus-ring);
   }
 
-  .filter-chip-label {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--color-fg-middle);
+  .filter-chip-label {    color: var(--color-fg-middle);
+    font: var(--typo-label-strong);
   }
   .filter-chip-count {
     flex-shrink: 0;
-    font-size: 13px;
     color: var(--color-fg-low);
+    font: var(--typo-body-small);
   }
   .filter-chip:disabled .filter-chip-label,
   .filter-chip:disabled .filter-chip-count {

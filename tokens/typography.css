@@ -1,22 +1,86 @@
 /*
  * Design System — Typography
  *
+ * 2層構成（設計: output/2026-09-23_typography-design）:
+ *   ① primitive — サイズ（rem）・行間（単位なし）・太さ・書体の段。
+ *                 semantic 層から参照する。コンポーネントからは使わない
+ *                 （例外: 状態で太さだけ変える場合の --font-weight-*）。
+ *   ② semantic  — 役割ごとのテキストスタイル（font ショートハンド）。
+ *                 コンポーネントは font: var(--typo-*) の1行で指定する。
+ *
  * Phase 0 原則「迷ったら情報密度を上げる」に沿い、本文ベースは 14px
  * （relay 系の 16px ベースより一段階詰める。Linear / Notion と同系統）。
+ * 日本語の行間は 1.5 を基準にする（デジタル庁「本文は少なくとも1.5倍」）。
  *
- * .typo-* セマンティック層を必ず経由する。text-sm / text-base 等の直書きは禁止。
+ * static: source(none) の Tailwind は未使用の変数をビルドで刈り取るため。
  */
 
-@theme {
-  --font-sans: "Inter", "Noto Sans JP", ui-sans-serif, system-ui, -apple-system, sans-serif;
+@theme static {
+  /* ===== ① Primitive ===== */
+
+  /* 書体。Webフォントは読み込まず、OS のフォントを使う（SmartHR / freee と同じ方針） */
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* サイズ（名前は px 相当。12px 以下は補足・単一行に限る） */
+  --text-11: 0.6875rem;
+  --text-12: 0.75rem;
+  --text-13: 0.8125rem;
+  --text-14: 0.875rem;   /* 本文・UI の基準 */
+  --text-16: 1rem;
+  --text-18: 1.125rem;
+  --text-20: 1.25rem;
+  --text-24: 1.5rem;     /* 最大（見出しのレスポンシブはしない） */
+
+  /* 行間（単位なし。サイズに比例し、WCAG 1.4.12 の上書きにも強い） */
+  --leading-100: 1;
+  --leading-133: 1.3333;
+  --leading-140: 1.4;
+  --leading-150: 1.5;    /* 基準 */
+  --leading-170: 1.7;
+
+  /* 太さ（3段。500 はシステムフォントで差が出にくいため使わない） */
+  --font-weight-normal:   400;
+  --font-weight-semibold: 600;
+  --font-weight-bold:     700;
 }
 
+:root {
+  /* ===== ② Semantic（font ショートハンド: 太さ サイズ/行間 書体） =====
+   * body   … 文章・入力欄・表のセル
+   * label  … UI 部品の文字（ボタン・タブ・ラベル）。body と同じサイズで太い
+   * caption… 補足・エラー文・バッジ（12px 以下。単一行に限る）
+   * heading… 見出し。見た目と見出しレベル（h1〜h6）を一致させる */
+  --typo-body:          var(--font-weight-normal) var(--text-14)/var(--leading-150) var(--font-sans);  /* 文章・入力欄・表のセル・チェックボックス等のラベル文 */
+  --typo-body-small:    var(--font-weight-normal) var(--text-13)/var(--leading-150) var(--font-sans);  /* 補助文・sm サイズの入力欄・tooltip */
+  --typo-body-large:    var(--font-weight-normal) var(--text-16)/var(--leading-150) var(--font-sans);  /* lg サイズの入力欄 */
+
+  --typo-label:         var(--font-weight-semibold) var(--text-14)/var(--leading-150) var(--font-sans);  /* ボタン・タブ・ページ送り・ステップ番号 */
+  --typo-label-strong:  var(--font-weight-bold)     var(--text-14)/var(--leading-150) var(--font-sans);  /* 入力欄のラベル・アコーディオン・filter-chip・alert のタイトル */
+  --typo-label-small:   var(--font-weight-semibold) var(--text-13)/var(--leading-150) var(--font-sans);  /* sm サイズのボタン・検索ボタン */
+  --typo-label-large:   var(--font-weight-semibold) var(--text-16)/var(--leading-150) var(--font-sans);  /* lg サイズのボタン */
+
+  --typo-caption:        var(--font-weight-normal)   var(--text-12)/var(--leading-150) var(--font-sans);  /* 補足・エラー文・文字数カウンター */
+  --typo-caption-strong: var(--font-weight-semibold) var(--text-12)/var(--leading-133) var(--font-sans);  /* バッジ・必須/任意ラベル・alert のアイコン */
+  --typo-caption-small:  var(--font-weight-normal)   var(--text-11)/var(--leading-150) var(--font-sans);  /* タブのカウント（太さは bold で上書き） */
+
+  --typo-heading-sm: var(--font-weight-bold) var(--text-16)/var(--leading-150) var(--font-sans);  /* カード・モーダルのタイトル（.typo-large） */
+  --typo-heading-md: var(--font-weight-bold) var(--text-18)/var(--leading-150) var(--font-sans);  /* 小見出し（.typo-xlarge） */
+  --typo-heading-lg: var(--font-weight-bold) var(--text-20)/var(--leading-140) var(--font-sans);  /* セクション見出し（.typo-2xlarge） */
+  --typo-heading-xl: var(--font-weight-bold) var(--text-24)/var(--leading-133) var(--font-sans);  /* ページタイトル（.typo-3xlarge） */
+}
+
+/* 利用者向けのクラス（既存名を維持）。中身は semantic を参照する。
+ * text-sm / text-base 等の直書きは禁止 */
 @layer components {
-  .typo-xsmall  { font-size: 11px; line-height: 16px; }
-  .typo-small   { font-size: 13px; line-height: 20px; }
-  .typo-medium  { font-size: 14px; line-height: 20px; }  /* ← 本文 default */
-  .typo-large   { font-size: 16px; line-height: 24px; font-weight: 600; }
-  .typo-xlarge  { font-size: 18px; line-height: 28px; font-weight: 600; }
-  .typo-2xlarge { font-size: 20px; line-height: 28px; font-weight: 700; }
-  .typo-3xlarge { font-size: 24px; line-height: 32px; font-weight: 700; }
+  .typo-xsmall  { font: var(--typo-caption-small); }
+  .typo-small   { font: var(--typo-body-small); }
+  .typo-medium  { font: var(--typo-body); }        /* ← 本文 default */
+  .typo-large   { font: var(--typo-heading-sm); }
+  .typo-xlarge  { font: var(--typo-heading-md); }
+  .typo-2xlarge { font: var(--typo-heading-lg); }
+  .typo-3xlarge { font: var(--typo-heading-xl); }
+
+  /* 表・金額・カウントなど、桁をそろえたい数字 */
+  .typo-numeric { font-variant-numeric: tabular-nums; }
 }
