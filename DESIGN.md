@@ -37,14 +37,15 @@
 ```
 ① primitive（直参照禁止）: brand-green / slate / red / amber / green / blue の 50〜950
 ② key（ブランド差し替え口）: primary(=brand-green) / neutral(=slate) / success(=green) / warning(=amber) / negative(=red) / info(=blue)
-③ semantic（コンポーネントはここ）:
-  面        : bg-sunken (neutral-50) / bg-page (white) / bg-raised (white) / bg-overlay (white) / scrim
-  状態      : bg-hover / bg-pressed / bg-disabled / bg-inverse
-  塗り      : bg-primary (#25835c) / bg-primary-hover / bg-primary-subtle、bg-negative(-hover|-subtle)、bg-{success,warning,info}-subtle
-  文字      : fg-high (neutral-900) / fg-middle (neutral-700) / fg-low (neutral-500) / fg-disabled / fg-placeholder / fg-inverse
-  塗りの上  : fg-on-primary / fg-on-negative (white) / fg-on-warning (neutral-900 ← 黄色系だけ暗い文字)
-  色付き文字: fg-{primary,negative,success,warning,info}
-  枠線      : stroke-{high,middle,low} / stroke-control(-hover) / stroke-{primary,negative} / stroke-focus (info-600 固定)
+③ semantic（コンポーネントはここ。値はライト）:
+  面          : bg-sunken (neutral-50) / bg-page (white) / bg-raised (white) / bg-overlay (white) / scrim
+  neutral の塗り: bg-neutral-low (50, 面の上の hover) / bg-neutral-middle (100, ghost の hover・soft バッジ) / bg-neutral-high (200)
+  その他の塗り: bg-disabled (入力欄の disabled) / bg-control-off(-hover) (switch の OFF) / bg-inverse(-hover) (tooltip・neutral の solid)
+  色付きの塗り: bg-{primary,negative,success,warning,info} / -hover / -disabled / -muted (100) / -subtle (50)
+  文字        : fg-high (neutral-900) / fg-middle (neutral-700) / fg-low (neutral-500) / fg-placeholder / fg-disabled / fg-inverse(-middle)
+  塗りの上    : fg-on-{primary,negative,success,info} (white) / fg-on-warning (neutral-900 ← 黄色系だけ暗い文字)
+  色付き文字  : fg-primary(-hover|-disabled) / fg-negative (白の上) / fg-negative-strong (negative-subtle・-muted の上) / fg-{success,warning,info}
+  枠線        : stroke-{high,middle,low} / stroke-control(-hover|-error) / stroke-{primary,negative}(-disabled) / stroke-{status}-subtle / stroke-focus (info-600 固定)
 ```
 
 ### テーマ（ライト / ダーク）
@@ -110,6 +111,8 @@ shadow-destructive         : 0 0 0 3px #ef4444
 | `text-sm` / `text-base` 直書き | `.typo-small` / `.typo-medium` |
 | `is-selected` 等の状態クラス | `aria-selected="true"` 等 |
 | フォーカスリングの色変更 | info青のまま固定 |
+| コンポーネントCSSで key / primitive（`--color-primary-600` `--color-slate-400` 等）を直接参照 | semantic（`--color-bg-primary` `--color-stroke-control` 等）。ダーク・ブランド差し替えに追従しないため |
+| `dark:` やテーマごとの分岐をコンポーネントに書く | semantic トークンだけで切り替わる |
 | 恒常的なsurfaceのelevationをシャドウで表現 | border + 背景色 |
 | main（保護ブランチ）へ直push | feature branch + PR |
 

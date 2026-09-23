@@ -36,7 +36,15 @@ npm run build
 </div>
 ```
 
-全コンポーネントの動作確認は [`preview/index.html`](preview/index.html) を参照してください。
+### 3. ダークモード（任意）
+
+```html
+<html data-color-mode="dark">  <!-- 常にダーク。"auto" で OS の設定に追従 -->
+```
+
+属性を付けなければライトのままです。仕組みは [DESIGN.md](DESIGN.md) の「テーマ」を参照してください。
+
+全コンポーネントの動作確認は [`preview/index.html`](preview/index.html) を参照してください（右上のボタンでテーマを切り替えられます）。
 
 ## コンポーネント一覧（27個）
 

@@ -77,6 +77,10 @@ CSS / HTMLを書く時は**必ずデザインシステムが用意した変数�
 | コンポーネント数 | `COMPONENT_NAMES`からicon除いた数 | READMEの見出し・表 |
 | ヘッダ規約 | — | `src/components/*.css`先頭コメントの機能:/使用法:/アクセシビリティ:（MCPの正本） |
 | index.css | `tokens/` `src/components/`の実ファイル | `@import`の網羅とtokens→components順序 |
+| 色トークンの定義 | `tokens/colors.css` | `src/components/` `tokens/` `preview/` が参照する`var(--color-*)`がすべて定義済み |
+| semantic のみ | — | `src/components/*.css`の色参照が semantic（`bg-*` `fg-*` `stroke-*` `scrim`）だけ |
+| ダーク定義の一致 | `[data-color-mode="dark"]` | `@media (prefers-color-scheme: dark)`内の`[data-color-mode="auto"]`と同じ内容 |
+| コントラスト | `tokens/colors.css`（ライト/ダーク） | `scripts/check-consistency.mjs`の`CONTRAST_PAIRS`（文字4.5:1・UI部品3:1） |
 
 エラーが出たら、指示に従いドキュメント側の表記を更新する。意図的に文言を変えた場合は
 `scripts/check-consistency.mjs`のパターン定義（`ICON_CLAIMS`等）も更新する。

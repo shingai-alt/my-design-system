@@ -19,6 +19,8 @@ WCAG 2.2は A ⊂ AA ⊂ AAA の階層。一般的な準拠目標は **AA**（AA
 |---|---|---|
 | 本文コントラスト (AAA, 通常文字) | 1.4.6 | `--color-fg-high` (neutral-900, 白背景比 約17.9:1) / `--color-fg-middle` (neutral-700, 約10.4:1) |
 | 標準コントラスト (AA) | 1.4.3 | `--color-fg-low` (neutral-500, 約4.76:1) — 通常文字AAA(7:1)は満たさないので本文には使わない |
+| 非テキストのコントラスト (AA) | 1.4.11 | 入力欄の枠 `--color-stroke-control`（neutral-500, 約4.76:1）・switch の OFF・フォーカスリングは 3:1 以上 |
+| ライト/ダーク両方のコントラスト | 1.4.3 / 1.4.11 | 「文字 × 背景」「UI部品 × 背景」のペアを `npm run check:consistency` の contrast チェックが両テーマで計算し、文字 4.5:1・UI部品 3:1 未満ならCIで落とす（disabled は対象外） |
 | キーボード操作 | 2.1.1 / 2.1.2 | 標準コンポーネントを使うだけ（トラップなし） |
 | Focus ring | 2.4.7 | `--shadow-focus-ring`（info-600固定, 3px）がデフォルト。色は変えない仕様（[DESIGN.md](../DESIGN.md)） |
 | 閃光なし | 2.3.1 / 2.3.2 | DSにアニメーション閃光は無い |

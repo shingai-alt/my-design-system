@@ -29,6 +29,7 @@ export const INSTRUCTIONS = `
 このMCPは自社デザインシステムのトークン・コンポーネント仕様・非交渉原則をAIエージェントに渡すためのものです。
 UIを生成する前に、まず get_design_principles を呼んで原則を把握し、使う部品ごとに get_component で完全仕様（使用法OK/NG・アクセシビリティ・Usage例）を取得してください。
 色・余白・角丸などの値は get_tokens で取得し、絶対にハードコード（生hex・生px）しないでください。
+色は semantic トークン（--color-bg-* / --color-fg-* / --color-stroke-*）を使い、primary-600 などのスケールを直接使わないでください（ダークモードに追従しなくなります）。
 `.trim();
 
 export const TOOLS = [
