@@ -7,7 +7,7 @@
     "ds-mcp": "src/mcp/server.mjs"
   },
   "scripts": {
-    "build": "npm run build:icons && vite build",
+    "build": "vite build && npm run build:icons",
     "build:icons": "node scripts/build-icons.mjs",
     "mcp": "node src/mcp/server.mjs",
     "eval": "node evals/run.mjs",
