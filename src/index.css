@@ -43,11 +43,11 @@
  * このsafelistは段階的に不要になっていく（それまでの土台）。
  * ------------------------------------------------------------ */
 @source inline("{bg,text,border}-primary-{50,100,200,300,400,500,600,700,800,900,950}");
-@source inline("{bg,text,border}-neutral-{50,100,200,300,400,500,600,700,800,900}");
-@source inline("{bg,text,border}-{success,warning,negative,info}-{50,100,500,600,700}");
+@source inline("{bg,text,border}-neutral-{50,100,200,300,400,500,600,700,800,900,950}");
+@source inline("{bg,text,border}-{success,warning,negative,info}-{50,100,200,300,400,500,600,700,800,900,950}");
 @source inline("{bg,text,border}-fg-{high,middle,low}");
 @source inline("border-stroke-{high,middle}");
-@source inline("bg-page bg-surface");
+@source inline("bg-bg-page bg-bg-sunken");
 @source inline("max-w-page max-w-content max-w-article");
 @source inline("rounded-{none,xs,sm,md,lg,full}");
 @source inline("shadow-{sm,md,lg} shadow-focus-ring shadow-destructive");

@@ -17,7 +17,7 @@
  *   page-shellは帯ごとに1つ（入れ子にしない）。DOM順＝読み上げ順を保つ
  *
  * Usage:
- *   <header class="bg-surface">
+ *   <header class="bg-bg-sunken">
  *     <div class="page-shell" style="padding-top:16px; padding-bottom:16px;">…</div>
  *   </header>
  *   <main>

@@ -19,6 +19,9 @@
  *                          あること（MCP get_component の正本のため必須）
  *   5. index.css          — tokens/ と src/components/ の全ファイルがimportされ、
  *                          tokens → components の順序が守られていること
+ *   6. 色トークンの定義   — src/components/・tokens/・preview/ が参照する var(--color-*) が
+ *                          tokens/colors.css に定義されていること（未定義の negative-200 を
+ *                          5箇所で参照していた実例の再発防止）
  *
  * 実行: npm run check:consistency（依存パッケージ不要・ネットワーク不要）
  *
@@ -199,6 +202,30 @@ function checkIndexCss() {
 }
 
 // ---------------------------------------------------------------------------
+// 6. 色トークンの定義 — 参照している var(--color-*) が tokens/colors.css に存在すること
+//    未定義の変数は CSS 上エラーにならず、黙って色が抜けるため機械で検出する。
+// ---------------------------------------------------------------------------
+
+function checkColorTokensDefined() {
+  const defined = new Set(read("tokens/colors.css").match(/--color-[a-z0-9-]+(?=\s*:)/g) ?? []);
+  const targets = [
+    ...["tokens", "src/components", "preview", "preview/components"].flatMap((dir) =>
+      fs
+        .readdirSync(path.join(projectRoot, dir))
+        .filter((f) => /\.(css|html)$/.test(f))
+        .map((f) => `${dir}/${f}`),
+    ),
+  ];
+  for (const rel of targets) {
+    for (const [, name] of read(rel).matchAll(/var\((--color-[a-z0-9-]+)/g)) {
+      if (!defined.has(name)) {
+        fail("color-tokens", `${rel}: 未定義の ${name} を参照しています（tokens/colors.css に定義がなく、色が適用されません）`);
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 
 const CHECKS = [
   ["icon-count", checkIconCount],
@@ -206,6 +233,7 @@ const CHECKS = [
   ["component-count", checkComponentCount],
   ["component-header", checkComponentHeaders],
   ["index-css", checkIndexCss],
+  ["color-tokens", checkColorTokensDefined],
 ];
 
 for (const [name, run] of CHECKS) {

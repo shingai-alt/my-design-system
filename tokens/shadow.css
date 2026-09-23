@@ -9,6 +9,6 @@
   --shadow-md: 0 4px 12px -2px rgb(15 23 42 / 0.10), 0 2px 4px -2px rgb(15 23 42 / 0.06);
   --shadow-lg: 0 12px 24px -4px rgb(15 23 42 / 0.14), 0 4px 8px -4px rgb(15 23 42 / 0.08);
 
-  --shadow-focus-ring:   0 0 0 3px var(--color-info-600);
+  --shadow-focus-ring:   0 0 0 3px var(--color-stroke-focus);
   --shadow-destructive:  0 0 0 3px var(--color-negative-500);
 }

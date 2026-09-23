@@ -1,75 +1,234 @@
 /*
  * Design System — Colors
  *
+ * 3層構成（設計: output/2026-09-23_color-token-design）:
+ *   ① primitive — 生の色。名前は色そのもの。全色 50〜950 の11段。
+ *                 key 層からだけ参照する。コンポーネントから直接使わない。
+ *   ② key       — 意味ごとのスケール別名（primary / neutral / status）。
+ *                 ブランド色の差し替えはこの層の参照先だけを変える。
+ *   ③ semantic  — 用途（bg-* / fg-* / stroke-*）。コンポーネントはここを使う。
+ *                 ライト/ダークの切り替えはこの層の値だけを変える（ダークは未実装）。
+ *
  * primary: フォレストグリーン #2f9e6f (HSL 155° 54% 40%) を 500 とした 11 段階。
  * Phase 0 合意: 彩度は抑えめ、装飾のための色を増やさない。
  * status色（success/warning/negative/info）は primary と意味が混ざらないよう別の色相にする。
+ *
+ * static: source(none) の Tailwind は未使用の変数をビルドで刈り取るため、
+ * まだコンポーネントが参照していない semantic トークンも dist に残すよう static にする。
  */
 
-@theme {
-  /* ===== Primary（brand green） ===== */
-  --color-primary-50:  #f4faf8;
-  --color-primary-100: #e5f5ee;
-  --color-primary-200: #c6ebdc;
-  --color-primary-300: #95dabd;
-  --color-primary-400: #5ec99d;
-  --color-primary-500: #2f9e6f;  /* base */
-  --color-primary-600: #25835c;
-  --color-primary-700: #1d6d4c;
-  --color-primary-800: #18593e;
-  --color-primary-900: #134932;
-  --color-primary-950: #0b2d1f;
-
-  /* ===== Neutral（slate） ===== */
-  --color-neutral-50:  #f8fafc;
-  --color-neutral-100: #f1f5f9;
-  --color-neutral-200: #e2e8f0;
-  --color-neutral-300: #cbd5e1;
-  --color-neutral-400: #94a3b8;
-  --color-neutral-500: #64748b;
-  --color-neutral-600: #475569;
-  --color-neutral-700: #334155;
-  --color-neutral-800: #1e293b;
-  --color-neutral-900: #0f172a;
-  --color-neutral-950: #020617;
-
-  /* ===== Status（primaryと色相を分ける） ===== */
-  --color-success-50:  #f0fdf4;
-  --color-success-100: #dcfce7;
-  --color-success-500: #16a34a;
-  --color-success-600: #15803d;
-  --color-success-700: #166534;
-
-  --color-warning-50:  #fffbeb;
-  --color-warning-100: #fef3c7;
-  --color-warning-500: #f59e0b;
-  --color-warning-600: #d97706;
-  --color-warning-700: #92400e;
-
-  --color-negative-50:  #fef2f2;
-  --color-negative-100: #fee2e2;
-  --color-negative-500: #ef4444;
-  --color-negative-600: #dc2626;
-  --color-negative-700: #b91c1c;
-
-  --color-info-50:  #eff6ff;
-  --color-info-100: #dbeafe;
-  --color-info-500: #3b82f6;
-  --color-info-600: #2563eb;
-  --color-info-700: #1d4ed8;
-
-  /* ===== Semantic roles（コンポーネントはこちらを使う。primitiveの直参照は最終手段） ===== */
+@theme static {
+  /* =====================================================================
+   *  ① Primitive
+   * ===================================================================== */
   --color-white: #ffffff;
+  --color-black: #000000;
 
-  --color-fg-high:   var(--color-neutral-900);  /* 本文・見出し */
-  --color-fg-middle: var(--color-neutral-700);  /* 本文（中優先） */
-  --color-fg-low:    var(--color-neutral-500);  /* 補足・キャプション */
-  --color-fg-high-inverse: var(--color-white);
+  /* brand-green（primary 用。success の green とは別物） */
+  --color-brand-green-50:  #f4faf8;
+  --color-brand-green-100: #e5f5ee;
+  --color-brand-green-200: #c6ebdc;
+  --color-brand-green-300: #95dabd;
+  --color-brand-green-400: #5ec99d;
+  --color-brand-green-500: #2f9e6f;
+  --color-brand-green-600: #25835c;
+  --color-brand-green-700: #1d6d4c;
+  --color-brand-green-800: #18593e;
+  --color-brand-green-900: #134932;
+  --color-brand-green-950: #0b2d1f;
 
-  --color-stroke-high:   var(--color-neutral-300);
-  --color-stroke-middle: var(--color-neutral-200);
-  --color-stroke-low:    var(--color-neutral-100);
+  --color-slate-50:  #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
 
-  --color-page:    var(--color-white);
-  --color-surface: var(--color-neutral-50);
+  --color-red-50:  #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+  --color-red-950: #450a0a;
+
+  --color-amber-50:  #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+  --color-amber-900: #78350f;
+  --color-amber-950: #451a03;
+
+  --color-green-50:  #f0fdf4;
+  --color-green-100: #dcfce7;
+  --color-green-200: #bbf7d0;
+  --color-green-300: #86efac;
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  --color-green-700: #15803d;
+  --color-green-800: #166534;
+  --color-green-900: #14532d;
+  --color-green-950: #052e16;
+
+  --color-blue-50:  #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --color-blue-950: #172554;
+
+  /* =====================================================================
+   *  ② Key — ブランド差し替えはここだけ変える
+   * ===================================================================== */
+  --color-primary-50:  var(--color-brand-green-50);
+  --color-primary-100: var(--color-brand-green-100);
+  --color-primary-200: var(--color-brand-green-200);
+  --color-primary-300: var(--color-brand-green-300);
+  --color-primary-400: var(--color-brand-green-400);
+  --color-primary-500: var(--color-brand-green-500);  /* base */
+  --color-primary-600: var(--color-brand-green-600);
+  --color-primary-700: var(--color-brand-green-700);
+  --color-primary-800: var(--color-brand-green-800);
+  --color-primary-900: var(--color-brand-green-900);
+  --color-primary-950: var(--color-brand-green-950);
+
+  --color-neutral-50:  var(--color-slate-50);
+  --color-neutral-100: var(--color-slate-100);
+  --color-neutral-200: var(--color-slate-200);
+  --color-neutral-300: var(--color-slate-300);
+  --color-neutral-400: var(--color-slate-400);
+  --color-neutral-500: var(--color-slate-500);
+  --color-neutral-600: var(--color-slate-600);
+  --color-neutral-700: var(--color-slate-700);
+  --color-neutral-800: var(--color-slate-800);
+  --color-neutral-900: var(--color-slate-900);
+  --color-neutral-950: var(--color-slate-950);
+
+  --color-success-50:  var(--color-green-50);
+  --color-success-100: var(--color-green-100);
+  --color-success-200: var(--color-green-200);
+  --color-success-300: var(--color-green-300);
+  --color-success-400: var(--color-green-400);
+  --color-success-500: var(--color-green-500);
+  --color-success-600: var(--color-green-600);
+  --color-success-700: var(--color-green-700);
+  --color-success-800: var(--color-green-800);
+  --color-success-900: var(--color-green-900);
+  --color-success-950: var(--color-green-950);
+
+  --color-warning-50:  var(--color-amber-50);
+  --color-warning-100: var(--color-amber-100);
+  --color-warning-200: var(--color-amber-200);
+  --color-warning-300: var(--color-amber-300);
+  --color-warning-400: var(--color-amber-400);
+  --color-warning-500: var(--color-amber-500);
+  --color-warning-600: var(--color-amber-600);
+  --color-warning-700: var(--color-amber-700);
+  --color-warning-800: var(--color-amber-800);
+  --color-warning-900: var(--color-amber-900);
+  --color-warning-950: var(--color-amber-950);
+
+  --color-negative-50:  var(--color-red-50);
+  --color-negative-100: var(--color-red-100);
+  --color-negative-200: var(--color-red-200);
+  --color-negative-300: var(--color-red-300);
+  --color-negative-400: var(--color-red-400);
+  --color-negative-500: var(--color-red-500);
+  --color-negative-600: var(--color-red-600);
+  --color-negative-700: var(--color-red-700);
+  --color-negative-800: var(--color-red-800);
+  --color-negative-900: var(--color-red-900);
+  --color-negative-950: var(--color-red-950);
+
+  --color-info-50:  var(--color-blue-50);
+  --color-info-100: var(--color-blue-100);
+  --color-info-200: var(--color-blue-200);
+  --color-info-300: var(--color-blue-300);
+  --color-info-400: var(--color-blue-400);
+  --color-info-500: var(--color-blue-500);
+  --color-info-600: var(--color-blue-600);
+  --color-info-700: var(--color-blue-700);
+  --color-info-800: var(--color-blue-800);
+  --color-info-900: var(--color-blue-900);
+  --color-info-950: var(--color-blue-950);
+
+  /* =====================================================================
+   *  ③ Semantic（ライト）— コンポーネントはこちらを使う
+   *  命名: {bg|fg|stroke}-{role}-{強さ}-{状態}
+   *  強さ: neutral 系は high / middle / low、色付き系は 塗り（語なし）と -subtle
+   * ===================================================================== */
+
+  /* 面（ダークでは sunken → page → raised → overlay の順に明るくする） */
+  --color-bg-sunken:  var(--color-neutral-50);   /* くぼんだ面・セクション背景 */
+  --color-bg-page:    var(--color-white);        /* ページ背景 */
+  --color-bg-raised:  var(--color-white);        /* カード・入力欄・menu */
+  --color-bg-overlay: var(--color-white);        /* modal・popover */
+  --color-scrim:      rgb(15 23 42 / 0.6);       /* modal の背面（slate-900 / 60%） */
+
+  --color-bg-hover:    var(--color-neutral-100);
+  --color-bg-pressed:  var(--color-neutral-200);
+  --color-bg-disabled: var(--color-neutral-100);
+  --color-bg-inverse:  var(--color-neutral-900); /* tooltip */
+
+  --color-bg-primary:          var(--color-primary-600);
+  --color-bg-primary-hover:    var(--color-primary-700);
+  --color-bg-primary-subtle:   var(--color-primary-50);
+  --color-bg-negative:         var(--color-negative-600);
+  --color-bg-negative-hover:   var(--color-negative-700);
+  --color-bg-negative-subtle:  var(--color-negative-50);
+  --color-bg-success-subtle:   var(--color-success-100);
+  --color-bg-warning-subtle:   var(--color-warning-100);
+  --color-bg-info-subtle:      var(--color-info-100);
+
+  /* 文字 */
+  --color-fg-high:        var(--color-neutral-900);  /* 本文・見出し */
+  --color-fg-middle:      var(--color-neutral-700);  /* 本文（中優先） */
+  --color-fg-low:         var(--color-neutral-500);  /* 補足・キャプション */
+  --color-fg-disabled:    var(--color-neutral-400);  /* コントラスト要件の対象外 */
+  --color-fg-placeholder: var(--color-neutral-400);
+  --color-fg-inverse:     var(--color-white);
+
+  /* 塗りの上に載せる文字。bg-* の塗りと必ずペアで使う */
+  --color-fg-on-primary:  var(--color-white);
+  --color-fg-on-negative: var(--color-white);
+  --color-fg-on-warning:  var(--color-neutral-900);  /* 黄色系の塗りの上だけ暗い文字 */
+
+  --color-fg-primary:  var(--color-primary-700);
+  --color-fg-negative: var(--color-negative-600);
+  --color-fg-success:  var(--color-success-800);
+  --color-fg-warning:  var(--color-warning-800);
+  --color-fg-info:     var(--color-info-700);
+
+  /* 枠線 */
+  --color-stroke-high:          var(--color-neutral-300);
+  --color-stroke-middle:        var(--color-neutral-200);
+  --color-stroke-low:           var(--color-neutral-100);
+  --color-stroke-control:       var(--color-neutral-400);  /* input・select・textarea */
+  --color-stroke-control-hover: var(--color-neutral-500);
+  --color-stroke-primary:       var(--color-primary-600);
+  --color-stroke-negative:      var(--color-negative-600);
+  --color-stroke-focus:         var(--color-info-600);     /* フォーカスリングは info 青で固定 */
+
+  /* 旧名（移行中の互換用。コンポーネントの置き換えが終わったら削除する） */
+  --color-fg-high-inverse: var(--color-fg-inverse);
 }

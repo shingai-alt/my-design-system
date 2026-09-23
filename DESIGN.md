@@ -21,7 +21,7 @@
 ## Non-Negotiable Principles
 
 1. **ハードコーディング禁止** — pixel / hex / 生数値で直書きしない。必ずトークン経由
-2. **Semantic Color** — `bg-primary-600` / `text-fg-high` を使う。primitive（`bg-primary-*` 以外の生スケール）直参照は最終手段
+2. **Semantic Color** — 色は primitive → key → semantic の3層（`tokens/colors.css`）。コンポーネントは semantic（`--color-bg-*` / `--color-fg-*` / `--color-stroke-*`）を使う。key（`primary-*` 等のスケール）は semantic 未整備の箇所だけ（移行中）。primitive（`brand-green-*` / `slate-*` / `red-*` 等）の直参照は禁止
 3. **Blessed Spacing** — `p-{0,1,2,3,4,6,8,12,16}` のみ使う
 4. **Typography セマンティック層** — `.typo-{xsmall..3xlarge}` を使う。生の `text-sm` 等は禁止
 5. **ARIA属性で状態を表現** — `[aria-pressed="true"]` 等をCSSセレクタに使う。独自の `is-*` クラスは作らない
@@ -35,14 +35,16 @@
 ### Color Tokens
 
 ```
-プライマリ (forest-green) : bg-primary-600 (#25835c) / hover bg-primary-700
-ニュートラル (slate)      : neutral-{50..900}
-本文テキスト(高優先)      : text-fg-high (neutral-900)
-本文テキスト(中優先)      : text-fg-middle (neutral-700)
-補助テキスト              : text-fg-low (neutral-500)
-ボーダー                  : border-stroke-{high,middle}
-ステータス                : success(#16a34a) / warning(#f59e0b) / negative(#ef4444) / info(#2563eb)
-背景                      : bg-page (white) / bg-surface (neutral-50)
+① primitive（直参照禁止）: brand-green / slate / red / amber / green / blue の 50〜950
+② key（ブランド差し替え口）: primary(=brand-green) / neutral(=slate) / success(=green) / warning(=amber) / negative(=red) / info(=blue)
+③ semantic（コンポーネントはここ）:
+  面        : bg-sunken (neutral-50) / bg-page (white) / bg-raised (white) / bg-overlay (white) / scrim
+  状態      : bg-hover / bg-pressed / bg-disabled / bg-inverse
+  塗り      : bg-primary (#25835c) / bg-primary-hover / bg-primary-subtle、bg-negative(-hover|-subtle)、bg-{success,warning,info}-subtle
+  文字      : fg-high (neutral-900) / fg-middle (neutral-700) / fg-low (neutral-500) / fg-disabled / fg-placeholder / fg-inverse
+  塗りの上  : fg-on-primary / fg-on-negative (white) / fg-on-warning (neutral-900 ← 黄色系だけ暗い文字)
+  色付き文字: fg-{primary,negative,success,warning,info}
+  枠線      : stroke-{high,middle,low} / stroke-control(-hover) / stroke-{primary,negative} / stroke-focus (info-600 固定)
 ```
 
 > primaryとsuccessは別の緑にしている。brand色（主操作）と成功状態を混同させないため。
