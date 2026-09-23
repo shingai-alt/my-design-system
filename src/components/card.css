@@ -30,7 +30,7 @@
 
 @layer components {
   .card {
-    background-color: var(--color-white);
+    background-color: var(--color-bg-raised);
     border: 1px solid var(--color-stroke-middle);
     border-radius: var(--radius-md);
   }

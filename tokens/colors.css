@@ -175,49 +175,76 @@
   /* =====================================================================
    *  ③ Semantic（ライト）— コンポーネントはこちらを使う
    *  命名: {bg|fg|stroke}-{role}-{強さ}-{状態}
-   *  強さ: neutral 系は high / middle / low、色付き系は 塗り（語なし）と -subtle
+   *  強さ: neutral 系は high / middle / low。色付き系は 塗り（語なし）/ -muted（100）/ -subtle（50）
+   *  状態: -hover / -disabled（計算や半透明の重ね合わせで作らない）
    * ===================================================================== */
 
   /* 面（ダークでは sunken → page → raised → overlay の順に明るくする） */
-  --color-bg-sunken:  var(--color-neutral-50);   /* くぼんだ面・セクション背景 */
+  --color-bg-sunken:  var(--color-neutral-50);   /* くぼんだ面: menu・表の見出し行・modal フッター */
   --color-bg-page:    var(--color-white);        /* ページ背景 */
-  --color-bg-raised:  var(--color-white);        /* カード・入力欄・menu */
+  --color-bg-raised:  var(--color-white);        /* カード・表・入力欄・ボタン類 */
   --color-bg-overlay: var(--color-white);        /* modal・popover */
-  --color-scrim:      rgb(15 23 42 / 0.6);       /* modal の背面（slate-900 / 60%） */
+  --color-scrim:      rgb(15 23 42 / 0.6);       /* modal の背面（neutral-900 / 60%） */
 
-  --color-bg-hover:    var(--color-neutral-100);
-  --color-bg-pressed:  var(--color-neutral-200);
-  --color-bg-disabled: var(--color-neutral-100);
-  --color-bg-inverse:  var(--color-neutral-900); /* tooltip */
+  /* neutral の塗り（hover・バッジ・トラックなど）。state は各コンポーネントがこの段から選ぶ */
+  --color-bg-neutral-low:    var(--color-neutral-50);   /* 面の上の hover */
+  --color-bg-neutral-middle: var(--color-neutral-100);  /* ghost の hover・soft バッジ・カウント */
+  --color-bg-neutral-high:   var(--color-neutral-200);  /* 強めの塗り・neutral の disabled */
+  --color-bg-disabled:       var(--color-neutral-50);   /* 入力欄の disabled */
+  --color-bg-control-off:       var(--color-neutral-400);  /* switch の OFF */
+  --color-bg-control-off-hover: var(--color-neutral-500);
+
+  /* 反転（tooltip・neutral の solid） */
+  --color-bg-inverse:       var(--color-neutral-900);
+  --color-bg-inverse-hover: var(--color-neutral-800);
 
   --color-bg-primary:          var(--color-primary-600);
   --color-bg-primary-hover:    var(--color-primary-700);
+  --color-bg-primary-disabled: var(--color-primary-200);
+  --color-bg-primary-muted:    var(--color-primary-100);
   --color-bg-primary-subtle:   var(--color-primary-50);
-  --color-bg-negative:         var(--color-negative-600);
-  --color-bg-negative-hover:   var(--color-negative-700);
-  --color-bg-negative-subtle:  var(--color-negative-50);
-  --color-bg-success-subtle:   var(--color-success-100);
-  --color-bg-warning-subtle:   var(--color-warning-100);
-  --color-bg-info-subtle:      var(--color-info-100);
+
+  --color-bg-negative:          var(--color-negative-600);
+  --color-bg-negative-hover:    var(--color-negative-700);
+  --color-bg-negative-disabled: var(--color-negative-100);
+  --color-bg-negative-muted:    var(--color-negative-100);
+  --color-bg-negative-subtle:   var(--color-negative-50);
+
+  --color-bg-success:        var(--color-success-700);
+  --color-bg-success-muted:  var(--color-success-100);
+  --color-bg-success-subtle: var(--color-success-50);
+  --color-bg-warning:        var(--color-warning-600);
+  --color-bg-warning-muted:  var(--color-warning-100);
+  --color-bg-warning-subtle: var(--color-warning-50);
+  --color-bg-info:           var(--color-info-600);
+  --color-bg-info-muted:     var(--color-info-100);
+  --color-bg-info-subtle:    var(--color-info-50);
 
   /* 文字 */
-  --color-fg-high:        var(--color-neutral-900);  /* 本文・見出し */
-  --color-fg-middle:      var(--color-neutral-700);  /* 本文（中優先） */
-  --color-fg-low:         var(--color-neutral-500);  /* 補足・キャプション */
-  --color-fg-disabled:    var(--color-neutral-400);  /* コントラスト要件の対象外 */
-  --color-fg-placeholder: var(--color-neutral-400);
-  --color-fg-inverse:     var(--color-white);
+  --color-fg-high:          var(--color-neutral-900);  /* 本文・見出し */
+  --color-fg-middle:        var(--color-neutral-700);  /* 本文（中優先） */
+  --color-fg-low:           var(--color-neutral-500);  /* 補足・キャプション */
+  --color-fg-placeholder:   var(--color-neutral-400);
+  --color-fg-disabled:      var(--color-neutral-300);  /* コントラスト要件の対象外 */
+  --color-fg-inverse:       var(--color-white);
+  --color-fg-inverse-middle: var(--color-neutral-200);
 
-  /* 塗りの上に載せる文字。bg-* の塗りと必ずペアで使う */
+  /* 塗りの上に載せる文字。bg-{role} の塗りと必ずペアで使う */
   --color-fg-on-primary:  var(--color-white);
   --color-fg-on-negative: var(--color-white);
+  --color-fg-on-success:  var(--color-white);
+  --color-fg-on-info:     var(--color-white);
   --color-fg-on-warning:  var(--color-neutral-900);  /* 黄色系の塗りの上だけ暗い文字 */
 
-  --color-fg-primary:  var(--color-primary-700);
-  --color-fg-negative: var(--color-negative-600);
-  --color-fg-success:  var(--color-success-800);
-  --color-fg-warning:  var(--color-warning-800);
-  --color-fg-info:     var(--color-info-700);
+  --color-fg-primary:          var(--color-primary-700);
+  --color-fg-primary-hover:    var(--color-primary-800);
+  --color-fg-primary-disabled: var(--color-primary-200);
+  --color-fg-negative:          var(--color-negative-600);  /* エラー文・negative ボタン */
+  --color-fg-negative-strong:   var(--color-negative-700);  /* negative-subtle / -muted の上の文字 */
+  --color-fg-negative-disabled: var(--color-negative-200);
+  --color-fg-success: var(--color-success-800);
+  --color-fg-warning: var(--color-warning-800);
+  --color-fg-info:    var(--color-info-700);
 
   /* 枠線 */
   --color-stroke-high:          var(--color-neutral-300);
@@ -225,10 +252,14 @@
   --color-stroke-low:           var(--color-neutral-100);
   --color-stroke-control:       var(--color-neutral-400);  /* input・select・textarea */
   --color-stroke-control-hover: var(--color-neutral-500);
-  --color-stroke-primary:       var(--color-primary-600);
-  --color-stroke-negative:      var(--color-negative-600);
+  --color-stroke-control-error: var(--color-negative-500);
+  --color-stroke-primary:          var(--color-primary-600);
+  --color-stroke-primary-disabled: var(--color-primary-200);
+  --color-stroke-negative:          var(--color-negative-600);
+  --color-stroke-negative-disabled: var(--color-negative-200);
+  --color-stroke-success-subtle:  var(--color-success-100);
+  --color-stroke-warning-subtle:  var(--color-warning-100);
+  --color-stroke-negative-subtle: var(--color-negative-100);
+  --color-stroke-info-subtle:     var(--color-info-100);
   --color-stroke-focus:         var(--color-info-600);     /* フォーカスリングは info 青で固定 */
-
-  /* 旧名（移行中の互換用。コンポーネントの置き換えが終わったら削除する） */
-  --color-fg-high-inverse: var(--color-fg-inverse);
 }

@@ -32,18 +32,18 @@
     justify-content: space-between;
     gap: calc(var(--spacing) * 2);
     padding: calc(var(--spacing) * 2) calc(var(--spacing) * 3);
-    background-color: var(--color-white);
+    background-color: var(--color-bg-raised);
     border: 1px solid var(--color-stroke-middle);
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: background-color 150ms, border-color 150ms;
   }
   .filter-chip:hover:not(:disabled):not([aria-pressed="true"]) {
-    background-color: var(--color-neutral-50);
+    background-color: var(--color-bg-disabled);
     border-color: var(--color-stroke-high);
   }
   .filter-chip:disabled {
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-bg-neutral-middle);
     color: var(--color-fg-low);
     cursor: not-allowed;
   }
@@ -55,7 +55,7 @@
   .filter-chip-label {
     font-size: 14px;
     font-weight: 700;
-    color: var(--color-neutral-600);
+    color: var(--color-fg-middle);
   }
   .filter-chip-count {
     flex-shrink: 0;
@@ -69,18 +69,18 @@
 
   /* Selected */
   .filter-chip[aria-pressed="true"] {
-    background-color: var(--color-primary-50);
-    border-color: var(--color-primary-500);
+    background-color: var(--color-bg-primary-subtle);
+    border-color: var(--color-stroke-primary);
   }
   .filter-chip[aria-pressed="true"]:hover:not(:disabled) {
-    background-color: var(--color-primary-100);
+    background-color: var(--color-bg-primary-muted);
   }
   .filter-chip[aria-pressed="true"] .filter-chip-label {
-    color: var(--color-primary-700);
+    color: var(--color-fg-primary);
   }
   .filter-chip[aria-pressed="true"]:disabled {
-    background-color: var(--color-primary-50);
-    border-color: var(--color-primary-200);
+    background-color: var(--color-bg-primary-subtle);
+    border-color: var(--color-stroke-primary-disabled);
   }
 
   /* 選択中のみ表示するチェックマーク */
@@ -92,8 +92,8 @@
     width: 16px;
     height: 16px;
     border-radius: var(--radius-full);
-    background-color: var(--color-primary-500);
-    color: var(--color-white);
+    background-color: var(--color-bg-primary);
+    color: var(--color-fg-on-primary);
   }
   .filter-chip[aria-pressed="true"] .filter-chip-check { display: inline-flex; }
   .filter-chip-check .icon { width: 10px; height: 10px; }

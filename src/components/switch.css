@@ -34,7 +34,7 @@
     height: 24px;
     border-radius: var(--radius-full);
     border: none;
-    background-color: var(--color-neutral-400);
+    background-color: var(--color-bg-control-off);
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><circle cx='10' cy='10' r='10' fill='white'/></svg>");
     background-size: 20px 20px;
     background-repeat: no-repeat;
@@ -43,12 +43,12 @@
   }
   .switch:checked { background-position: left 22px center; }
 
-  .switch:hover:not(:checked):not(:disabled) { background-color: var(--color-neutral-500); }
-  .switch:disabled:not(:checked) { background-color: var(--color-neutral-200); cursor: not-allowed; }
+  .switch:hover:not(:checked):not(:disabled) { background-color: var(--color-bg-control-off-hover); }
+  .switch:disabled:not(:checked) { background-color: var(--color-bg-neutral-high); cursor: not-allowed; }
 
-  .switch:checked:not(:disabled) { background-color: var(--color-primary-600); }
-  .switch:checked:hover:not(:disabled) { background-color: var(--color-primary-700); }
-  .switch:checked:disabled { background-color: var(--color-primary-200); cursor: not-allowed; }
+  .switch:checked:not(:disabled) { background-color: var(--color-bg-primary); }
+  .switch:checked:hover:not(:disabled) { background-color: var(--color-bg-primary-hover); }
+  .switch:checked:disabled { background-color: var(--color-bg-primary-disabled); cursor: not-allowed; }
 
   .switch:focus-visible {
     outline: none;

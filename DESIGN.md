@@ -21,7 +21,7 @@
 ## Non-Negotiable Principles
 
 1. **ハードコーディング禁止** — pixel / hex / 生数値で直書きしない。必ずトークン経由
-2. **Semantic Color** — 色は primitive → key → semantic の3層（`tokens/colors.css`）。コンポーネントは semantic（`--color-bg-*` / `--color-fg-*` / `--color-stroke-*`）を使う。key（`primary-*` 等のスケール）は semantic 未整備の箇所だけ（移行中）。primitive（`brand-green-*` / `slate-*` / `red-*` 等）の直参照は禁止
+2. **Semantic Color** — 色は primitive → key → semantic の3層（`tokens/colors.css`）。コンポーネントは semantic（`--color-bg-*` / `--color-fg-*` / `--color-stroke-*`）だけを使う（`npm run check:consistency` で検査）。key（`primary-*` 等）・primitive（`brand-green-*` / `slate-*` 等）の直参照は禁止
 3. **Blessed Spacing** — `p-{0,1,2,3,4,6,8,12,16}` のみ使う
 4. **Typography セマンティック層** — `.typo-{xsmall..3xlarge}` を使う。生の `text-sm` 等は禁止
 5. **ARIA属性で状態を表現** — `[aria-pressed="true"]` 等をCSSセレクタに使う。独自の `is-*` クラスは作らない

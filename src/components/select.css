@@ -34,8 +34,8 @@
     width: 100%;
     font-family: inherit;
     color: var(--color-fg-high);
-    background-color: var(--color-white);
-    border: 1px solid var(--color-neutral-400);
+    background-color: var(--color-bg-raised);
+    border: 1px solid var(--color-stroke-control);
     border-radius: var(--radius-sm);
     appearance: none;
     /* ハードコード例外: background-image の SVG data URI は var()/currentColor を
@@ -46,15 +46,15 @@
     padding-right: calc(var(--spacing) * 8);
     transition: border-color 150ms, box-shadow 150ms;
   }
-  .select:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-neutral-500); }
+  .select:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-stroke-control-hover); }
   /* フォーカスは outline + offset で枠との間に隙間を空ける（input と同じ方式） */
   .select:focus-visible {
-    outline: 2px solid var(--color-info-600);
+    outline: 2px solid var(--color-stroke-focus);
     outline-offset: 2px;
   }
   .select:disabled {
-    background-color: var(--color-neutral-50);
-    border-color: var(--color-neutral-200);
+    background-color: var(--color-bg-disabled);
+    border-color: var(--color-stroke-middle);
     color: var(--color-fg-low);
     cursor: not-allowed;
     /* ハードコード例外: disabled時は矢印もneutral-400 #94a3b8相当に薄くする */
@@ -69,13 +69,13 @@
   /* ===== Error ===== */
   /* フォーカスリングはerror時もinfo青固定（DESIGN.md原則8）。枠だけnegativeを濃くする。 */
   .select-error {
-    background-color: var(--color-negative-50);
+    background-color: var(--color-bg-negative-subtle);
     border-width: 2px;
-    border-color: var(--color-negative-500);
+    border-color: var(--color-stroke-control-error);
   }
   .select-error:hover:not(:disabled),
   .select-error:focus-visible {
-    border-color: var(--color-negative-600);
+    border-color: var(--color-stroke-negative);
   }
 
   /* 強制カラーモード: 背景シェブロンはCanvas化して消えるが、appearance:noneを外せば

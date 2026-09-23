@@ -64,20 +64,20 @@
   .alert-close:focus-visible { outline: none; box-shadow: var(--shadow-focus-ring); border-radius: var(--radius-xs); }
 
   /* ===== Variants ===== */
-  .alert-neutral  { background-color: var(--color-neutral-50);  border-color: var(--color-stroke-middle); color: var(--color-fg-high); }
-  .alert-neutral  .alert-icon { background-color: var(--color-neutral-200); color: var(--color-neutral-700); }
+  .alert-neutral  { background-color: var(--color-bg-neutral-low);  border-color: var(--color-stroke-middle); color: var(--color-fg-high); }
+  .alert-neutral  .alert-icon { background-color: var(--color-bg-neutral-high); color: var(--color-fg-middle); }
 
-  .alert-success  { background-color: var(--color-success-50);  border-color: var(--color-success-100); color: var(--color-success-800); }
-  .alert-success  .alert-icon { background-color: var(--color-success-100); color: var(--color-success-700); }
+  .alert-success  { background-color: var(--color-bg-success-subtle);  border-color: var(--color-stroke-success-subtle); color: var(--color-fg-success); }
+  .alert-success  .alert-icon { background-color: var(--color-bg-success-muted); color: var(--color-fg-success); }
 
-  .alert-negative { background-color: var(--color-negative-50); border-color: var(--color-negative-100); color: var(--color-negative-700); }
-  .alert-negative .alert-icon { background-color: var(--color-negative-100); color: var(--color-negative-600); }
+  .alert-negative { background-color: var(--color-bg-negative-subtle); border-color: var(--color-stroke-negative-subtle); color: var(--color-fg-negative-strong); }
+  .alert-negative .alert-icon { background-color: var(--color-bg-negative-muted); color: var(--color-fg-negative-strong); }
 
-  .alert-warning  { background-color: var(--color-warning-50);  border-color: var(--color-warning-100); color: var(--color-warning-800); }
-  .alert-warning  .alert-icon { background-color: var(--color-warning-100); color: var(--color-warning-700); }
+  .alert-warning  { background-color: var(--color-bg-warning-subtle);  border-color: var(--color-stroke-warning-subtle); color: var(--color-fg-warning); }
+  .alert-warning  .alert-icon { background-color: var(--color-bg-warning-muted); color: var(--color-fg-warning); }
 
-  .alert-info     { background-color: var(--color-info-50);     border-color: var(--color-info-100); color: var(--color-info-700); }
-  .alert-info     .alert-icon { background-color: var(--color-info-100); color: var(--color-info-600); }
+  .alert-info     { background-color: var(--color-bg-info-subtle);     border-color: var(--color-stroke-info-subtle); color: var(--color-fg-info); }
+  .alert-info     .alert-icon { background-color: var(--color-bg-info-muted); color: var(--color-fg-info); }
 
   /* 強制カラーモード: フォーカスはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
    * 閉じるボタンのopacity(0.6)も文字を薄くしすぎるため強制カラー時は戻す。

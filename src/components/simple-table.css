@@ -28,7 +28,7 @@
 @layer components {
   .simple-table {
     width: 100%;
-    background-color: var(--color-white);
+    background-color: var(--color-bg-raised);
     border: 1px solid var(--color-stroke-middle);
     border-radius: var(--radius-md);
     border-collapse: separate;
@@ -48,11 +48,11 @@
 
   .simple-table th {
     width: 128px;
-    background-color: var(--color-neutral-50);
+    background-color: var(--color-bg-sunken);
     font-weight: 700;
   }
   .simple-table td {
-    background-color: var(--color-white);
+    background-color: var(--color-bg-raised);
     font-weight: 400;
   }
 

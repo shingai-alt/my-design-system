@@ -48,14 +48,14 @@
   }
   .tab:hover:not([aria-selected="true"]) {
     color: var(--color-fg-high);
-    background-color: var(--color-neutral-50);
+    background-color: var(--color-bg-neutral-low);
   }
   /* 選択状態は4px下線（太さの差で「選択中」がより明確に伝わる）。
      太さが増える分 padding-bottom を詰め、行の高さを他タブと揃える。 */
   .tab[aria-selected="true"] {
-    color: var(--color-primary-700);
+    color: var(--color-fg-primary);
     border-bottom-width: 4px;
-    border-bottom-color: var(--color-primary-600);
+    border-bottom-color: var(--color-stroke-primary);
     padding-bottom: calc(var(--spacing) * 2 - 3px);
   }
   .tab:focus-visible {
@@ -72,19 +72,19 @@
     height: 18px;
     padding: 0 calc(var(--spacing) * 1);
     border-radius: var(--radius-full);
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-bg-neutral-middle);
     color: var(--color-fg-middle);
     font-size: 11px;
     font-weight: 700;
   }
   .tab[aria-selected="true"] .tab-count {
-    background-color: var(--color-primary-100);
-    color: var(--color-primary-700);
+    background-color: var(--color-bg-primary-muted);
+    color: var(--color-fg-primary);
   }
 
   /* ============================================================
    * 強制カラーモード (Windows ハイコントラスト等) 対応
-   *   選択状態をprimary/700の下線「色」だけで示しているため強制カラー時に判別しづらい。
+   *   選択状態をstroke-primary の下線「色」だけで示しているため強制カラー時に判別しづらい。
    *   選択タブの下線をHighlightにし、太さ(4px)と合わせて選択を示す
    *   （checkbox/radio/switchと同じ「選択色=Highlight」の流儀）。
    *   focusはbox-shadowのリングが強制カラーで消えるためoutlineを出す。

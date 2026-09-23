@@ -86,14 +86,14 @@
   .menu-item .icon { flex-shrink: 0; }
   .menu-item-trailing { margin-left: auto; }
 
-  .menu-item:hover { background-color: var(--color-neutral-100); color: var(--color-fg-high); }
+  .menu-item:hover { background-color: var(--color-bg-neutral-middle); color: var(--color-fg-high); }
 
   .menu-item[aria-current="page"] {
-    background-color: var(--color-primary-50);
-    color: var(--color-primary-700);
+    background-color: var(--color-bg-primary-subtle);
+    color: var(--color-fg-primary);
     font-weight: 700;
   }
-  .menu-item[aria-current="page"]:hover { background-color: var(--color-primary-50); }
+  .menu-item[aria-current="page"]:hover { background-color: var(--color-bg-primary-subtle); }
 
   .menu-item:focus-visible {
     outline: none;
@@ -102,7 +102,7 @@
 
   /* ============================================================
    * 強制カラーモード (Windows ハイコントラスト等) 対応
-   *   現在地をbg(primary-50)＋太字で示すが、強制カラーでは背景がCanvas化して
+   *   現在地をbg-primary-subtle＋太字で示すが、強制カラーでは背景がCanvas化して
    *   ハイライトが消え、太字だけになり弱い。Highlightで塗って明確に示す
    *   （backplate対策でforced-color-adjust:none）。
    *   focusはbox-shadowのリングが強制カラーで消えるためoutlineを出す。

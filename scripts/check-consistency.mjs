@@ -22,6 +22,9 @@
  *   6. 色トークンの定義   — src/components/・tokens/・preview/ が参照する var(--color-*) が
  *                          tokens/colors.css に定義されていること（未定義の negative-200 を
  *                          5箇所で参照していた実例の再発防止）
+ *   7. semantic のみ      — src/components/*.css が参照する色は semantic 層（bg-* / fg-* / stroke-* /
+ *                          scrim）だけであること。key（primary-600 等）や primitive（slate-400 等）を
+ *                          直接使うとダークモード・ブランド差し替えに追従しないため
  *
  * 実行: npm run check:consistency（依存パッケージ不要・ネットワーク不要）
  *
@@ -226,6 +229,22 @@ function checkColorTokensDefined() {
 }
 
 // ---------------------------------------------------------------------------
+// 7. semantic のみ — コンポーネントは semantic 層の色だけを参照する（コメント内の記述は対象外）
+// ---------------------------------------------------------------------------
+
+function checkComponentsUseSemanticColors() {
+  const dir = path.join(projectRoot, "src/components");
+  for (const name of fs.readdirSync(dir).filter((f) => f.endsWith(".css")).sort()) {
+    const code = fs.readFileSync(path.join(dir, name), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    for (const [, token] of code.matchAll(/var\(--color-([a-z0-9-]+)/g)) {
+      if (!/^(bg|fg|stroke)-|^scrim$/.test(token)) {
+        fail("semantic-colors", `src/components/${name}: --color-${token} は semantic 層ではありません。bg-* / fg-* / stroke-* を使ってください（tokens/colors.css ③）`);
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 
 const CHECKS = [
   ["icon-count", checkIconCount],
@@ -234,6 +253,7 @@ const CHECKS = [
   ["component-header", checkComponentHeaders],
   ["index-css", checkIndexCss],
   ["color-tokens", checkColorTokensDefined],
+  ["semantic-colors", checkComponentsUseSemanticColors],
 ];
 
 for (const [name, run] of CHECKS) {

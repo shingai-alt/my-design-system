@@ -34,7 +34,7 @@
     align-items: center;
     gap: calc(var(--spacing) * 1);
     font-weight: 500;
-    color: var(--color-primary-700);
+    color: var(--color-fg-primary);
     text-decoration: none;
     cursor: pointer;
     font-size: inherit;
@@ -48,13 +48,13 @@
     width: 1em;
     height: 1em;
   }
-  .link:hover:not([aria-disabled="true"]) { color: var(--color-primary-800); }
+  .link:hover:not([aria-disabled="true"]) { color: var(--color-fg-primary-hover); }
 
   .link.link-neutral { color: var(--color-fg-middle); }
   .link.link-neutral:hover:not([aria-disabled="true"]) { color: var(--color-fg-high); }
 
   .link.link-inverse { color: var(--color-fg-inverse); }
-  .link.link-inverse:hover:not([aria-disabled="true"]) { color: var(--color-neutral-200); }
+  .link.link-inverse:hover:not([aria-disabled="true"]) { color: var(--color-fg-inverse-middle); }
 
   .link:focus-visible {
     outline: none;

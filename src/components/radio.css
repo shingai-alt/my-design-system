@@ -27,7 +27,7 @@
     width: 18px;
     height: 18px;
     margin: 0;
-    accent-color: var(--color-primary-600);
+    accent-color: var(--color-bg-primary);
     cursor: pointer;
   }
   .radio-sm { width: 14px; height: 14px; }

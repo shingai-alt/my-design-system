@@ -37,19 +37,19 @@
     display: flex;
     align-items: stretch;
     width: 100%;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-neutral-400);
+    background-color: var(--color-bg-raised);
+    border: 1px solid var(--color-stroke-control);
     border-radius: var(--radius-sm);
     transition: border-color 150ms;
   }
-  .selector:hover:not(:has(.select:disabled)):not(:focus-within) { border-color: var(--color-neutral-500); }
+  .selector:hover:not(:has(.select:disabled)):not(:focus-within) { border-color: var(--color-stroke-control-hover); }
   .selector:focus-within {
-    outline: 2px solid var(--color-info-600);
+    outline: 2px solid var(--color-stroke-focus);
     outline-offset: 2px;
   }
   .selector:has(.select:disabled) {
-    background-color: var(--color-neutral-50);
-    border-color: var(--color-neutral-200);
+    background-color: var(--color-bg-disabled);
+    border-color: var(--color-stroke-middle);
     cursor: not-allowed;
   }
 
@@ -70,20 +70,20 @@
     flex-shrink: 0;
     display: inline-flex;
     align-self: center;
-    color: var(--color-primary-500);
+    color: var(--color-fg-primary);
     margin-left: calc(var(--spacing) * 3);
   }
-  .selector:has(.select:disabled) .selector-icon { color: var(--color-neutral-400); }
+  .selector:has(.select:disabled) .selector-icon { color: var(--color-fg-disabled); }
 
   /* Error — wrapper だけで完結させる（中の select に select-error は付けない） */
   .selector-error {
-    background-color: var(--color-negative-50);
+    background-color: var(--color-bg-negative-subtle);
     border-width: 2px;
-    border-color: var(--color-negative-500);
+    border-color: var(--color-stroke-control-error);
   }
   .selector-error:hover:not(:has(.select:disabled)),
   .selector-error:focus-within {
-    border-color: var(--color-negative-600);
+    border-color: var(--color-stroke-negative);
   }
 
   /* 強制カラーモード: フォーカスをborder色の変化だけで示しているためoutlineで可視化する。

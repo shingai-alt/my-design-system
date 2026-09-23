@@ -32,19 +32,19 @@
     align-items: center;
     gap: calc(var(--spacing) * 2);
     width: 100%;
-    background-color: var(--color-white);
-    border: 1px solid var(--color-neutral-400);
+    background-color: var(--color-bg-raised);
+    border: 1px solid var(--color-stroke-control);
     border-radius: var(--radius-sm);
     padding: 0 calc(var(--spacing) * 3);
     transition: border-color 150ms;
   }
-  .search-input:hover:not(:has(.search-input-field:disabled)):not(:focus-within) { border-color: var(--color-neutral-500); }
+  .search-input:hover:not(:has(.search-input-field:disabled)):not(:focus-within) { border-color: var(--color-stroke-control-hover); }
   .search-input:focus-within {
-    outline: 2px solid var(--color-info-600);
+    outline: 2px solid var(--color-stroke-focus);
     outline-offset: 2px;
   }
   .search-input:has(.search-input-field:disabled) {
-    background-color: var(--color-neutral-50);
+    background-color: var(--color-bg-disabled);
     cursor: not-allowed;
   }
 
@@ -86,23 +86,23 @@
     padding: 0 calc(var(--spacing) * 3);
     border: none;
     border-radius: var(--radius-xs);
-    background-color: var(--color-primary-600);
-    color: var(--color-white);
+    background-color: var(--color-bg-primary);
+    color: var(--color-fg-on-primary);
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
   }
-  .search-input-submit:hover { background-color: var(--color-primary-700); }
+  .search-input-submit:hover { background-color: var(--color-bg-primary-hover); }
 
   /* エラー */
   .search-input-error {
-    background-color: var(--color-negative-50);
+    background-color: var(--color-bg-negative-subtle);
     border-width: 2px;
-    border-color: var(--color-negative-500);
+    border-color: var(--color-stroke-control-error);
   }
   .search-input-error:hover,
   .search-input-error:focus-within {
-    border-color: var(--color-negative-600);
+    border-color: var(--color-stroke-negative);
   }
 
   /* 強制カラーモード: フォーカスをborder色の変化だけで示す箇所はoutlineで可視化する。
