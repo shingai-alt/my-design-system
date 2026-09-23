@@ -15,6 +15,7 @@
  *   各スイッチにラベルを switch-label で内包 か aria-labelledby で関連付ける
  *   role="switch" で「オン/オフ」が伝わる。状態を色だけで表さない
  *   switch-sm(高さ20px)はラベル併用でタップ領域24px以上を確保
+ *   prefers-reduced-motion: reduce ではつまみのスライドを止める（色の変化は残す）
  *
  * Usage:
  *   <label class="switch-label">
@@ -98,5 +99,9 @@
     .switch:checked:disabled {
       background-color: GrayText;
     }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .switch { transition: background-color 150ms; }
   }
 }

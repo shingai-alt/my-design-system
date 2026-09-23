@@ -15,6 +15,7 @@
  *   <details>/<summary>によりトグルの役割・展開状態・キーボード操作が標準で確立
  *   開閉アイコンは見出しの左に置く
  *   :focus-visible で info/600 のフォーカスリングを出す（トリガー全体が対象）
+ *   prefers-reduced-motion: reduce ではアイコンの回転アニメを止める
  *
  * Usage:
  *   <div class="accordion">
@@ -83,5 +84,9 @@
       outline-offset: -2px;
     }
     .accordion-icon { color: CanvasText; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .accordion-icon { transition: none; }
   }
 }
