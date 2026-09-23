@@ -81,6 +81,7 @@ CSS / HTMLを書く時は**必ずデザインシステムが用意した変数�
 | semantic のみ | — | `src/components/*.css`の色参照が semantic（`bg-*` `fg-*` `stroke-*` `scrim`）だけ |
 | ダーク定義の一致 | `[data-color-mode="dark"]` | `@media (prefers-color-scheme: dark)`内の`[data-color-mode="auto"]`と同じ内容 |
 | コントラスト | `tokens/colors.css`（ライト/ダーク） | `scripts/check-consistency.mjs`の`CONTRAST_PAIRS`（文字4.5:1・UI部品3:1） |
+| タイポのトークン | `tokens/typography.css` | `src/components/*.css`の`font` `font-size` `font-weight` `line-height`が`var(--typo-*)` / `var(--font-weight-*)` / `inherit`だけ |
 
 エラーが出たら、指示に従いドキュメント側の表記を更新する。意図的に文言を変えた場合は
 `scripts/check-consistency.mjs`のパターン定義（`ICON_CLAIMS`等）も更新する。

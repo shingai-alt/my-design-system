@@ -23,7 +23,7 @@
 1. **ハードコーディング禁止** — pixel / hex / 生数値で直書きしない。必ずトークン経由
 2. **Semantic Color** — 色は primitive → key → semantic の3層（`tokens/colors.css`）。コンポーネントは semantic（`--color-bg-*` / `--color-fg-*` / `--color-stroke-*`）だけを使う（`npm run check:consistency` で検査）。key（`primary-*` 等）・primitive（`brand-green-*` / `slate-*` 等）の直参照は禁止
 3. **Blessed Spacing** — `p-{0,1,2,3,4,6,8,12,16}` のみ使う
-4. **Typography セマンティック層** — `.typo-{xsmall..3xlarge}` を使う。生の `text-sm` 等は禁止
+4. **Typography セマンティック層** — コンポーネントCSSは `font: var(--typo-*)` の1行で指定する（`npm run check:consistency` で検査）。HTML では `.typo-{xsmall..3xlarge}` を使う。`font-size: 14px` や生の `text-sm` 等は禁止
 5. **ARIA属性で状態を表現** — `[aria-pressed="true"]` 等をCSSセレクタに使う。独自の `is-*` クラスは作らない
 6. **フォーカスリングはinfo（青）固定** — `--shadow-focus-ring` のみ。色を変えない、見切れさせない
 7. **保護ブランチへの直push禁止** — feature branch + PR
@@ -80,14 +80,27 @@
 ### Typography（本文14pxベース — Linear/Notion系の情報密度を優先）
 
 ```
-.typo-xsmall  : 11px / 16px
-.typo-small   : 13px / 20px
-.typo-medium  : 14px / 20px  ← 本文 default
-.typo-large   : 16px / 24px (bold必須)
-.typo-xlarge  : 18px / 28px (bold必須)
-.typo-2xlarge : 20px / 28px (bold必須) ← セクション見出し
-.typo-3xlarge : 24px / 32px (bold必須) ← ページタイトル
+① primitive（直参照禁止）: --text-{11,12,13,14,16,18,20,24}（rem）/ --leading-{100,133,140,150,170} / --font-weight-{normal,semibold,bold} / --font-sans / --font-mono
+② semantic（font ショートハンド。コンポーネントはここ）: サイズ / 行間 / 太さ
+  body          : 14 / 1.5 / 400  ← 本文 default（.typo-medium）
+  body-small    : 13 / 1.5 / 400  （.typo-small）
+  body-large    : 16 / 1.5 / 400
+  label         : 14 / 1.5 / 600  ← ボタン・タブなど UI 部品の文字
+  label-strong  : 14 / 1.5 / 700  ← 入力欄のラベル・アコーディオン
+  label-small / label-large : 13・16 / 1.5 / 600
+  caption       : 12 / 1.5 / 400  ← 補足・エラー文（12px 以下は単一行に限る）
+  caption-strong: 12 / 1.33 / 600 ← バッジ
+  caption-small : 11 / 1.5 / 400  （.typo-xsmall）
+  heading-sm    : 16 / 1.5  / 700 （.typo-large）
+  heading-md    : 18 / 1.5  / 700 （.typo-xlarge）
+  heading-lg    : 20 / 1.4  / 700 （.typo-2xlarge）← セクション見出し
+  heading-xl    : 24 / 1.33 / 700 （.typo-3xlarge）← ページタイトル
+.typo-numeric : 桁をそろえる数字（tabular-nums）
 ```
+
+- 状態で太さだけ変える場合（選択中のメニュー等）は `font-weight: var(--font-weight-bold)` を使ってよい
+- `font` ショートハンドは `font-variant-numeric` 等もリセットするので、それらは `font` より後に書く
+- 字間・palt は使わない。全トークンの見本はカタログの Typography ページ
 
 ### Radius / Shadow
 
@@ -109,6 +122,7 @@ shadow-destructive         : 0 0 0 3px stroke-control-error（negative-500）
 | `padding: 16px` `color: #334155` 等の生値直書き | トークン経由（`p-4` / `text-fg-middle`） |
 | 祝福外spacing（`p-5`, `p-7`等） | 近傍の祝福値 |
 | `text-sm` / `text-base` 直書き | `.typo-small` / `.typo-medium` |
+| コンポーネントCSSで `font-size: 14px` / `font-weight: 700` 等を直書き | `font: var(--typo-*)`（太さだけ変える場合は `var(--font-weight-*)`） |
 | `is-selected` 等の状態クラス | `aria-selected="true"` 等 |
 | フォーカスリングの色変更 | info青のまま固定 |
 | コンポーネントCSSで key / primitive（`--color-primary-600` `--color-slate-400` 等）を直接参照 | semantic（`--color-bg-primary` `--color-stroke-control` 等）。ダーク・ブランド差し替えに追従しないため |
@@ -134,7 +148,7 @@ shadow-destructive         : 0 0 0 3px stroke-control-error（negative-500）
 |---|---|
 | カラーモード | ライト（既定）/ ダーク（`data-color-mode="dark"` / `"auto"`） |
 | Primary | `#2f9e6f`（500）/ 主に使うのは600 `#25835c` |
-| Font | Inter + Noto Sans JP |
+| Font | OS のフォント（`system-ui` / ヒラギノ / 游ゴシック UI / メイリオ）。Webフォントは読み込まない |
 | ベーススペーシング | 4px |
 | 参考プロダクト | Linear / Notion / Vercel |
 
