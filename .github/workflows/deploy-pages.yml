@@ -45,7 +45,7 @@ jobs:
           cp -r preview/. site/
           cp dist/ds.css site/dist/ds.css
           sed -i 's#\.\./dist/ds\.css#dist/ds.css#' site/index.html
-          sed -i 's#\.\./\.\./dist/ds\.css#../dist/ds.css#' site/components/*.html
+          sed -i 's#\.\./\.\./dist/ds\.css#../dist/ds.css#' site/components/*.html site/foundations/*.html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

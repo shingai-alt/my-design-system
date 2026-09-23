@@ -11,8 +11,6 @@
 .hero-title { margin: 0 0 8px; }
 .hero-desc { color: var(--color-fg-middle); margin: 0; }
 .swatch { width: 64px; height: 40px; border-radius: var(--radius-xs); border: 1px solid var(--color-stroke-middle); }
-.swatch-label { font-size: 11px; color: var(--color-fg-low); text-align: center; margin-top: 4px; }
-.swatch-col { display: flex; flex-direction: column; align-items: center; }
 .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 </style>
 </head>
@@ -69,25 +67,19 @@
     <h2 class="catalog-section-title typo-2xlarge">Foundation</h2>
 
     <div class="catalog-card">
-      <div class="catalog-card-header"><p class="catalog-card-title">Colors</p></div>
+      <div class="catalog-card-header"><p class="catalog-card-title">Colors</p><p class="catalog-card-note">primitive → key → semantic の3層。ライト / ダーク対応</p></div>
       <div style="padding: 0 24px 24px;">
-        <p class="typo-small" style="color:var(--color-fg-low); margin-bottom:8px;">Primary</p>
-        <div class="row" style="margin-bottom:16px;">
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-100)"></div><div class="swatch-label">100</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-300)"></div><div class="swatch-label">300</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-500)"></div><div class="swatch-label">500</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-600)"></div><div class="swatch-label">600</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-700)"></div><div class="swatch-label">700</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-primary-900)"></div><div class="swatch-label">900</div></div>
+        <p class="typo-medium" style="color:var(--color-fg-middle); margin:0 0 12px;">コンポーネントは semantic トークン（<code>bg-*</code> / <code>fg-*</code> / <code>stroke-*</code>）だけを使います。全トークンのライト・ダークの値と使い方は Colors ページにまとめています。</p>
+        <div class="row" style="margin-bottom:16px;" aria-hidden="true">
+          <div class="swatch" style="background:var(--color-bg-primary)"></div>
+          <div class="swatch" style="background:var(--color-bg-negative)"></div>
+          <div class="swatch" style="background:var(--color-bg-warning)"></div>
+          <div class="swatch" style="background:var(--color-bg-success)"></div>
+          <div class="swatch" style="background:var(--color-bg-info)"></div>
+          <div class="swatch" style="background:var(--color-bg-inverse)"></div>
+          <div class="swatch" style="background:var(--color-bg-sunken)"></div>
         </div>
-        <p class="typo-small" style="color:var(--color-fg-low); margin-bottom:8px;">Neutral</p>
-        <div class="row">
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-100)"></div><div class="swatch-label">100</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-300)"></div><div class="swatch-label">300</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-500)"></div><div class="swatch-label">500</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-700)"></div><div class="swatch-label">700</div></div>
-          <div class="swatch-col"><div class="swatch" style="background:var(--color-neutral-900)"></div><div class="swatch-label">900</div></div>
-        </div>
+        <a class="link" href="foundations/colors.html">Colors ページを見る</a>
       </div>
     </div>
 

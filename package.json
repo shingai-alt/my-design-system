@@ -7,8 +7,9 @@
     "ds-mcp": "src/mcp/server.mjs"
   },
   "scripts": {
-    "build": "vite build && npm run build:icons",
+    "build": "vite build && npm run build:icons && npm run build:colors",
     "build:icons": "node scripts/build-icons.mjs",
+    "build:colors": "node scripts/build-color-page.mjs",
     "mcp": "node src/mcp/server.mjs",
     "eval": "node evals/run.mjs",
     "eval:report": "node evals/report.mjs",
