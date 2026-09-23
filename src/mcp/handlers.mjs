@@ -22,7 +22,8 @@ const COMPONENT_NAMES = [
 
 const TOKEN_CATEGORIES = ["colors", "spacing", "typography", "radius", "shadow", "container"];
 
-export const SERVER_INFO = { name: "design-system-mcp", version: "0.1.0" };
+const { version } = JSON.parse(readFileSync(resolve(ROOT, "package.json"), "utf8"));
+export const SERVER_INFO = { name: "design-system-mcp", version };
 
 export const INSTRUCTIONS = `
 このMCPは自社デザインシステムのトークン・コンポーネント仕様・非交渉原則をAIエージェントに渡すためのものです。
