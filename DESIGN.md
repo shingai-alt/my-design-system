@@ -67,7 +67,17 @@
 ```
 0=0  1=4px  2=8px  3=12px  4=16px  6=24px  8=32px  12=48px  16=64px
 ```
-→ `p-{0,1,2,3,4,6,8,12,16}` / `gap-{...}` / `m-{...}`。祝福外は近傍値に丸める。
+→ `p-{0,1,2,3,4,6,8,12,16}` / `gap-{...}` / `m-{...}`。コンポーネントCSSは `calc(var(--spacing) * N)`（`--spacing(N)` は使わない。ビルドしなくても読める plain CSS にするため）。祝福外は近傍値に丸める。
+
+```
+部品の高さ（余白とは別の段）: --control-height-sm = 32px / -md = 40px / -lg = 48px
+  button / icon-button / input / select / search-input / selector / pagination で使う
+  文字を含む部品は min-height（文字サイズ・行間を上書きされても内容がはみ出さない）、正方形の部品は width / height
+```
+
+- 9段と部品の高さは `npm run check:consistency`（spacing-scale）が検査する。例外は `scripts/spacing-exceptions.mjs` に理由付きで登録する
+- 意味ごとの余白トークン（stack-gap・card-padding 等）は作らない。2箇所以上で実際に使う場面が出たときだけ追加する
+- アイコン・バッジ・checkbox 等の小さい部品のサイズは px のまま
 
 ### Container
 
@@ -121,6 +131,7 @@ shadow-destructive         : 0 0 0 3px stroke-control-error（negative-500）
 |---|---|
 | `padding: 16px` `color: #334155` 等の生値直書き | トークン経由（`p-4` / `text-fg-middle`） |
 | 祝福外spacing（`p-5`, `p-7`等） | 近傍の祝福値 |
+| 部品の高さ `height: 40px` 等の直書き | `min-height: var(--control-height-md)` |
 | `text-sm` / `text-base` 直書き | `.typo-small` / `.typo-medium` |
 | コンポーネントCSSで `font-size: 14px` / `font-weight: 700` 等を直書き | `font: var(--typo-*)`（太さだけ変える場合は `var(--font-weight-*)`） |
 | `is-selected` 等の状態クラス | `aria-selected="true"` 等 |
@@ -138,7 +149,7 @@ shadow-destructive         : 0 0 0 3px stroke-control-error（negative-500）
 | 比率・100%・auto | スケール非依存値 |
 | 強制カラーモードのシステムカラー（`ButtonText`等） | OSの設定に追従する系統色のため |
 | `background-image` の SVG data URI 内の色 | `var()`/`currentColor` が解決できないため直書き。コンポーネントには書かず、`tokens/colors.css` の変数（例: `--select-arrow`）にライト・ダーク両方の値を置く。変更時はコメントの色名と実値を両方直す |
-| Figma仕様やアイコンとの位置合わせでoff-scaleな`calc(var(--spacing) * N)`が必要 | 祝福値に丸めるとズレる少数のケース限定。コメントでpx値と理由を明記（例: `modal.css`のmax-width、`accordion.css`のpanel padding-left） |
+| Figma仕様やアイコンとの位置合わせでoff-scaleな`calc(var(--spacing) * N)`や、枠線の太さを補正する px が必要 | 祝福値に丸めるとズレる少数のケース限定。`scripts/spacing-exceptions.mjs` に理由付きで登録する（登録しないと check:consistency が落ちる。例: `accordion.css` の panel padding-left、`tab.css` の下線補正） |
 
 ---
 
