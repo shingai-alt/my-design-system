@@ -191,8 +191,8 @@
   --color-bg-neutral-middle: var(--color-neutral-100);  /* ghost の hover・soft バッジ・カウント */
   --color-bg-neutral-high:   var(--color-neutral-200);  /* 強めの塗り・neutral の disabled */
   --color-bg-disabled:       var(--color-neutral-50);   /* 入力欄の disabled */
-  --color-bg-control-off:       var(--color-neutral-400);  /* switch の OFF */
-  --color-bg-control-off-hover: var(--color-neutral-500);
+  --color-bg-control-off:       var(--color-neutral-500);  /* switch の OFF */
+  --color-bg-control-off-hover: var(--color-neutral-600);
 
   /* 反転（tooltip・neutral の solid） */
   --color-bg-inverse:       var(--color-neutral-900);
@@ -250,8 +250,8 @@
   --color-stroke-high:          var(--color-neutral-300);
   --color-stroke-middle:        var(--color-neutral-200);
   --color-stroke-low:           var(--color-neutral-100);
-  --color-stroke-control:       var(--color-neutral-400);  /* input・select・textarea */
-  --color-stroke-control-hover: var(--color-neutral-500);
+  --color-stroke-control:       var(--color-neutral-500);  /* input・select・textarea（3:1 以上） */
+  --color-stroke-control-hover: var(--color-neutral-600);
   --color-stroke-control-error: var(--color-negative-500);
   --color-stroke-primary:          var(--color-primary-600);
   --color-stroke-primary-disabled: var(--color-primary-200);

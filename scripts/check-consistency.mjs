@@ -299,7 +299,7 @@ const CONTRAST_PAIRS = [
   ["fg-on-negative", "bg-negative", TEXT], ["fg-on-negative", "bg-negative-hover", TEXT],
   ["fg-on-success", "bg-success", TEXT], ["fg-on-info", "bg-info", TEXT], ["fg-on-warning", "bg-warning", TEXT],
   ["fg-inverse", "bg-inverse", TEXT], ["fg-inverse", "bg-inverse-hover", TEXT], ["fg-inverse-middle", "bg-inverse", TEXT],
-  ["fg-negative", "bg-negative-subtle", TEXT],
+  // negative-subtle / -muted の上の文字は fg-negative-strong を使う（fg-negative は 4.41:1 で不足）
   ["fg-negative-strong", "bg-negative-subtle", TEXT], ["fg-negative-strong", "bg-negative-muted", TEXT],
   ...["success", "warning", "info"].flatMap((r) => [[`fg-${r}`, `bg-${r}-subtle`, TEXT], [`fg-${r}`, `bg-${r}-muted`, TEXT]]),
   ["stroke-control", "bg-raised", UI], ["stroke-control-error", "bg-raised", UI], ["stroke-control-error", "bg-negative-subtle", UI],
@@ -307,13 +307,6 @@ const CONTRAST_PAIRS = [
   ["bg-primary", "bg-page", UI], ["bg-primary", "bg-raised", UI], ["bg-control-off", "bg-raised", UI],
 ];
 
-// 既知の未達（ライト）。ダーク対応以前からの値で、変えると見た目が変わるためユーザー判断待ち。
-// 直したらここから消す（消し忘れは「未達でなくなった」エラーで検出する）
-const KNOWN_CONTRAST_GAPS = new Set([
-  "light:fg-negative/bg-negative-subtle", // negative の outline ボタン文字 4.41:1
-  "light:stroke-control/bg-raised",       // 入力欄の枠 2.56:1
-  "light:bg-control-off/bg-raised",       // switch の OFF トラック 2.56:1
-]);
 
 function luminance(hex) {
   const m = hex.match(/^#([0-9a-f]{3}|[0-9a-f]{6})$/i);
@@ -343,12 +336,8 @@ function checkContrast() {
         continue;
       }
       const ratio = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
-      const key = `${theme}:${fg}/${bg}`;
-      if (ratio < min && !KNOWN_CONTRAST_GAPS.has(key)) {
+      if (ratio < min) {
         fail("contrast", `tokens/colors.css (${theme}): ${fg} on ${bg} が ${ratio.toFixed(2)}:1 で基準 ${min}:1 未満です`);
-      }
-      if (ratio >= min && KNOWN_CONTRAST_GAPS.has(key)) {
-        fail("contrast", `scripts/check-consistency.mjs: ${key} は基準を満たすようになりました。KNOWN_CONTRAST_GAPS から消してください`);
       }
     }
   }

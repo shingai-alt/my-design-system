@@ -75,7 +75,7 @@
   .btn-neutral.btn-solid:disabled { background-color: var(--color-bg-neutral-high); }
 
   .btn-neutral.btn-outline { background-color: var(--color-bg-raised); color: var(--color-fg-middle); border-color: var(--color-stroke-high); }
-  .btn-neutral.btn-outline:hover:not(:disabled) { background-color: var(--color-bg-disabled); }
+  .btn-neutral.btn-outline:hover:not(:disabled) { background-color: var(--color-bg-neutral-low); }
   .btn-neutral.btn-outline:disabled { color: var(--color-fg-disabled); border-color: var(--color-stroke-middle); }
 
   .btn-neutral.btn-ghost { background-color: transparent; color: var(--color-fg-middle); }
@@ -87,12 +87,12 @@
   .btn-negative.btn-solid:hover:not(:disabled) { background-color: var(--color-bg-negative-hover); }
   .btn-negative.btn-solid:disabled { background-color: var(--color-bg-negative-disabled); }
 
-  .btn-negative.btn-outline { background-color: var(--color-bg-negative-subtle); color: var(--color-fg-negative); border-color: var(--color-stroke-negative); }
-  .btn-negative.btn-outline:hover:not(:disabled) { background-color: var(--color-bg-negative-disabled); }
+  .btn-negative.btn-outline { background-color: var(--color-bg-negative-subtle); color: var(--color-fg-negative-strong); border-color: var(--color-stroke-negative); }
+  .btn-negative.btn-outline:hover:not(:disabled) { background-color: var(--color-bg-negative-muted); }
   .btn-negative.btn-outline:disabled { color: var(--color-fg-negative-disabled); border-color: var(--color-stroke-negative-disabled); }
 
   .btn-negative.btn-ghost { background-color: transparent; color: var(--color-fg-negative); }
-  .btn-negative.btn-ghost:hover:not(:disabled) { background-color: var(--color-bg-negative-subtle); }
+  .btn-negative.btn-ghost:hover:not(:disabled) { background-color: var(--color-bg-negative-subtle); color: var(--color-fg-negative-strong); }
   .btn-negative.btn-ghost:disabled { color: var(--color-fg-negative-disabled); }
 
   /* ===== Loading — spinner replaces label ===== */

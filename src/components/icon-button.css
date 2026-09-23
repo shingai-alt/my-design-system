@@ -64,7 +64,7 @@
   .icon-btn-neutral.icon-btn-solid:disabled { background-color: var(--color-bg-neutral-high); }
 
   .icon-btn-neutral.icon-btn-outline { background-color: var(--color-bg-raised); color: var(--color-fg-middle); border-color: var(--color-stroke-high); }
-  .icon-btn-neutral.icon-btn-outline:hover:not(:disabled) { background-color: var(--color-bg-disabled); }
+  .icon-btn-neutral.icon-btn-outline:hover:not(:disabled) { background-color: var(--color-bg-neutral-low); }
   .icon-btn-neutral.icon-btn-outline:disabled { color: var(--color-fg-disabled); border-color: var(--color-stroke-middle); }
 
   .icon-btn-neutral.icon-btn-ghost { background-color: transparent; color: var(--color-fg-middle); }
@@ -76,12 +76,12 @@
   .icon-btn-negative.icon-btn-solid:hover:not(:disabled) { background-color: var(--color-bg-negative-hover); }
   .icon-btn-negative.icon-btn-solid:disabled { background-color: var(--color-bg-negative-disabled); }
 
-  .icon-btn-negative.icon-btn-outline { background-color: var(--color-bg-negative-subtle); color: var(--color-fg-negative); border-color: var(--color-stroke-negative); }
-  .icon-btn-negative.icon-btn-outline:hover:not(:disabled) { background-color: var(--color-bg-negative-disabled); }
+  .icon-btn-negative.icon-btn-outline { background-color: var(--color-bg-negative-subtle); color: var(--color-fg-negative-strong); border-color: var(--color-stroke-negative); }
+  .icon-btn-negative.icon-btn-outline:hover:not(:disabled) { background-color: var(--color-bg-negative-muted); }
   .icon-btn-negative.icon-btn-outline:disabled { color: var(--color-fg-negative-disabled); border-color: var(--color-stroke-negative-disabled); }
 
   .icon-btn-negative.icon-btn-ghost { background-color: transparent; color: var(--color-fg-negative); }
-  .icon-btn-negative.icon-btn-ghost:hover:not(:disabled) { background-color: var(--color-bg-negative-subtle); }
+  .icon-btn-negative.icon-btn-ghost:hover:not(:disabled) { background-color: var(--color-bg-negative-subtle); color: var(--color-fg-negative-strong); }
   .icon-btn-negative.icon-btn-ghost:disabled { color: var(--color-fg-negative-disabled); }
 
   /* 強制カラーモード対応。考え方はbutton.cssと同じ（塗り=主/枠のみ=副のヒエラルキーを保つ）。

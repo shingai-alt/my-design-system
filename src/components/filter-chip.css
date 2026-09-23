@@ -39,7 +39,7 @@
     transition: background-color 150ms, border-color 150ms;
   }
   .filter-chip:hover:not(:disabled):not([aria-pressed="true"]) {
-    background-color: var(--color-bg-disabled);
+    background-color: var(--color-bg-neutral-low);
     border-color: var(--color-stroke-high);
   }
   .filter-chip:disabled {
