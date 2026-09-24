@@ -22,7 +22,7 @@ WCAG 2.2は A ⊂ AA ⊂ AAA の階層。一般的な準拠目標は **AA**（AA
 | 非テキストのコントラスト (AA) | 1.4.11 | 入力欄の枠 `--color-stroke-control`（neutral-500, 約4.76:1）・switch の OFF・フォーカスリングは 3:1 以上 |
 | ライト/ダーク両方のコントラスト | 1.4.3 / 1.4.11 | 「文字 × 背景」「UI部品 × 背景」のペアを `npm run check:consistency` の contrast チェックが両テーマで計算し、文字 4.5:1・UI部品 3:1 未満ならCIで落とす（disabled は対象外） |
 | キーボード操作 | 2.1.1 / 2.1.2 | 標準コンポーネントを使うだけ（トラップなし） |
-| Focus ring | 2.4.7 | `--shadow-focus-ring`（info-600固定, 3px）がデフォルト。色は変えない仕様（[DESIGN.md](../DESIGN.md)） |
+| Focus ring | 2.4.7 / 2.4.13 | 全コンポーネント共通の `outline: var(--focus-outline)`（2px・offset 2px・info-600 固定）。WCAG 2.4.13（AAA）の「2px 以上」も満たす。`box-shadow` は強制カラーモードで `none` になる（CSS Color Adjust）ため使わない |
 | 閃光なし | 2.3.1 / 2.3.2 | DSにアニメーション閃光は無い |
 | 動きの抑制 | 2.3.3 | `prefers-reduced-motion: reduce` で accordion のアイコン回転・switch のつまみスライドを止める。色/透明度のフェード(150ms)は動きではないので残す。button の loading スピナーは状態表示そのものなので止めない |
 | 入力共存 | 2.5.6 | キーボード / マウス / タッチ全対応（clickイベントベース） |

@@ -25,7 +25,7 @@
 3. **Blessed Spacing** — `p-{0,1,2,3,4,6,8,12,16}` のみ使う
 4. **Typography セマンティック層** — コンポーネントCSSは `font: var(--typo-*)` の1行で指定する（`npm run check:consistency` で検査）。HTML では `.typo-{xsmall..3xlarge}` を使う。`font-size: 14px` や生の `text-sm` 等は禁止
 5. **ARIA属性で状態を表現** — `[aria-pressed="true"]` 等をCSSセレクタに使う。独自の `is-*` クラスは作らない
-6. **フォーカスリングはinfo（青）固定** — `--shadow-focus-ring` のみ。色を変えない、見切れさせない
+6. **フォーカスリングはinfo（青）固定** — `outline: var(--focus-outline); outline-offset: var(--focus-outline-offset)` のみ（box-shadow は強制カラーモードで消えるため使わない）。色を変えない、見切れさせない
 7. **保護ブランチへの直push禁止** — feature branch + PR
 
 ---
@@ -116,12 +116,17 @@
 
 ```
 rounded-{none,xs,sm,md,lg,full} = 0 / 4 / 8 / 16 / 24 / 9999 px
-shadow-{sm,md,lg}          : 一時レイヤー(modal/tooltip)専用
-shadow-focus-ring          : 0 0 0 3px stroke-focus（info-600固定。ダークは info-400）
-shadow-destructive         : 0 0 0 3px stroke-control-error（negative-500）
+  md   = 外枠（card・modal・alert・accordion・data-table・menu・simple-table）
+  sm   = 部品（button・input・select・icon-button・filter-chip・pagination・menu-item・tooltip）
+  xs   = 部品の中の小さい要素（label-badge・検索ボタン・タブの上端）
+  full = 丸・ピル（badge・switch・stepper のマーカー）
+  lg / none = コンポーネントでは未使用（利用者向けに残す）
+shadow-md : tooltip・popover   shadow-lg : modal   （ダークでは濃く＋明るい 1px の輪郭）
+--focus-outline        : 2px solid stroke-focus（info-600固定。ダークは info-400）
+--focus-outline-offset : 2px（accordion の見出し・menu の項目は内側に描くため -2px）
 ```
 
-**elevationの表現にシャドウを使わない。** 恒常的なsurface（カード等）はborder + 背景色で区切る。
+**elevationの表現にシャドウを使わない。** 恒常的なsurface（カード等）はborder + 背景色で区切る。z-index のトークンは作らない（重なる層は `<dialog>` や `popover` 属性で最前面に出す）。全トークンの見本はカタログの Radius & Shadow ページ。
 
 ---
 
@@ -135,7 +140,7 @@ shadow-destructive         : 0 0 0 3px stroke-control-error（negative-500）
 | `text-sm` / `text-base` 直書き | `.typo-small` / `.typo-medium` |
 | コンポーネントCSSで `font-size: 14px` / `font-weight: 700` 等を直書き | `font: var(--typo-*)`（太さだけ変える場合は `var(--font-weight-*)`） |
 | `is-selected` 等の状態クラス | `aria-selected="true"` 等 |
-| フォーカスリングの色変更 | info青のまま固定 |
+| フォーカスリングの色変更、`box-shadow` でフォーカスを描く | `outline: var(--focus-outline)`（info青のまま固定） |
 | コンポーネントCSSで key / primitive（`--color-primary-600` `--color-slate-400` 等）を直接参照 | semantic（`--color-bg-primary` `--color-stroke-control` 等）。ダーク・ブランド差し替えに追従しないため |
 | `dark:` やテーマごとの分岐をコンポーネントに書く | semantic トークンだけで切り替わる |
 | 恒常的なsurfaceのelevationをシャドウで表現 | border + 背景色 |

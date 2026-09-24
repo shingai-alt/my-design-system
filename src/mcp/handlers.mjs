@@ -32,6 +32,7 @@ UIを生成する前に、まず get_design_principles を呼んで原則を把�
 色は semantic トークン（--color-bg-* / --color-fg-* / --color-stroke-*）を使い、primary-600 などのスケールを直接使わないでください（ダークモードに追従しなくなります）。
 文字は font: var(--typo-*)（HTML では .typo-* クラス）で指定し、font-size: 14px などを直書きしないでください。
 余白は p-{0,1,2,3,4,6,8,12,16} の9段だけを使い、部品の高さは既存コンポーネントのサイズ（sm / md / lg）に合わせてください。
+フォーカスリングは outline: var(--focus-outline) で描き、box-shadow で描かないでください。
 `.trim();
 
 export const TOOLS = [

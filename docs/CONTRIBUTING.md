@@ -83,6 +83,7 @@ CSS / HTMLを書く時は**必ずデザインシステムが用意した変数�
 | コントラスト | `tokens/colors.css`（ライト/ダーク） | `scripts/check-consistency.mjs`の`CONTRAST_PAIRS`（文字4.5:1・UI部品3:1） |
 | タイポのトークン | `tokens/typography.css` | `src/components/*.css`の`font` `font-size` `font-weight` `line-height`が`var(--typo-*)` / `var(--font-weight-*)` / `inherit`だけ |
 | 余白のスケール | `scripts/spacing-exceptions.mjs`（9段と例外） | `src/components/*.css`の余白の`var(--spacing) * N`が9段、px直書きなし、部品の高さ32/40/48pxの直書きなし。使われなくなった例外も検知 |
+| 角丸・影・フォーカス | `tokens/radius.css` / `tokens/shadow.css` | `src/components/*.css`の`border-radius`が`var(--radius-*)`、`box-shadow`が`var(--shadow-md|lg)`か`none`、フォーカス時の`outline`が`var(--focus-outline)`（強制カラー用のシステム色は許可） |
 
 エラーが出たら、指示に従いドキュメント側の表記を更新する。意図的に文言を変えた場合は
 `scripts/check-consistency.mjs`のパターン定義（`ICON_CLAIMS`等）も更新する。
