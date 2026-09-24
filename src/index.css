@@ -48,7 +48,18 @@
 @source inline("{bg,text,border}-fg-{high,middle,low}");
 @source inline("border-stroke-{high,middle}");
 @source inline("bg-bg-page bg-bg-sunken");
-@source inline("max-w-page max-w-content max-w-article");
+@source inline("max-w-page max-w-content max-w-article max-w-narrow");
 @source inline("rounded-{none,xs,sm,md,lg,full}");
 @source inline("shadow-{md,lg}");
 @source inline("sr-only");
+
+/* ── レイアウト utility（配布先で画面を組むための最小セット）──
+ * ds.css を読み込むだけの利用者・AI が、部品の外側（並べ方・余白・中央寄せ）を
+ * インライン style なしで書けるようにする。余白は9段だけ。
+ * MCP の INSTRUCTIONS は、このファイルの @source inline 行を全部そのまま「使える utility 一覧」として返す。 */
+@source inline("{p,px,py,pt,pb,m,mx,my,mt,mb,gap,gap-x,gap-y}-{0,1,2,3,4,6,8,12,16}");
+@source inline("mx-auto w-full min-h-screen");
+@source inline("flex inline-flex grid hidden block flex-col flex-row flex-wrap flex-1 shrink-0");
+@source inline("items-{start,center,end} justify-{start,center,end,between}");
+@source inline("grid-cols-{1,2,3,4}");
+@source inline("text-{left,center,right}");

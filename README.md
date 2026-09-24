@@ -22,6 +22,8 @@ npm run build
 
 これで `.btn` / `.input` / `.card` などのクラスと、`bg-primary-500` / `text-fg-high` などのトークンユーティリティが使えます。
 
+画面の組み立て用に、レイアウト utility の最小セット（`p-/m-/gap-` の9段、`flex` / `grid` / `items-*` / `justify-*` / `mx-auto` / `w-full` / `max-w-{page,content,article,narrow}` など）も入っています。Tailwind の utility が全部使えるわけではありません。一覧の正本は `src/index.css` の `@source inline`（MCP も同じ一覧を AI に渡します）。
+
 ### 2. すぐ書ける例
 
 ```html

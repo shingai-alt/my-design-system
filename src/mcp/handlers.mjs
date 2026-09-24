@@ -25,6 +25,14 @@ const TOKEN_CATEGORIES = ["colors", "spacing", "typography", "radius", "shadow",
 const { version } = JSON.parse(readFileSync(resolve(ROOT, "package.json"), "utf8"));
 export const SERVER_INFO = { name: "design-system-mcp", version };
 
+// ds.css に入っている utility は src/index.css の safelist だけ（source(none) のため）。
+// 正本の @source inline 行をそのまま返し、一覧を二重管理しない。
+// primary-600 などの色スケールは safelist にはあるが使用禁止なので除く。
+const indexCss = readFileSync(resolve(ROOT, "src/index.css"), "utf8");
+const LAYOUT_UTILITIES = [...indexCss.matchAll(/@source inline\("([^"]+)"\)/g)]
+  .map((m) => m[1])
+  .filter((u) => !u.includes("-{50,"));
+
 export const INSTRUCTIONS = `
 このMCPは自社デザインシステムのトークン・コンポーネント仕様・非交渉原則をAIエージェントに渡すためのものです。
 UIを生成する前に、まず get_design_principles を呼んで原則を把握し、使う部品ごとに get_component で完全仕様（使用法OK/NG・アクセシビリティ・Usage例）を取得してください。
@@ -33,6 +41,8 @@ UIを生成する前に、まず get_design_principles を呼んで原則を把�
 文字は font: var(--typo-*)（HTML では .typo-* クラス）で指定し、font-size: 14px などを直書きしないでください。
 余白は p-{0,1,2,3,4,6,8,12,16} の9段だけを使い、部品の高さは既存コンポーネントのサイズ（sm / md / lg）に合わせてください。
 フォーカスリングは outline: var(--focus-outline) で描き、box-shadow で描かないでください。
+ds.css を読み込むだけの環境では Tailwind の utility は全部は使えません。使えるのはコンポーネントのクラスと、次の utility だけです（{a,b} は展開して読む）。ここに無い utility やインライン style でレイアウトしないでください:
+${LAYOUT_UTILITIES.map((u) => `- ${u}`).join("\n")}
 `.trim();
 
 export const TOOLS = [

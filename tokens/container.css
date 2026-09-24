@@ -8,4 +8,5 @@
   --container-page:    76.25rem; /* 1220px — 一覧・帯（ヘッダー/フッター） */
   --container-content: 56.25rem; /* 900px  — フォーム・設定・詳細 */
   --container-article: 42rem;    /* 672px  — 長文本文 */
+  --container-narrow:  24rem;    /* 384px  — ログインなど単機能の小さいフォーム（relayには無い独自追加） */
 }
