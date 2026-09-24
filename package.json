@@ -9,7 +9,7 @@
   "scripts": {
     "build": "vite build && npm run build:icons && npm run build:foundations",
     "build:icons": "node scripts/build-icons.mjs",
-    "build:foundations": "node scripts/build-color-page.mjs && node scripts/build-typography-page.mjs && node scripts/build-spacing-page.mjs",
+    "build:foundations": "node scripts/build-color-page.mjs && node scripts/build-typography-page.mjs && node scripts/build-spacing-page.mjs && node scripts/build-effects-page.mjs",
     "mcp": "node src/mcp/server.mjs",
     "eval": "node evals/run.mjs",
     "eval:report": "node evals/report.mjs",
