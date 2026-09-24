@@ -12,7 +12,17 @@ import {
   ListToolsRequestSchema,
   CallToolRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { SERVER_INFO, INSTRUCTIONS, TOOLS, callTool } from "./handlers.mjs";
+import { readFileSync, existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { resolve } from "node:path";
+import { createHandlers } from "./handlers.mjs";
+
+const ROOT = resolve(fileURLToPath(import.meta.url), "../../..");
+const read = (rel) => {
+  const path = resolve(ROOT, rel);
+  return existsSync(path) ? readFileSync(path, "utf8") : null;
+};
+const { SERVER_INFO, INSTRUCTIONS, TOOLS, callTool } = createHandlers(read);
 
 const server = new Server(SERVER_INFO, {
   capabilities: { tools: {} },

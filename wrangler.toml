@@ -1,0 +1,10 @@
+# リモートMCP（Cloudflare Workers）。src/mcp/worker.mjs を POST /mcp で公開する（認証なし・stateless）。
+#   デプロイ: npm run deploy:mcp   ローカル確認: npm run dev:mcp-remote（http://localhost:8787/mcp）
+name = "my-design-system-mcp"
+main = "src/mcp/worker.mjs"
+compatibility_date = "2025-01-01"
+workers_dev = true
+
+# dist/ は gitignore なので、バンドル前に毎回データを作り直す。
+[build]
+command = "node scripts/build-mcp-files.mjs"
