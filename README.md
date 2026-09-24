@@ -109,13 +109,26 @@ npm run build     # dist/ds.css をビルド
 
 ## MCP（AIコーディングツール連携）
 
-AI（Claude Code等）にこのDSのコンポーネント仕様・トークン・原則を直接読ませるMCPサーバーを同梱しています（`src/mcp/`、ツールは3つ: `get_component` / `get_tokens` / `get_design_principles`）。
+AI（Claude Code等）にこのDSのコンポーネント仕様・トークン・原則を直接読ませるMCPサーバーです（`src/mcp/`、ツールは3つ: `get_component` / `get_tokens` / `get_design_principles`）。
+
+### 使う人（URLを登録するだけ・Node不要）
 
 ```bash
-claude mcp add ds-mcp --scope project -- node "$(pwd)/src/mcp/server.mjs"
+claude mcp add --transport http ds-mcp https://my-design-system-mcp.shingai-6ba.workers.dev/mcp --scope user
 ```
 
-登録後、そのプロジェクトで最初に `claude` を対話起動した時に一度だけ承認が必要です（`.mcp.json` はマシン固有の絶対パスを含むためgitignore対象。各自ローカルで上記コマンドを実行してください）。
+- claude.ai: Settings → Connectors → Add custom connector → 上記URL（認証なし）
+- CSS は `<link rel="stylesheet" href="https://shingai-alt.github.io/my-design-system/dist/ds.css">` の1行
+
+### メンテナ向け
+
+- ローカル版（DSを直すと即反映。開発中の確認用）: `claude mcp add ds-mcp --scope project -- node "$(pwd)/src/mcp/server.mjs"`（`.mcp.json` は絶対パスを含むため gitignore 対象）
+- リモート版は Cloudflare Workers（[src/mcp/worker.mjs](src/mcp/worker.mjs)）。ロジックは `handlers.mjs` をローカル版と共有し、データはデプロイ時に `dist/mcp-files.json` に固める。**DSを直したら `npm run deploy:mcp` するまでリモート版には反映されない。**
+
+```bash
+npm run dev:mcp-remote   # ローカル確認（http://localhost:8787/mcp）
+npm run deploy:mcp       # デプロイ（要 wrangler login）
+```
 
 ## 回帰スイート（evals）
 
