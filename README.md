@@ -123,7 +123,7 @@ claude mcp add --transport http ds-mcp https://my-design-system-mcp.shingai-6ba.
 ### メンテナ向け
 
 - ローカル版（DSを直すと即反映。開発中の確認用）: `claude mcp add ds-mcp --scope project -- node "$(pwd)/src/mcp/server.mjs"`（`.mcp.json` は絶対パスを含むため gitignore 対象）
-- リモート版は Cloudflare Workers（[src/mcp/worker.mjs](src/mcp/worker.mjs)）。ロジックは `handlers.mjs` をローカル版と共有し、データはデプロイ時に `dist/mcp-files.json` に固める。**DSを直したら `npm run deploy:mcp` するまでリモート版には反映されない。**
+- リモート版は Cloudflare Workers（[src/mcp/worker.mjs](src/mcp/worker.mjs)）。ロジックは `handlers.mjs` をローカル版と共有し、データはデプロイ時に `dist/mcp-files.json` に固める。`main` への push で、データの正本（components / tokens / DESIGN.md 等）が変わっていれば GitHub Actions が自動デプロイする（[deploy-mcp-worker.yml](.github/workflows/deploy-mcp-worker.yml)）。
 
 ```bash
 npm run dev:mcp-remote   # ローカル確認（http://localhost:8787/mcp）

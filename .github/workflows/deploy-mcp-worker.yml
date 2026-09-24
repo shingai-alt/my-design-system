@@ -1,0 +1,53 @@
+name: Deploy MCP Worker to Cloudflare
+
+# リモートMCP（src/mcp/worker.mjs）を、MCPが返すデータの正本が変わった push ごとにデプロイする。
+# wrangler.toml の [build] が dist/mcp-files.json を作り直すので、常に最新の内容が配られる。
+# relay-design-system の同名 workflow を移植。
+#
+# 必要な repo secrets（Settings → Secrets and variables → Actions）:
+#   CLOUDFLARE_API_TOKEN   — "Edit Cloudflare Workers" テンプレートで作ったトークン
+#   CLOUDFLARE_ACCOUNT_ID  — wrangler whoami で出る Account ID
+
+on:
+  push:
+    branches: [main]
+    paths:
+      # handlers.mjs の SOURCE_FILES が読むファイル + worker 自体
+      - "src/mcp/**"
+      - "src/components/**"
+      - "src/index.css"
+      - "tokens/**"
+      - "DESIGN.md"
+      - "package.json"
+      - "scripts/build-mcp-files.mjs"
+      - "wrangler.toml"
+      - ".github/workflows/deploy-mcp-worker.yml"
+  workflow_dispatch:
+
+# 1回ずつ順番に（進行中のデプロイはキャンセルしない）
+concurrency:
+  group: deploy-mcp-worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22" # wrangler v4 が Node >= 22 を要求
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # lockfile と同じ wrangler v4 でデプロイする（wrangler-action は古い v3 を入れるため使わない）
+      - name: Deploy Worker
+        run: npx --no-install wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
