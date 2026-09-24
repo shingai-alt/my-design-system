@@ -40,8 +40,8 @@
   }
   .search-input:hover:not(:has(.search-input-field:disabled)):not(:focus-within) { border-color: var(--color-stroke-control-hover); }
   .search-input:focus-within {
-    outline: 2px solid var(--color-stroke-focus);
-    outline-offset: 2px;
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
   .search-input:has(.search-input-field:disabled) {
     background-color: var(--color-bg-disabled);

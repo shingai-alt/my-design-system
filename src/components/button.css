@@ -46,8 +46,8 @@
     pointer-events: none;
   }
   .btn:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
 
   /* ===== Size（relay同様 h-8/h-10/h-12 相当。余白感もrelay寄りに） ===== */
@@ -123,7 +123,7 @@
    *   solidの塗りは背景色で表現しているため強制カラー時に消え、solid/outline/ghost
    *   の変種ヒエラルキー（＝重要度の非色ヒント）が失われる。すべてのボタンに輪郭線を
    *   出し、solidはButtonTextの面で塗り直して「塗り=主/枠のみ=副/文字=3次」を保つ。
-   *   フォーカスはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   *   フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
    * ============================================================ */
   @media (forced-colors: active) {

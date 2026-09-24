@@ -349,6 +349,8 @@
   --color-stroke-focus:         var(--color-info-400);
 
   --color-shadow: var(--color-black);
+  --shadow-md: 0 0 0 1px color-mix(in srgb, var(--color-white) 10%, transparent), 0 4px 12px -2px color-mix(in srgb, var(--color-black) 50%, transparent);
+  --shadow-lg: 0 0 0 1px color-mix(in srgb, var(--color-white) 10%, transparent), 0 12px 24px -4px color-mix(in srgb, var(--color-black) 60%, transparent);
 
   --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   --select-arrow-disabled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
@@ -424,6 +426,8 @@
     --color-stroke-focus:         var(--color-info-400);
 
     --color-shadow: var(--color-black);
+    --shadow-md: 0 0 0 1px color-mix(in srgb, var(--color-white) 10%, transparent), 0 4px 12px -2px color-mix(in srgb, var(--color-black) 50%, transparent);
+    --shadow-lg: 0 0 0 1px color-mix(in srgb, var(--color-white) 10%, transparent), 0 12px 24px -4px color-mix(in srgb, var(--color-black) 60%, transparent);
 
     --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     --select-arrow-disabled: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");

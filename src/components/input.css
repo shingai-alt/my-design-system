@@ -41,10 +41,10 @@
   }
   .input::placeholder { color: var(--color-fg-low); }
   .input:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-stroke-control-hover); }
-  /* フォーカスは outline + offset で枠との間に隙間を空ける（box-shadowで枠に密着させない） */
+  /* フォーカスは outline + offset で枠との間に隙間を空ける（--focus-outline。全コンポーネント共通） */
   .input:focus-visible {
-    outline: 2px solid var(--color-stroke-focus);
-    outline-offset: 2px;
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
   .input:disabled {
     background-color: var(--color-bg-disabled);

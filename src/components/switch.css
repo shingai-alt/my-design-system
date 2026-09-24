@@ -51,8 +51,8 @@
   .switch:checked:disabled { background-color: var(--color-bg-primary-disabled); cursor: not-allowed; }
 
   .switch:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
 
   .switch-sm {

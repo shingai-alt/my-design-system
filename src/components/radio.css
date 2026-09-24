@@ -33,8 +33,8 @@
   .radio-sm { width: 14px; height: 14px; }
   .radio:disabled { cursor: not-allowed; opacity: 0.5; }
   .radio:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
     border-radius: var(--radius-full);
   }
 
@@ -63,7 +63,7 @@
   }
 
   /* 強制カラーモード: ネイティブ<input>なので選択状態はOSが自動的に正しく描画する。
-   * box-shadowのフォーカスリングだけは強制カラーで消えるためoutlineを出す。
+   * フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
   @media (forced-colors: active) {
     .radio:focus-visible {

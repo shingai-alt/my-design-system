@@ -34,8 +34,8 @@
   .checkbox-sm { width: 14px; height: 14px; }
   .checkbox:disabled { cursor: not-allowed; opacity: 0.5; }
   .checkbox:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
     border-radius: var(--radius-xs);
   }
   .checkbox-error { outline: 1px solid var(--color-stroke-control-error); outline-offset: 1px; }
@@ -52,7 +52,7 @@
 
   /* 強制カラーモード: ネイティブ<input>なので選択状態の見た目はOSが描画し自動対応する
    * （accent-colorは強制カラーで無視されるが、ブラウザがシステム色で正しく描き直す）。
-   * box-shadowのフォーカスリングだけは強制カラーで消えるためoutlineを出す。
+   * フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
   @media (forced-colors: active) {
     .checkbox:focus-visible {

@@ -57,12 +57,12 @@
   .link.link-inverse:hover:not([aria-disabled="true"]) { color: var(--color-fg-inverse-middle); }
 
   .link:focus-visible {
-    outline: none;
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
     border-radius: var(--radius-xs);
-    box-shadow: var(--shadow-focus-ring);
   }
 
-  /* 強制カラーモード: box-shadowのフォーカスリングは強制カラーで消えるためoutlineを出す。
+  /* 強制カラーモード: フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
   @media (forced-colors: active) {
     .link:focus-visible {

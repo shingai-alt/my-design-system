@@ -95,8 +95,8 @@
   .menu-item[aria-current="page"]:hover { background-color: var(--color-bg-primary-subtle); }
 
   .menu-item:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: -2px;
   }
 
   /* ============================================================
@@ -104,7 +104,7 @@
    *   現在地をbg-primary-subtle＋太字で示すが、強制カラーでは背景がCanvas化して
    *   ハイライトが消え、太字だけになり弱い。Highlightで塗って明確に示す
    *   （backplate対策でforced-color-adjust:none）。
-   *   focusはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   *   フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
    * ============================================================ */
   @media (forced-colors: active) {

@@ -48,8 +48,8 @@
     cursor: not-allowed;
   }
   .filter-chip:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
 
   .filter-chip-label {    color: var(--color-fg-middle);
@@ -96,7 +96,7 @@
   .filter-chip[aria-pressed="true"] .filter-chip-check { display: inline-flex; }
   .filter-chip-check .icon { width: 10px; height: 10px; }
 
-  /* 強制カラーモード: フォーカスはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+  /* 強制カラーモード: フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    * 選択状態はチェックマークの表示/非表示（色に依存しない構造的な差）で既に区別できるため、
    * それ以上の対応は不要。※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
   @media (forced-colors: active) {

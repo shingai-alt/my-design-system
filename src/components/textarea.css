@@ -47,8 +47,8 @@
   .textarea::placeholder { color: var(--color-fg-low); }
   .textarea:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-stroke-control-hover); }
   .textarea:focus-visible {
-    outline: 2px solid var(--color-stroke-focus);
-    outline-offset: 2px;
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
   .textarea:disabled {
     background-color: var(--color-bg-disabled);

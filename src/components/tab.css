@@ -58,8 +58,8 @@
     padding-bottom: calc(var(--spacing) * 2 - 3px);
   }
   .tab:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
     border-radius: var(--radius-xs);
   }
 
@@ -86,7 +86,7 @@
    *   選択状態をstroke-primary の下線「色」だけで示しているため強制カラー時に判別しづらい。
    *   選択タブの下線をHighlightにし、太さ(4px)と合わせて選択を示す
    *   （checkbox/radio/switchと同じ「選択色=Highlight」の流儀）。
-   *   focusはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   *   フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
    * ============================================================ */
   @media (forced-colors: active) {

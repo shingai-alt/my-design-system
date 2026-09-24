@@ -1,14 +1,20 @@
 /*
- * Design System — Shadow
+ * Design System — Shadow / Focus
  * elevation の表現にシャドウを使わない（surfaceはボーダー+背景色で区切る）。
  * shadowを使ってよいのは modal / tooltip 等、最前面に重なる一時レイヤーだけ。
+ * ダークでは濃くし、明るい 1px の輪郭を足す（tokens/colors.css のダーク定義）。
  */
 
 @theme {
-  --shadow-sm: 0 1px 2px 0 color-mix(in srgb, var(--color-shadow) 6%, transparent);
-  --shadow-md: 0 4px 12px -2px color-mix(in srgb, var(--color-shadow) 10%, transparent), 0 2px 4px -2px color-mix(in srgb, var(--color-shadow) 6%, transparent);
-  --shadow-lg: 0 12px 24px -4px color-mix(in srgb, var(--color-shadow) 14%, transparent), 0 4px 8px -4px color-mix(in srgb, var(--color-shadow) 8%, transparent);
+  --shadow-md: 0 4px 12px -2px color-mix(in srgb, var(--color-shadow) 10%, transparent), 0 2px 4px -2px color-mix(in srgb, var(--color-shadow) 6%, transparent);  /* tooltip・popover */
+  --shadow-lg: 0 12px 24px -4px color-mix(in srgb, var(--color-shadow) 14%, transparent), 0 4px 8px -4px color-mix(in srgb, var(--color-shadow) 8%, transparent);  /* modal */
+}
 
-  --shadow-focus-ring:   0 0 0 3px var(--color-stroke-focus);
-  --shadow-destructive:  0 0 0 3px var(--color-stroke-control-error);
+/*
+ * フォーカスリング。outline で描く（強制カラーモードでは box-shadow が消えるため）。
+ * 色は info の青で固定。内側に描く箇所（accordion の見出し・menu の項目）だけ offset を -2px にする。
+ */
+:root {
+  --focus-outline:        2px solid var(--color-stroke-focus);
+  --focus-outline-offset: 2px;
 }

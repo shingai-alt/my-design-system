@@ -34,6 +34,9 @@
  *  11. 余白のスケール     — src/components/*.css の余白（padding / margin / gap / top 等）の var(--spacing) * N が
  *                          9段のどれかで、px 直書きが無いこと（例外は scripts/spacing-exceptions.mjs に理由付きで登録）。
  *                          部品の高さ 32 / 40 / 48px の直書きも検知する（--control-height-* を使う）
+ *  12. 角丸・影・フォーカス — src/components/*.css の border-radius は var(--radius-*)、box-shadow は var(--shadow-*) か none、
+ *                          フォーカス時（:focus / :focus-visible / :focus-within）の outline は var(--focus-outline)
+ *                          （強制カラーモード用のシステム色 CanvasText 等は許可）
  *
  * 実行: npm run check:consistency（依存パッケージ不要・ネットワーク不要）
  *
@@ -408,6 +411,36 @@ function checkSpacingScale() {
 }
 
 // ---------------------------------------------------------------------------
+// 12. 角丸・影・フォーカス — tokens/radius.css・tokens/shadow.css のトークンだけを使う
+// ---------------------------------------------------------------------------
+
+const SYSTEM_COLOR = /\b(CanvasText|Canvas|ButtonText|ButtonFace|ButtonBorder|Highlight|HighlightText|LinkText|GrayText|Field|FieldText|Mark|MarkText|AccentColor|AccentColorText|SelectedItem|SelectedItemText)\b/;
+
+function checkEffectsTokens() {
+  const dir = path.join(projectRoot, "src/components");
+  for (const name of fs.readdirSync(dir).filter((f) => f.endsWith(".css")).sort()) {
+    const code = fs.readFileSync(path.join(dir, name), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    for (const [, rawSel, body] of code.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      const selector = rawSel.trim().replace(/\s+/g, " ");
+      const focus = /:focus(-visible|-within)?\b/.test(selector);
+      for (const [, prop, raw] of body.matchAll(/(?<![-\w])([a-z-]+)\s*:\s*([^;]+)/g)) {
+        const value = raw.trim();
+        const where = `src/components/${name}: ${selector} の ${prop}: ${value}`;
+        if (/^border(-[a-z]+)*-radius$/.test(prop) && !/^(var\(--radius-[a-z]+\)|0)(\s+(var\(--radius-[a-z]+\)|0))*$/.test(value)) {
+          fail("effects-tokens", `${where} は直書きです。var(--radius-*) を使ってください`);
+        }
+        if (prop === "box-shadow" && !/^(none|var\(--shadow-(md|lg)\))$/.test(value)) {
+          fail("effects-tokens", `${where} は直書きです。影は var(--shadow-md|lg) だけ（フォーカスリングは outline: var(--focus-outline)）`);
+        }
+        if (focus && prop === "outline" && !/^(none|var\(--focus-outline\))$/.test(value) && !SYSTEM_COLOR.test(value)) {
+          fail("effects-tokens", `${where} はフォーカスリングの直書きです。outline: var(--focus-outline) を使ってください`);
+        }
+      }
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 
 const CHECKS = [
   ["icon-count", checkIconCount],
@@ -421,6 +454,7 @@ const CHECKS = [
   ["contrast", checkContrast],
   ["typo-tokens", checkComponentsUseTypoTokens],
   ["spacing-scale", checkSpacingScale],
+  ["effects-tokens", checkEffectsTokens],
 ];
 
 for (const [name, run] of CHECKS) {

@@ -36,8 +36,8 @@
   }
   .icon-btn:disabled { cursor: not-allowed; pointer-events: none; }
   .icon-btn:focus-visible {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
 
   /* ===== Size（button/inputと同じ32/40/48スケール） ===== */

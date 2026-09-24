@@ -74,7 +74,7 @@
     color: var(--color-fg-low);
   }
   .modal-close:hover { color: var(--color-fg-high); }
-  .modal-close:focus-visible { outline: none; box-shadow: var(--shadow-focus-ring); border-radius: var(--radius-xs); }
+  .modal-close:focus-visible { outline: var(--focus-outline); outline-offset: var(--focus-outline-offset); border-radius: var(--radius-xs); }
 
   .modal-body {
     padding: calc(var(--spacing) * 6);
@@ -93,7 +93,7 @@
    * 強制カラーモード (Windows ハイコントラスト等) 対応
    *   浮き上がりはshadow-lgで表現しているが、強制カラー時は影が無視され
    *   ダイアログと背景の境界が失われる。輪郭線を出して境界を確保する。
-   *   閉じるボタンのフォーカスもbox-shadowのリングが消えるためoutlineを出す。
+   *   フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
    * ============================================================ */
   @media (forced-colors: active) {

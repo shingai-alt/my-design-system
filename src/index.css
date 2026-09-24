@@ -50,5 +50,5 @@
 @source inline("bg-bg-page bg-bg-sunken");
 @source inline("max-w-page max-w-content max-w-article");
 @source inline("rounded-{none,xs,sm,md,lg,full}");
-@source inline("shadow-{sm,md,lg} shadow-focus-ring shadow-destructive");
+@source inline("shadow-{md,lg}");
 @source inline("sr-only");

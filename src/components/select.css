@@ -48,8 +48,8 @@
   .select:hover:not(:disabled):not(:focus-visible) { border-color: var(--color-stroke-control-hover); }
   /* フォーカスは outline + offset で枠との間に隙間を空ける（input と同じ方式） */
   .select:focus-visible {
-    outline: 2px solid var(--color-stroke-focus);
-    outline-offset: 2px;
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
   .select:disabled {
     background-color: var(--color-bg-disabled);

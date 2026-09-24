@@ -60,7 +60,7 @@
     opacity: 0.6;
   }
   .alert-close:hover { opacity: 1; }
-  .alert-close:focus-visible { outline: none; box-shadow: var(--shadow-focus-ring); border-radius: var(--radius-xs); }
+  .alert-close:focus-visible { outline: var(--focus-outline); outline-offset: var(--focus-outline-offset); border-radius: var(--radius-xs); }
 
   /* ===== Variants ===== */
   .alert-neutral  { background-color: var(--color-bg-neutral-low);  border-color: var(--color-stroke-middle); color: var(--color-fg-high); }
@@ -78,7 +78,7 @@
   .alert-info     { background-color: var(--color-bg-info-subtle);     border-color: var(--color-stroke-info-subtle); color: var(--color-fg-info); }
   .alert-info     .alert-icon { background-color: var(--color-bg-info-muted); color: var(--color-fg-info); }
 
-  /* 強制カラーモード: フォーカスはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+  /* 強制カラーモード: フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    * 閉じるボタンのopacity(0.6)も文字を薄くしすぎるため強制カラー時は戻す。
    * ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。 */
   @media (forced-colors: active) {

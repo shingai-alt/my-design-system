@@ -62,8 +62,8 @@
   }
 
   .pagination-item:focus-visible:not([aria-disabled="true"]) {
-    outline: none;
-    box-shadow: var(--shadow-focus-ring);
+    outline: var(--focus-outline);
+    outline-offset: var(--focus-outline-offset);
   }
 
   .pagination-item[aria-current="page"] {
@@ -95,7 +95,7 @@
    *   現在ページをbg-primary＋透明枠で示しており、強制カラーでは背景が
    *   Canvas化・透明枠は透明のままで、現在ページが他と区別できなくなる。
    *   Highlightで塗って明確に示す（backplate対策でforced-color-adjust:none）。
-   *   focusはbox-shadowのリングが強制カラーで消えるためoutlineを出す。
+   *   フォーカスリング（outline）の色を CanvasText に固定する（outline は強制カラーでも残るが、実機未検証のため明示しておく）。
    *   ※ システムカラーキーワードはハードコード禁止の例外 (DESIGN.md)。
    * ============================================================ */
   @media (forced-colors: active) {
