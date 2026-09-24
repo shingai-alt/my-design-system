@@ -11,3 +11,6 @@ evals/results/
 
 # ローカルのMCP登録（claude mcp add が生成。絶対パスでマシン固有のためコミットしない）
 .mcp.json
+
+# wrangler dev のローカル状態
+.wrangler/
